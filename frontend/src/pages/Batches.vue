@@ -196,7 +196,7 @@ const updateTabFilter = () => {
 	if (!user.data) {
 		return
 	}
-	if (currentTab.value == 'Enrolled' && is_student.value) {
+	if (currentTab.value == 'Enrolled' && (is_student.value||is_instructor.value)) {
 		filters.value['enrolled'] = 1
 		delete filters.value['start_date']
 		delete filters.value['published']
@@ -276,7 +276,6 @@ const batchTabs = computed(() => {
 
 	if (
 		user.data?.is_moderator ||
-		user.data?.is_instructor ||
 		user.data?.is_evaluator
 	) {
 		tabs.push({ label: __('Upcoming') })
