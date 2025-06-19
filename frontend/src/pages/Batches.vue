@@ -193,7 +193,7 @@ const updateCertificationFilter = () => {
 }
 
 const updateTabFilter = () => {
-	console.log("User Data:", user.data)
+	console.log("User Data:", user.data.roles)
 	orderBy.value = 'start_date'
 	if (!user.data) {
 		return
