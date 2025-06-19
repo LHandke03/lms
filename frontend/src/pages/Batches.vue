@@ -110,6 +110,7 @@ const title = ref('')
 const certification = ref(false)
 const filters = ref({})
 const is_student = computed(() => user.data?.is_student)
+const is_instructor = computed(() => user.data?.is_instructor)
 const currentTab = ref(is_student.value ? 'All' : 'Upcoming')
 const orderBy = ref('start_date')
 const readOnlyMode = window.read_only_mode
@@ -201,7 +202,7 @@ const updateTabFilter = () => {
 		delete filters.value['start_date']
 		delete filters.value['published']
 		orderBy.value = 'start_date desc'
-	} else if (is_student.value) {
+	} else if (is_student.value||is_instructor.value){
 		delete filters.value['enrolled']
 	} else {
 		delete filters.value['start_date']
