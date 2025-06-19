@@ -197,12 +197,12 @@ const updateTabFilter = () => {
 	if (!user.data) {
 		return
 	}
-	if (currentTab.value == 'Enrolled' && (is_student.value||is_instructor.value)) {
+	if (currentTab.value == 'Enrolled' && (is_student.value||user.data.is_instructor)) {
 		filters.value['enrolled'] = 1
 		delete filters.value['start_date']
 		delete filters.value['published']
 		orderBy.value = 'start_date desc'
-	} else if (is_student.value||is_instructor.value){
+	} else if (is_student.value||user.data.is_instructor) {
 		delete filters.value['enrolled']
 	} else {
 		delete filters.value['start_date']
