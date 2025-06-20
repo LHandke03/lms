@@ -222,7 +222,7 @@ const updateTabFilter = () => {
 }
 
 const updateStudentFilter = () => {
-	if (!user.data || (is_student.value && currentTab.value != 'Enrolled')) {
+	if (!user.data || ((is_student.value||user.data.roles.includes('Course Creator')) && currentTab.value != 'Enrolled')) {
 		filters.value['start_date'] = ['>=', dayjs().format('YYYY-MM-DD')]
 		filters.value['published'] = 1
 	}
