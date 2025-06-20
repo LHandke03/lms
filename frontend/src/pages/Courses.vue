@@ -259,9 +259,9 @@ const updateStudentFilter = () => {
 		filters.value['published'] = 1
 	} else if (user.data?.roles?.includes('Course Creator')) {
 		filters.value['published'] = 1
-		filters.value['created_by'] = user.data.name
+		filters.value['instructors'] = user.data.name
 	} else {
-		delete filters.value['created_by']
+		delete filters.value['instructors']
 		delete filters.value['published']
 	}
 
