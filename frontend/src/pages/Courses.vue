@@ -257,7 +257,14 @@ const updateTabFilter = () => {
 const updateStudentFilter = () => {
 	if (!user.data || (user.data?.is_student && currentTab.value != 'Enrolled')) {
 		filters.value['published'] = 1
+	} else if (user.data?.roles?.includes('Course Creator')) {
+		filters.value['published'] = 1
+		filters.value['created_by'] = user.data.name
+	} else {
+		delete filters.value['created_by']
+		delete filters.value['published']
 	}
+
 }
 
 const setQueryParams = () => {
