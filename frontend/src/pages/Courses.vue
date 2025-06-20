@@ -257,7 +257,7 @@ const updateTabFilter = () => {
 const updateStudentFilter = () => {
 	if (!user.data || (user.data?.is_student && currentTab.value != 'Enrolled')) {
 		filters.value['published'] = 1
-	} else if (user.data?.roles?.includes('Course Creator')) {
+	} else if (user.data?.roles?.includes('Course Creator') && user.data.name != "Administrator") {
 		delete filters.value['published']
 		filters.value['owner'] = user.data.name
 	} else {
