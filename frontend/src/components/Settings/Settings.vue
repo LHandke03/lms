@@ -167,6 +167,14 @@ const tabsStructure = computed(() => {
 							type: 'Link',
 						},
 						{
+							label: 'Livecode URL',
+							name: 'livecode_url',
+							doctype: 'Livecode URL',
+							type: 'text',
+							description:
+								'https://docs.frappe.io/learning/falcon-self-hosting-guide',
+						},
+						{
 							label: 'Unsplash Access Key',
 							name: 'unsplash_access_key',
 							description:
