@@ -14,7 +14,7 @@
   "license": "AGPL-3.0-or-later",
   "author": "Frappe",
   "type": "module",
-  "workspaces": [
+  "workspaces1": [
     "frappe-ui",
     "frontend"
   ],
