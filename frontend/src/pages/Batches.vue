@@ -198,7 +198,7 @@ const updateTabFilter = () => {
 	if (!user.data) {
 		return
 	}
-	if (currentTab.value == 'Enrolled' && (is_student.value||user.data.roles.includes('Course Creator'))) {
+	if (currentTab.value == 'Enrolled' && (is_student.value||user.data.roles.includes('Course Creator')||user.data.roles.includes("Batch Evaluator"))) {
 		filters.value['enrolled'] = 1
 		delete filters.value['start_date']
 		delete filters.value['published']
@@ -222,7 +222,7 @@ const updateTabFilter = () => {
 }
 
 const updateStudentFilter = () => {
-	if (!user.data || ((is_student.value||user.data.roles.includes('Course Creator')) && currentTab.value != 'Enrolled')) {
+	if (!user.data || ((is_student.value||user.data.roles.includes('Course Creator')||user.data.roles.includes("Batch Evaluator")) && currentTab.value != 'Enrolled')) {
 		filters.value['start_date'] = ['>=', dayjs().format('YYYY-MM-DD')]
 		filters.value['published'] = 1
 	}
