@@ -277,8 +277,7 @@ const batchTabs = computed(() => {
 	]
 
 	if (
-		user.data?.is_moderator ||
-		user.data?.is_evaluator
+		user.data?.is_moderator
 	) {
 		tabs.push({ label: __('Upcoming') })
 		tabs.push({ label: __('Archived') })
