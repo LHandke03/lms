@@ -130,7 +130,7 @@ const options = createResource({
 	params: {
 		txt: text.value,
 		doctype: props.doctype,
-		filters: {
+		filters: user.data?.name=="Administrator" ? props.filters : {
 			...props.filters,
 			owner: user.data?.name,
 		},
@@ -151,7 +151,10 @@ const reload = (val) => {
 		params: {
 			txt: val,
 			doctype: props.doctype,
-			filters: props.filters,
+			filters: user.data?.name=="Administrator" ? props.filters : {
+				...props.filters,
+				owner: user.data?.name,
+			},
 		},
 	})
 	options.reload()
