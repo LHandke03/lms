@@ -66,7 +66,7 @@
 							{{ tag }}
 						</Badge>
 					</div>
-					<div class="md:hidden mb-4">
+					<div class="md:hidden my-4">
 						<CourseCardOverlay :course="course" />
 					</div>
 					<div
@@ -78,6 +78,7 @@
 							:title="__('Course Outline')"
 							:courseName="course.data.name"
 							:showOutline="true"
+							:getProgress="course.data.membership ? true : false"
 						/>
 					</div>
 					<CourseReviews

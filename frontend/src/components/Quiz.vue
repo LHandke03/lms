@@ -574,7 +574,17 @@ const addToLocalStorage = () => {
 			return answer != undefined
 		}),
 	}
-	quizData ? quizData.push(questionData) : (quizData = [questionData])
+
+	if (quizData) {
+		let existingQuestion = quizData.find(
+			(q) => q.question_name == questionData.question_name
+		)
+		if (!existingQuestion) {
+			quizData.push(questionData)
+		}
+	} else {
+		quizData = [questionData]
+	}
 	localStorage.setItem(quiz.data.title, JSON.stringify(quizData))
 }
 
@@ -648,6 +658,8 @@ const getInstructions = (question) => {
 
 const markLessonProgress = () => {
 	let pathname = window.location.pathname.split('/')
+	if (!pathname.includes('courses'))
+		pathname = window.parent.location.pathname.split('/')
 	if (pathname[2] != 'courses') return
 	let lessonIndex = pathname.pop().split('-')
 
