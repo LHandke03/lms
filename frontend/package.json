@@ -32,7 +32,7 @@
     "dayjs": "^1.11.6",
     "dompurify": "^3.2.6",
     "feather-icons": "^4.28.0",
-    "frappe-ui": "0.1.173",
+    "frappe-ui": "^0.1.200",
     "highlight.js": "^11.11.1",
     "lucide-vue-next": "^0.383.0",
     "markdown-it": "^14.0.0",
@@ -54,6 +54,7 @@
     "@vitejs/plugin-vue": "^5.0.3",
     "autoprefixer": "^10.4.2",
     "postcss": "^8.4.5",
-    "vite": "^5.0.11"
+    "vite": "^5.0.11",
+    "vite-plugin-pwa": "^1.0.2"
   }
 }

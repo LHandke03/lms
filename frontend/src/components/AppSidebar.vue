@@ -375,6 +375,18 @@ const addPrograms = async () => {
 	})
 }
 
+const addContactUsDetails = () => {
+	if (settingsStore.contactUsEmail?.data || settingsStore.contactUsURL?.data) {
+		sidebarLinks.value.push({
+			label: 'Contact Us',
+			icon: settingsStore.contactUsURL?.data ? 'Headset' : 'Mail',
+			to: settingsStore.contactUsURL?.data
+				? settingsStore.contactUsURL.data
+				: `mailto:${settingsStore.contactUsEmail?.data}`,
+		})
+	}
+}
+
 const checkIfCanAddProgram = async () => {
 	if (isModerator.value || isInstructor.value) {
 		return true
@@ -595,6 +607,11 @@ const articles = ref([
 		],
 	},
 	{
+		title: __('Learning Paths'),
+		opened: false,
+		subArticles: [{ name: 'add-a-program', title: __('Add a program') }],
+	},
+	{
 		title: __('Assessments'),
 		opened: false,
 		subArticles: [
@@ -640,6 +657,7 @@ const setUpOnboarding = () => {
 }
 
 watch(userResource, () => {
+	addContactUsDetails()
 	if (userResource.data) {
 		isModerator.value = userResource.data.is_moderator
 		isInstructor.value = userResource.data.is_instructor
