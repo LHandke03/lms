@@ -2,24 +2,17 @@
 	<Dialog
 		v-model="show"
 		:options="{
-			title:
-				type == 'quiz'
-					? __('Add a quiz to your lesson')
-					: __('Add an assignment to your lesson'),
 			size: 'xl',
-			actions: [
-				{
-					label: __('Save'),
-					variant: 'solid',
-					onClick: () => {
-						addAssessment()
-					},
-				},
-			],
 		}"
 	>
-		<template #body-content>
-			<div class="">
+		<template #body>
+			<div class="p-5 space-y-4">
+				<div v-if="type == 'quiz'" class="text-lg font-semibold">
+					{{ __('Add a quiz to your lesson') }}
+				</div>
+				<div v-else class="text-lg font-semibold">
+					{{ __('Add an assignment to your lesson') }}
+				</div>
 				<div>
 					<Link
 						v-if="type == 'quiz'"
@@ -36,12 +29,17 @@
 						:onCreate="(value, close) => redirectToForm()"
 					/>
 				</div>
+				<div class="flex justify-end space-x-2">
+					<Button variant="solid" @click="addAssessment()">
+						{{ __('Save') }}
+					</Button>
+				</div>
 			</div>
 		</template>
 	</Dialog>
 </template>
 <script setup>
-import { Dialog } from 'frappe-ui'
+import { Dialog, Button } from 'frappe-ui'
 import { onMounted, ref, nextTick } from 'vue'
 import Link from '@/components/Controls/Link.vue'
 
