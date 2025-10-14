@@ -55,9 +55,12 @@ const props = defineProps({
 	},
 })
 
-onMounted(async () => {
-	await nextTick()
-	show.value = true
+// onMounted(async () => {
+// 	await nextTick()
+// 	show.value = true
+// })
+onMounted(() => {
+	setTimeout(() => (show.value = true), 50)
 })
 
 const addAssessment = () => {
