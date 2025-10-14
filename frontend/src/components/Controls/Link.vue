@@ -151,7 +151,7 @@ const reload = (val) => {
 		params: {
 			txt: val,
 			doctype: props.doctype,
-			filters: user.data?.name=="Administrator" ? props.filters : {
+			filters:{
 				...props.filters,
 				owner: user.data?.name,
 			},
