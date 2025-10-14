@@ -55,13 +55,13 @@ const props = defineProps({
 	},
 })
 
-// onMounted(async () => {
-// 	await nextTick()
-// 	show.value = true
-// })
-onMounted(() => {
-	setTimeout(() => (show.value = true), 50)
+onMounted(async () => {
+	await nextTick()
+	show.value = true
 })
+// onMounted(() => {
+// 	setTimeout(() => (show.value = true), 50)
+// })
 
 const addAssessment = () => {
 	props.onAddition(props.type == 'quiz' ? quiz.value : assignment.value)

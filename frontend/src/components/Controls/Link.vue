@@ -130,7 +130,7 @@ const options = createResource({
 	params: {
 		txt: text.value,
 		doctype: props.doctype,
-		filters: user.data?.name=="Administrator" ? props.filters : {
+		filters: {
 			...props.filters,
 			owner: user.data?.name,
 		},
