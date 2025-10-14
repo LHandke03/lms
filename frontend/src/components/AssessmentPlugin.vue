@@ -1,44 +1,39 @@
 <template>
-	<Dialog
-		v-model="show"
-		:options="{
-			title:
-				type == 'quiz'
-					? __('Add a quiz to your lesson')
-					: __('Add an assignment to your lesson'),
-			size: 'xl',
-			actions: [
-				{
-					label: __('Save'),
-					variant: 'solid',
-					onClick: () => {
-						addAssessment()
-					},
-				},
-			],
-		}"
-	>
-		<template #body-content>
-			<div class="">
-				<div>
-					<Link
-						v-if="type == 'quiz'"
-						v-model="quiz"
-						doctype="LMS Quiz"
-						:label="__('Select a quiz')"
-						:onCreate="(value, close) => redirectToForm()"
-					/>
-					<Link
-						v-else
-						v-model="assignment"
-						doctype="LMS Assignment"
-						:label="__('Select an assignment')"
-						:onCreate="(value, close) => redirectToForm()"
-					/>
-				</div>
-			</div>
-		</template>
-	</Dialog>
+ <Dialog
+  v-model="show"
+  :options="{
+    title: type == 'quiz'
+      ? __('Add a quiz to your lesson')
+      : __('Add an assignment to your lesson'),
+    size: 'xl',
+    actions: [
+      {
+        label: __('Save'),
+        variant: 'solid',
+        onClick: () => addAssessment(),
+      },
+    ],
+  }"
+>
+  <template #body-content>
+    <div class="p-5 space-y-4">
+      <Link
+        v-if="type == 'quiz'"
+        v-model="quiz"
+        doctype="LMS Quiz"
+        :label="__('Select a quiz')"
+        :onCreate="(value, close) => redirectToForm()"
+      />
+      <Link
+        v-else
+        v-model="assignment"
+        doctype="LMS Assignment"
+        :label="__('Select an assignment')"
+        :onCreate="(value, close) => redirectToForm()"
+      />
+    </div>
+  </template>
+</Dialog>
 </template>
 <script setup>
 import { Dialog } from 'frappe-ui'
