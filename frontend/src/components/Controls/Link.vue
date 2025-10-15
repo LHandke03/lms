@@ -132,11 +132,11 @@ const options = createResource({
 	params: {
 		txt: text.value,
 		doctype: props.doctype,
-		// filters: {
-		// 	...props.filters,
-		// 	owner: user.data?.name,
-		// },
-		filters: props.filters,
+		filters: user ? {
+			...props.filters,
+			owner: user.data?.name,
+		} : props.filters,
+		// filters: props.filters,
 	},
 	transform: (data) => {
 		return data.map((option) => {
@@ -154,11 +154,11 @@ const reload = (val) => {
 		params: {
 			txt: val,
 			doctype: props.doctype,
-			// filters:{
-			// 	...props.filters,
-			// 	owner: user.data?.name,
-			// },
-			filters:props.filters
+			filters: user ? {
+				...props.filters,
+				owner: user.data?.name,
+			}:props.filters,
+			// filters:props.filters
 		},
 	})
 	options.reload()
