@@ -66,9 +66,10 @@ import Autocomplete from '@/components/Controls/Autocomplete.vue'
 import { watchDebounced } from '@vueuse/core'
 import { createResource, Button } from 'frappe-ui'
 import { Plus, X } from 'lucide-vue-next'
-import { useAttrs, computed, ref, inject } from 'vue'
+// import { useAttrs, computed, ref, inject } from 'vue'
+import { useAttrs, computed, ref } from 'vue'
 
-const user = inject('$user')
+// const user = inject('$user')
 const props = defineProps({
 	doctype: {
 		type: String,
@@ -130,10 +131,11 @@ const options = createResource({
 	params: {
 		txt: text.value,
 		doctype: props.doctype,
-		filters: {
-			...props.filters,
-			owner: user.data?.name,
-		},
+		// filters: {
+		// 	...props.filters,
+		// 	owner: user.data?.name,
+		// },
+		filters: props.filters,
 	},
 	transform: (data) => {
 		return data.map((option) => {
@@ -151,10 +153,11 @@ const reload = (val) => {
 		params: {
 			txt: val,
 			doctype: props.doctype,
-			filters:{
-				...props.filters,
-				owner: user.data?.name,
-			},
+			// filters:{
+			// 	...props.filters,
+			// 	owner: user.data?.name,
+			// },
+			filters:props.filters
 		},
 	})
 	options.reload()
