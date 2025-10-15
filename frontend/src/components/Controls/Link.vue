@@ -66,10 +66,11 @@ import Autocomplete from '@/components/Controls/Autocomplete.vue'
 import { watchDebounced } from '@vueuse/core'
 import { createResource, Button } from 'frappe-ui'
 import { Plus, X } from 'lucide-vue-next'
-// import { useAttrs, computed, ref, inject } from 'vue'
-import { useAttrs, computed, ref } from 'vue'
+import { useAttrs, computed, ref, inject } from 'vue'
+// import { useAttrs, computed, ref } from 'vue'
 
-// const user = inject('$user')
+const user = inject('$user')
+console.log(user)
 const props = defineProps({
 	doctype: {
 		type: String,

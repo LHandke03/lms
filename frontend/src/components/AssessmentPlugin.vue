@@ -16,7 +16,7 @@
   }"
 >
   <template #body-content>
-    <div class="p-5 space-y-4">
+    <div class="">
       <Link
         v-if="type == 'quiz'"
         v-model="quiz"
