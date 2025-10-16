@@ -11,7 +11,6 @@ export class Quiz {
 		this.data = data
 		this.readOnly = readOnly
 	}
-
 	static get toolbox() {
 		const app = createApp({
 			render: () => h(CircleHelp, { size: 5, strokeWidth: 1.5 }),
@@ -41,6 +40,7 @@ export class Quiz {
 	}
 
 	renderQuiz(quiz) {
+		
 		if (this.readOnly) {
 			this.wrapper.innerHTML = `<iframe src="/lms/quiz/${quiz}?fromLesson=1" class="w-full h-[500px]"></iframe>`
 			return
@@ -57,6 +57,7 @@ export class Quiz {
 		if (this.readOnly) {
 			return
 		}
+		const { userResource } = usersStore()
 		const app = createApp(AssessmentPlugin, {
 			type: 'quiz',
 			onAddition: (quiz) => {
@@ -64,6 +65,7 @@ export class Quiz {
 				this.renderQuiz(quiz)
 			},
 		})
+		app.provide('$user', userResource)
 		app.use(translationPlugin)
 		app.mount(this.wrapper)
 	}
