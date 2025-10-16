@@ -150,6 +150,10 @@ const quizFilters = ref({})
 const showForm = ref(false)
 const title = ref('')
 
+if (!user.data?.is_moderator && user.data?.is_instructor) {
+	quizFilters.value['owner'] = user.data?.name
+}
+
 console.log("Quizzes user:", user)
 console.log("Quizzes user data:", user.data)
 onMounted(() => {
