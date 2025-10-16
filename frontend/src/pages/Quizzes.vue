@@ -150,6 +150,8 @@ const quizFilters = ref({})
 const showForm = ref(false)
 const title = ref('')
 
+console.log("Quizzes user:", user)
+
 onMounted(() => {
 	if (!user.data?.is_moderator && !user.data?.is_instructor) {
 		router.push({ name: 'Courses' })
