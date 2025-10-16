@@ -151,15 +151,17 @@ const showForm = ref(false)
 const title = ref('')
 
 console.log("Quizzes user:", user)
-
+console.log("Quizzes user data:", user.data)
 onMounted(() => {
+	console.log("Mounted Quizzes user Test:", user)
 	if (!user.data?.is_moderator && !user.data?.is_instructor) {
 		router.push({ name: 'Courses' })
 	} else if (!user.data?.is_moderator) {
+		console.log("User is not moderator, setting owner filter:", user.data?.is_moderator, user.data?.is_instructor, user.data?.name)
 		quizFilters.value['owner'] = user.data?.name
 	}
 })
-
+console.log("QuizFilters before watch:", quizFilters)
 watch(search, () => {
 	quizFilters.value['title'] = ['like', `%${search.value}%`]
 	quizzes.update({
