@@ -16,7 +16,7 @@
 			</div>
 			<div>
 				<TabButtons v-if="isAdmin" v-model="currentTab" :buttons="tabs" />
-				<div
+				<!-- <div
 					v-else
 					@click="showStreakModal = true"
 					class="bg-surface-amber-2 px-2 py-1 rounded-md cursor-pointer"
@@ -25,7 +25,7 @@
 					<span>
 						{{ streakInfo.data?.current_streak }}
 					</span>
-				</div>
+				</div> -->
 			</div>
 		</div>
 

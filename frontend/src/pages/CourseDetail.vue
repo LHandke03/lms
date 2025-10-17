@@ -142,9 +142,9 @@ watch(
 		course.reload()
 	}
 )
-
 watch(course, () => {
-	if (!isInstructor() && !course.data?.published && !course.data?.upcoming) {
+	console.log("course", course)
+	if (!isInstructor() && !course.data?.published && !course.data?.upcoming && !course.data?.membership?.some(e => e.member == user.data?.name)) {
 		router.push({
 			name: 'Courses',
 		})
