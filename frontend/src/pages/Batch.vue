@@ -32,31 +32,31 @@
 					:tabs="tabs"
 					tablistClass="overflow-y-hidden bg-surface-white"
 				>
-					<template #tab="{ tab, selected }" class="overflow-x-hidden">
-						<div>
-							<button
-								class="group -mb-px flex items-center gap-1 border-b border-transparent py-2.5 text-base text-ink-gray-5 duration-300 ease-in-out hover:border-outline-gray-3 hover:text-ink-gray-9"
-								:class="{ 'text-ink-gray-9': selected }"
-							>
-								<component
-									v-if="tab.icon"
-									:is="tab.icon"
-									class="h-4 stroke-1.5"
-								/>
-								{{ __(tab.label) }}
-								<Badge
-									v-if="tab.count"
-									:class="{
-										'text-ink-gray-9 border border-gray-900': selected,
-									}"
-									variant="subtle"
-									theme="gray"
-									size="sm"
+					<template #tab="{ tab, selected }" class="overflow-x-hidden">s
+							<div>
+								<button
+									class="group -mb-px flex items-center gap-1 border-b border-transparent py-2.5 text-base text-ink-gray-5 duration-300 ease-in-out hover:border-outline-gray-3 hover:text-ink-gray-9"
+									:class="{ 'text-ink-gray-9': selected }"
 								>
-									{{ tab.count }}
-								</Badge>
-							</button>
-						</div>
+									<component
+										v-if="tab.icon"
+										:is="tab.icon"
+										class="h-4 stroke-1.5"
+									/>
+									{{ __(tab.label) }}
+									<Badge
+										v-if="tab.count"
+										:class="{
+											'text-ink-gray-9 border border-gray-900': selected,
+										}"
+										variant="subtle"
+										theme="gray"
+										size="sm"
+									>
+										{{ tab.count }}
+									</Badge>
+								</button>
+							</div>
 					</template>
 					<template #tab-panel="{ tab }">
 						<div class="pt-5 px-5 pb-10">
@@ -81,7 +81,7 @@
 							<div v-else-if="tab.label == 'Announcements'">
 								<Announcements :batch="batch.data.name" />
 							</div>
-							<div v-else-if="tab.label == 'Discussions'">
+							<!-- <div v-else-if="tab.label == 'Discussions'">
 								<Discussions
 									doctype="LMS Batch"
 									:docname="batch.data.name"
@@ -90,7 +90,7 @@
 									:singleThread="true"
 									:scrollToBottom="false"
 								/>
-							</div>
+							</div> -->
 						</div>
 					</template>
 				</Tabs>
@@ -141,12 +141,12 @@
 						</span>
 					</div>
 				</div>
-				<div v-if="dayjs().isSameOrAfter(dayjs(batch.data.start_date))">
+				<!-- <div v-if="dayjs().isSameOrAfter(dayjs(batch.data.start_date))">
 					<div class="text-ink-gray-7 font-semibold mb-2">
 						{{ __('Feedback') }}
 					</div>
 					<BatchFeedback :batch="batch.data?.name" />
-				</div>
+				</div> -->
 			</div>
 			<AnnouncementModal
 				v-model="showAnnouncementModal"
