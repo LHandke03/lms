@@ -81,11 +81,11 @@
 							:getProgress="course.data.membership ? true : false"
 						/>
 					</div>
-					<CourseReviews
+					<!-- <CourseReviews
 						:courseName="course.data.name"
 						:avg_rating="course.data.rating"
 						:membership="course.data.membership"
-					/>
+					/> -->
 				</div>
 				<div class="hidden md:block">
 					<CourseCardOverlay :course="course" />

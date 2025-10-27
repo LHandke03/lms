@@ -279,7 +279,7 @@
 							v-model:notes="notes"
 							@updateNotes="updateNotes"
 						/>
-						<Discussions
+						<!-- <Discussions
 							v-else-if="allowDiscussions"
 							:title="'Questions'"
 							:doctype="'Course Lesson'"
@@ -288,7 +288,7 @@
 							:emptyStateText="
 								__('Ask a question to get help from the community.')
 							"
-						/>
+						/> -->
 					</div>
 				</div>
 			</div>
