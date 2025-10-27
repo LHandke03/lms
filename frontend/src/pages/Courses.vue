@@ -115,6 +115,7 @@ onMounted(() => {
 	setFiltersFromQuery()
 	updateCourses()
 	getCourseCount()
+	pushHome()
 	categories.value = [
 		{
 			label: '',
@@ -168,6 +169,14 @@ const identifyUserPersona = async () => {
 				name: 'PersonaForm',
 			})
 		}
+	}
+}
+const pushHome = async () => {
+	console.log("user course:",user)
+	console.log("user data:", user.data)
+	if (user.data.is_student){
+		console.log("Router push true")
+		router.push({ name: 'Home' })
 	}
 }
 
