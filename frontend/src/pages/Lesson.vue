@@ -733,7 +733,7 @@ const updateVideoTime = (video) => {
 const startTimer = () => {
 	let timerInterval = setInterval(() => {
 		timer.value++
-		if (timer.value == 30) {
+		if (timer.value == 1) {
 			clearInterval(timerInterval)
 			markProgress()
 		}
