@@ -1679,7 +1679,7 @@ msgstr "Kursname"
 
 #: frontend/src/pages/CourseDetail.vue:78 frontend/src/pages/CourseForm.vue:310
 msgid "Course Outline"
-msgstr ""
+msgstr "Kursübersicht"
 
 #. Name of a report
 #: frontend/src/components/Modals/CourseProgressSummary.vue:5
@@ -5884,7 +5884,7 @@ msgstr ""
 #: frontend/src/pages/Home/StudentHome.vue:19
 #: frontend/src/pages/Home/StudentHome.vue:51
 msgid "See all"
-msgstr ""
+msgstr "Alle Anzeigen"
 
 #: frontend/src/components/Settings/BadgeAssignmentForm.vue:42
 msgid "Select Date"
