@@ -1788,7 +1788,7 @@ msgstr ""
 
 #: frontend/src/pages/Home/AdminHome.vue:84
 msgid "Create Course"
-msgstr ""
+msgstr "Kurs Erstellen"
 
 #: frontend/src/components/Controls/Link.vue:38
 #: frontend/src/components/Controls/MultiSelect.vue:66
@@ -6554,7 +6554,7 @@ msgstr ""
 
 #: frontend/src/pages/Home/AdminHome.vue:71
 msgid "There are no courses currently. Create your first course to get started!"
-msgstr ""
+msgstr "Sie haben keine Kurse erstellt"
 
 #: lms/lms/doctype/lms_batch/lms_batch.py:101
 msgid "There are no seats available in this batch."

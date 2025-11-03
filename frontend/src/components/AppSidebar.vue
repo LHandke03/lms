@@ -662,7 +662,9 @@ watch(userResource, () => {
 		isModerator.value = userResource.data.is_moderator
 		isInstructor.value = userResource.data.is_instructor
 		addHome()
-		addPrograms()
+		if (isModerator.value) {
+			addPrograms()
+		}
 		addProgrammingExercises()
 		addQuizzes()
 		addAssignments()
