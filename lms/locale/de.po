@@ -658,11 +658,11 @@ msgstr "Durchschnittliche Bewertung"
 
 #: frontend/src/components/Modals/VideoStatistics.vue:74
 msgid "Average Watch Time"
-msgstr ""
+msgstr "Durchschnittliche Watch Time"
 
 #: frontend/src/pages/Lesson.vue:63 frontend/src/pages/Lesson.vue:199
 msgid "Back to Course"
-msgstr ""
+msgstr "Zurück zur Kursübersicht"
 
 #. Label of the badge (Link) field in DocType 'LMS Badge Assignment'
 #: frontend/src/components/Settings/BadgeAssignmentForm.vue:32
@@ -4117,12 +4117,12 @@ msgstr "Mitgliedsname"
 #. Submission'
 #: lms/lms/doctype/exercise_latest_submission/exercise_latest_submission.json
 msgid "Member Subgroup"
-msgstr ""
+msgstr "Nutzer Untergruppe"
 
 #. Label of the member_type (Select) field in DocType 'LMS Enrollment'
 #: lms/lms/doctype/lms_enrollment/lms_enrollment.json
 msgid "Member Type"
-msgstr ""
+msgstr "Nutzertyp"
 
 #. Label of the member_username (Data) field in DocType 'LMS Badge Assignment'
 #. Label of the member_username (Data) field in DocType 'LMS Batch Enrollment'
@@ -4137,7 +4137,7 @@ msgstr ""
 #: lms/lms/doctype/lms_live_class_participant/lms_live_class_participant.json
 #: lms/lms/doctype/lms_video_watch_duration/lms_video_watch_duration.json
 msgid "Member Username"
-msgstr ""
+msgstr "Nutzername des Nutzers"
 
 #: frontend/src/pages/Programs/ProgramForm.vue:463
 msgid "Member added to program successfully"
@@ -4145,11 +4145,11 @@ msgstr ""
 
 #: lms/lms/doctype/lms_batch_enrollment/lms_batch_enrollment.py:26
 msgid "Member already enrolled in this batch"
-msgstr ""
+msgstr "Nutzer ist bereits in dieser Klasse eingeschrieben"
 
 #: lms/lms/doctype/lms_program/lms_program.py:30
 msgid "Member {0} has already been added to this batch."
-msgstr ""
+msgstr "Der Nutzer {0} wurde bereitz zu dieser Klasse hinzugefügt"
 
 #. Group in LMS Batch Old's connections
 #: frontend/src/pages/Programs/ProgramForm.vue:110
@@ -4313,7 +4313,7 @@ msgstr "Ihre Kurse"
 
 #: frontend/src/components/Notes/Notes.vue:3
 msgid "My Notes"
-msgstr "Ihre Notiezen"
+msgstr "Ihre Notizen"
 
 #: frontend/src/pages/ProfileEvaluator.vue:4
 msgid "My availability"
