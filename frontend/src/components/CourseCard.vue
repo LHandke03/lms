@@ -58,14 +58,14 @@
 					</Tooltip>
 				</div>
 
-				<div v-if="course.enrollments">
+				<!-- <div v-if="course.enrollments">
 					<Tooltip :text="__('Enrolled Students')">
 						<span class="flex items-center">
 							<Users class="h-4 w-4 stroke-1.5 mr-1" />
 							{{ course.enrollments }}
 						</span>
 					</Tooltip>
-				</div>
+				</div> -->
 
 				<!-- <div v-if="course.rating">
 					<Tooltip :text="__('Average Rating')">
