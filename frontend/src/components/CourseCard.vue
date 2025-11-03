@@ -67,14 +67,14 @@
 					</Tooltip>
 				</div>
 
-				<div v-if="course.rating">
+				<!-- <div v-if="course.rating">
 					<Tooltip :text="__('Average Rating')">
 						<span class="flex items-center">
 							<Star class="h-4 w-4 stroke-1.5 mr-1" />
 							{{ course.rating }}
 						</span>
 					</Tooltip>
-				</div>
+				</div> -->
 
 				<Tooltip v-if="course.featured" :text="__('Featured')">
 					<Award class="size-4 stroke-2 text-ink-amber-3" />
