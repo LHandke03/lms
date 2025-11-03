@@ -238,21 +238,21 @@
 							{{ __('Pricing and Certification') }}
 						</div>
 						<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-							<FormControl
+							<!-- <FormControl
 								type="checkbox"
 								v-model="course.paid_course"
 								:label="__('Paid Course')"
-							/>
+							/> -->
 							<FormControl
 								type="checkbox"
 								v-model="course.enable_certification"
 								:label="__('Completion Certificate')"
 							/>
-							<FormControl
+							<!-- <FormControl
 								type="checkbox"
 								v-model="course.paid_certificate"
 								:label="__('Paid Certificate')"
-							/>
+							/> -->
 						</div>
 						<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 							<div class="space-y-5">

@@ -308,7 +308,7 @@ msgstr "Alle"
 
 #: frontend/src/pages/Batches.vue:26
 msgid "All Batches"
-msgstr ""
+msgstr "Alle Klassen"
 
 #: frontend/src/pages/Courses.vue:26 lms/lms/widgets/BreadCrumb.html:3
 msgid "All Courses"
@@ -848,7 +848,7 @@ msgstr "Charge:"
 #: frontend/src/pages/Batches.vue:306 frontend/src/pages/Batches.vue:313
 #: lms/lms/doctype/lms_settings/lms_settings.json lms/www/lms.py:120
 msgid "Batches"
-msgstr ""
+msgstr "Klassen"
 
 #. Label of the begin_date (Date) field in DocType 'Cohort'
 #: lms/lms/doctype/cohort/cohort.json
@@ -2347,7 +2347,7 @@ msgstr ""
 #: frontend/src/pages/Batches.vue:288 frontend/src/pages/Courses.vue:326
 #: frontend/src/pages/Programs/StudentPrograms.vue:96
 msgid "Enrolled"
-msgstr ""
+msgstr "Eingeschrieben"
 
 #: frontend/src/components/CourseCard.vue:62
 #: frontend/src/components/CourseCardOverlay.vue:138
@@ -4711,7 +4711,7 @@ msgstr ""
 
 #: frontend/src/pages/Home/StudentHome.vue:41
 msgid "Our Upcoming Batches"
-msgstr ""
+msgstr "Unsere Bald verfügbaren Klassen"
 
 #. Label of the output (Data) field in DocType 'LMS Test Case Submission'
 #: lms/lms/doctype/lms_test_case_submission/lms_test_case_submission.json
@@ -5848,7 +5848,7 @@ msgstr ""
 
 #: frontend/src/pages/Batches.vue:40 frontend/src/pages/Courses.vue:36
 msgid "Search by Title"
-msgstr ""
+msgstr "Suche nach Titel"
 
 #: frontend/src/pages/Assignments.vue:34
 #: frontend/src/pages/ProgrammingExercises/ProgrammingExercises.vue:47
@@ -6185,7 +6185,7 @@ msgstr "Start-URL"
 
 #: frontend/src/components/Quiz.vue:81
 msgid "Start the Quiz"
-msgstr ""
+msgstr "Quiz starten"
 
 #. Option for the 'Company Type' (Select) field in DocType 'User'
 #: lms/fixtures/custom_field.json
@@ -6313,11 +6313,11 @@ msgstr ""
 
 #: frontend/src/pages/ProgrammingExercises/ProgrammingExerciseSubmission.vue:353
 msgid "Submission saved!"
-msgstr ""
+msgstr "Einreichenung gespeichert"
 
 #: frontend/src/pages/ProgrammingExercises/ProgrammingExerciseSubmissions.vue:254
 msgid "Submissions deleted successfully"
-msgstr ""
+msgstr "Einreichung erfolgreich gelöscht"
 
 #: frontend/src/components/Modals/AssessmentModal.vue:9
 #: frontend/src/components/Modals/BatchCourseModal.vue:9
@@ -6334,7 +6334,7 @@ msgstr "Feedback senden"
 
 #: frontend/src/pages/PersonaForm.vue:43
 msgid "Submit and Continue"
-msgstr ""
+msgstr "Einreichen und Fortsetzen"
 
 #: frontend/src/components/Modals/JobApplicationModal.vue:23
 msgid "Submit your resume to proceed with your application for this position. Upon submission, it will be shared with the job poster."
@@ -6558,11 +6558,11 @@ msgstr ""
 
 #: lms/lms/doctype/lms_batch/lms_batch.py:101
 msgid "There are no seats available in this batch."
-msgstr ""
+msgstr " Es sind keine Plätze in dieser Klasse verfügbar"
 
 #: frontend/src/components/BatchStudents.vue:155
 msgid "There are no students in this batch."
-msgstr ""
+msgstr "Es sind keine schüler in dieser Klasse"
 
 #: frontend/src/pages/AssignmentSubmissionList.vue:70
 msgid "There are no submissions for this assignment."
@@ -6570,7 +6570,7 @@ msgstr ""
 
 #: frontend/src/components/EmptyState.vue:11
 msgid "There are no {0} currently. Keep an eye out, fresh learning experiences are on the way!"
-msgstr ""
+msgstr "Es sind zurzeit keine {0} verfügbar."
 
 #: lms/templates/course_list.html:14
 msgid "There are no {0} on this site."
@@ -6611,7 +6611,7 @@ msgstr ""
 
 #: frontend/src/components/CourseCardOverlay.vue:126
 msgid "This course has:"
-msgstr ""
+msgstr "Dieser Kurs hat:"
 
 #: lms/lms/utils.py:1765
 msgid "This course is free."
@@ -6621,25 +6621,25 @@ msgstr "Dieser Kurs ist kostenlos."
 #. Settings'
 #: lms/lms/doctype/lms_settings/lms_settings.json
 msgid "This description will be shown on lists and pages without meta description"
-msgstr ""
+msgstr "Diese Beschreibung wird gezeigt, auf Listen und Seiten ohne Meta-Beschreibung"
 
 #. Description of the 'Meta Image' (Attach Image) field in DocType 'LMS
 #. Settings'
 #: lms/lms/doctype/lms_settings/lms_settings.json
 msgid "This image will be shown on lists and pages that don't have an image by default"
-msgstr ""
+msgstr "Dieses Bild wird auf Listen und Seiten gezeigt, welche kein Standardbild haben"
 
 #: frontend/src/pages/Lesson.vue:74
 msgid "This lesson is locked"
-msgstr ""
+msgstr "Diese Lektion ist Geschlossen"
 
 #: frontend/src/pages/Lesson.vue:79
 msgid "This lesson is not available for preview. Please enroll in the course to access it."
-msgstr ""
+msgstr "Diese Lektion ist nicht als Vorschau verfügbar. Bitte schrieben sie sich in den Kurs ein, um auf die Lektion zuzugreifen"
 
 #: lms/lms/widgets/NoPreviewModal.html:16
 msgid "This lesson is not available for preview. Please join the course to access it."
-msgstr ""
+msgstr "Diese Lektion ist nicht als Vorschau verfügbar. Bitte treten sie den Kurs bei, um auf die Lektion zuzugreifen"
 
 #: frontend/src/pages/Programs/ProgramEnrollment.vue:18
 msgid "This program consists of {0} courses"
@@ -6647,16 +6647,16 @@ msgstr ""
 
 #: frontend/src/components/Quiz.vue:11
 msgid "This quiz consists of {0} questions."
-msgstr ""
+msgstr "Dieses Quiz besteht aus {0} Fragen"
 
 #: frontend/src/components/AppSidebar.vue:75
 #: frontend/src/components/AppSidebar.vue:115
 msgid "This site is being updated. You will not be able to make any changes. Full access will be restored shortly."
-msgstr ""
+msgstr "Diese seite wird geupdated. Du wirst"
 
 #: frontend/src/components/VideoBlock.vue:5
 msgid "This video contains {0} {1}:"
-msgstr ""
+msgstr "Dieses Video hat {0} {1}:"
 
 #. Option for the 'Day' (Select) field in DocType 'Evaluator Schedule'
 #. Option for the 'Day' (Select) field in DocType 'LMS Certificate Request'
@@ -6696,7 +6696,7 @@ msgstr ""
 
 #: frontend/src/components/Modals/LiveClassModal.vue:44
 msgid "Time must be in 24 hour format (HH:mm). Example 11:30 or 22:00"
-msgstr ""
+msgstr "Die Zeit muss im 24 Stunden format (HH:mm) sein. Zum Beispiel 11:30 oder 22:00"
 
 #. Label of the schedule_tab (Tab Break) field in DocType 'LMS Batch'
 #. Label of the timetable (Table) field in DocType 'LMS Batch'
@@ -6786,7 +6786,7 @@ msgstr "Bezeichnung"
 
 #: frontend/src/components/Modals/ChapterModal.vue:172
 msgid "Title is required"
-msgstr ""
+msgstr "Titel wird benötigt"
 
 #. Label of the unavailable_to (Date) field in DocType 'Course Evaluator'
 #: frontend/src/pages/ProfileEvaluator.vue:112
@@ -6873,11 +6873,11 @@ msgstr "Typ"
 
 #: frontend/src/utils/markdownParser.js:11
 msgid "Type '/' for commands or select text to format"
-msgstr ""
+msgstr "Drücke 'Umschalt+7' um Komandos anzuzeigen oder Wähle text aus um diesn zu formatieren "
 
 #: frontend/src/components/Quiz.vue:656
 msgid "Type your answer"
-msgstr ""
+msgstr "Schreibe dein Antwort hier"
 
 #. Option for the 'Grade Type' (Select) field in DocType 'Education Detail'
 #: lms/lms/doctype/education_detail/education_detail.json
@@ -6922,7 +6922,7 @@ msgstr ""
 
 #: frontend/src/pages/Batches.vue:286 frontend/src/pages/Courses.vue:324
 msgid "Unpublished"
-msgstr ""
+msgstr "Nicht Veröffentlicht"
 
 #: frontend/src/components/Modals/EditCoverImage.vue:60
 #: frontend/src/components/UnsplashImageBrowser.vue:54
@@ -6947,11 +6947,11 @@ msgstr ""
 #: lms/lms/doctype/lms_certificate_request/lms_certificate_request.json
 #: lms/lms/doctype/lms_course/lms_course.json
 msgid "Upcoming"
-msgstr ""
+msgstr "Bald Verfügbar"
 
 #: frontend/src/pages/Batch.vue:187 frontend/src/pages/Home/AdminHome.vue:34
 msgid "Upcoming Batches"
-msgstr ""
+msgstr "Bald verfügbare Klassen"
 
 #: frontend/src/components/UpcomingEvaluations.vue:5
 #: frontend/src/pages/Home/AdminHome.vue:92 lms/templates/upcoming_evals.html:3
@@ -7244,7 +7244,7 @@ msgstr "Sie sind bereits in diesem Kurs eingeschrieben."
 
 #: frontend/src/pages/Batch.vue:169
 msgid "You are not a member of this batch. Please checkout our upcoming batches."
-msgstr ""
+msgstr "Sie sind kein Mitglied dieser Klasse. Bitte Checken sie unsere Bald verfügbaren Klassen oder Kontaktieren sie den Administrator"
 
 #: lms/lms/doctype/lms_batch_old/lms_batch_old.py:20
 msgid "You are not a mentor of the course {0}"

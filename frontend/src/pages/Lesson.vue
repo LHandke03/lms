@@ -430,6 +430,7 @@ onMounted(() => {
 			lessonProgress.value = data.progress
 		}
 	})
+	
 })
 
 const attachFullscreenEvent = () => {
@@ -759,7 +760,8 @@ const checkIfDiscussionsAllowed = () => {
 			user.data?.is_moderator ||
 			user.data?.is_instructor)
 	) {
-		allowDiscussions.value = true
+		// allowDiscussions.value = true
+		allowDiscussions.value = false
 	} else {
 		allowDiscussions.value = false
 	}
