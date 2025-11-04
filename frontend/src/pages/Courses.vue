@@ -94,6 +94,7 @@ import { computed, inject, onMounted, ref, watch } from 'vue'
 import { Plus } from 'lucide-vue-next'
 import { sessionStore } from '@/stores/session'
 import { canCreateCourse } from '@/utils'
+import { useRoute } from 'vue-router'
 import CourseCard from '@/components/CourseCard.vue'
 import EmptyState from '@/components/EmptyState.vue'
 import router from '../router'
@@ -110,6 +111,7 @@ const filters = ref({})
 const currentTab = ref('Live')
 const { brand } = sessionStore()
 const courseCount = ref(0)
+const route = useRoute()
 
 onMounted(() => {
 	setFiltersFromQuery()
@@ -174,7 +176,9 @@ const identifyUserPersona = async () => {
 const pushHome = async () => {
 	console.log("user course:",user)
 	console.log("user data:", user.data)
-	if (user.data.is_student){
+	console.log("course:", courses)
+	console.log("route:", route.fullPath)		
+	if (user.data.is_student && (route.fullPath == '/courses')) {
 		console.log("Router push true")
 		router.push({ name: 'Home' })
 	}
