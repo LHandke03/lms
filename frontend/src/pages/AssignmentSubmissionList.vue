@@ -212,7 +212,7 @@ const getStatusTheme = (status) => {
 const breadcrumbs = computed(() => {
 	return [
 		{
-			label: 'Assignment Submissions',
+			label: __('Assignment Submissions'),
 		},
 	]
 })

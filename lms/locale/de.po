@@ -732,7 +732,7 @@ msgstr ""
 #. Name of a DocType
 #: lms/lms/doctype/batch_course/batch_course.json
 msgid "Batch Course"
-msgstr ""
+msgstr "Klassen Kurs"
 
 #. Label of the section_break_5 (Section Break) field in DocType 'LMS Batch
 #. Old'
@@ -754,16 +754,16 @@ msgstr ""
 
 #: frontend/src/pages/BatchForm.vue:89
 msgid "Batch End Date"
-msgstr ""
+msgstr "Klassen Enddatum"
 
 #: frontend/src/components/Settings/BadgeForm.vue:204
 #: frontend/src/components/Settings/Badges.vue:202
 msgid "Batch Enrollment"
-msgstr ""
+msgstr "Klasseneinschreibung"
 
 #: frontend/src/components/Modals/EmailTemplateModal.vue:28
 msgid "Batch Enrollment Confirmation"
-msgstr ""
+msgstr "Klasseneinschreibungs Bestätigung"
 
 #. Name of a role
 #: lms/lms/doctype/course_evaluator/course_evaluator.json
@@ -790,7 +790,7 @@ msgstr ""
 #: lms/lms/doctype/exercise_submission/exercise_submission.json
 #: lms/lms/doctype/lms_enrollment/lms_enrollment.json
 msgid "Batch Old"
-msgstr ""
+msgstr "Klasse alt"
 
 #. Label of the section_break_7 (Section Break) field in DocType 'LMS Batch
 #. Old'
@@ -799,38 +799,38 @@ msgstr ""
 #: lms/lms/doctype/lms_batch_old/lms_batch_old.json
 #: lms/lms/doctype/lms_settings/lms_settings.json
 msgid "Batch Settings"
-msgstr ""
+msgstr "Klasseneinstellung"
 
 #: frontend/src/pages/BatchForm.vue:82
 msgid "Batch Start Date"
-msgstr ""
+msgstr "Klassen Startdatum"
 
 #: lms/templates/emails/batch_confirmation.html:11
 msgid "Batch Start Date:"
-msgstr ""
+msgstr "Startdatum der Klasse:"
 
 #: frontend/src/components/BatchStudents.vue:40
 msgid "Batch Summary"
-msgstr ""
+msgstr "Klassenzusammenfasseung"
 
 #. Label of the batch_title (Data) field in DocType 'LMS Certificate'
 #. Label of the batch_title (Data) field in DocType 'LMS Certificate Request'
 #: lms/lms/doctype/lms_certificate/lms_certificate.json
 #: lms/lms/doctype/lms_certificate_request/lms_certificate_request.json
 msgid "Batch Title"
-msgstr ""
+msgstr "Klassentitel"
 
 #: frontend/src/pages/BatchForm.vue:581
 msgid "Batch deleted successfully"
-msgstr ""
+msgstr "Klasse erfolgreich gelöscht"
 
 #: lms/lms/doctype/lms_batch/lms_batch.py:43
 msgid "Batch end date cannot be before the batch start date"
-msgstr ""
+msgstr "Enddatum der klasse, kann nicht vor Startdatum der Klasse liegen"
 
 #: lms/lms/api.py:211
 msgid "Batch has already started."
-msgstr ""
+msgstr "Klasse hat bereits angefangen"
 
 #: lms/lms/api.py:206
 msgid "Batch is sold out."
@@ -842,7 +842,7 @@ msgstr ""
 
 #: lms/templates/emails/batch_start_reminder.html:10
 msgid "Batch:"
-msgstr "Charge:"
+msgstr "Klasse:"
 
 #. Label of the batches (Check) field in DocType 'LMS Settings'
 #: frontend/src/pages/Batches.vue:306 frontend/src/pages/Batches.vue:313
@@ -928,7 +928,7 @@ msgstr "Abbrechen"
 
 #: frontend/src/components/UpcomingEvaluations.vue:175
 msgid "Cancel this evaluation?"
-msgstr ""
+msgstr "Diese Bewertung abbrechen?"
 
 #. Option for the 'Status' (Select) field in DocType 'Cohort'
 #. Option for the 'Stage' (Select) field in DocType 'LMS Batch Old'
@@ -996,11 +996,11 @@ msgstr "Zertifikatslink"
 
 #: frontend/src/components/CourseCardOverlay.vue:156
 msgid "Certificate of Completion"
-msgstr ""
+msgstr "Zertifikat für Abschluss"
 
 #: frontend/src/components/Modals/Event.vue:317
 msgid "Certificate saved successfully"
-msgstr ""
+msgstr "Zertifikat erfolgreich gespeichert"
 
 #: frontend/src/pages/ProfileCertificates.vue:4
 msgid "Certificates"
@@ -1008,7 +1008,7 @@ msgstr "Zertifikate"
 
 #: frontend/src/components/Modals/BulkCertificates.vue:120
 msgid "Certificates generated successfully"
-msgstr ""
+msgstr "Zertifikat erfolgreich generiert"
 
 #. Label of the certification (Table) field in DocType 'User'
 #. Name of a DocType

@@ -469,7 +469,7 @@ const validateLesson = () => {
 const breadcrumbs = computed(() => {
 	let crumbs = [
 		{
-			label: 'Courses',
+			label: __('Courses'),
 			route: { name: 'Courses' },
 		},
 		{
