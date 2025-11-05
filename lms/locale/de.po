@@ -84,7 +84,7 @@ msgstr ""
 
 #: frontend/src/pages/CourseForm.vue:190
 msgid "A one line introduction to the course that appears on the course card"
-msgstr ""
+msgstr "Eine kurze einführung, die auf Der Kurskarte angezeigt wird"
 
 #: frontend/src/pages/ProfileAbout.vue:4
 msgid "About"
@@ -92,11 +92,11 @@ msgstr "Über"
 
 #: frontend/src/pages/CourseForm.vue:182
 msgid "About the Course"
-msgstr ""
+msgstr "Über diesen Kurs"
 
 #: frontend/src/pages/Batch.vue:101
 msgid "About this batch"
-msgstr ""
+msgstr "Über diese Klasse"
 
 #. Label of the verify_terms (Check) field in DocType 'User'
 #: lms/fixtures/custom_field.json
@@ -134,7 +134,7 @@ msgstr "Aktiv"
 
 #: frontend/src/pages/Statistics.vue:16
 msgid "Active Members"
-msgstr ""
+msgstr "Aktive Mitglieder"
 
 #: frontend/src/components/Assessments.vue:11
 #: frontend/src/components/BatchCourses.vue:11
@@ -170,7 +170,7 @@ msgstr "Lektion hinzufügen"
 
 #: frontend/src/components/VideoBlock.vue:121
 msgid "Add Quiz to Video"
-msgstr ""
+msgstr "Quiz zum Video hinzufügen"
 
 #: frontend/src/components/Controls/ChildTable.vue:69
 msgid "Add Row"
@@ -198,7 +198,7 @@ msgstr "Schüler hinzufügen"
 
 #: frontend/src/components/AppSidebar.vue:585
 msgid "Add a chapter"
-msgstr ""
+msgstr "Kapitel hinzufügen"
 
 #: frontend/src/components/Modals/BatchCourseModal.vue:5
 msgid "Add a course"
@@ -210,16 +210,16 @@ msgstr ""
 
 #: frontend/src/components/AppSidebar.vue:586
 msgid "Add a lesson"
-msgstr ""
+msgstr "Lektion hinzufügen"
 
 #: frontend/src/components/Settings/Members.vue:88
 msgid "Add a new member"
-msgstr ""
+msgstr "Neuen Nutzer hinzufügen"
 
 #: frontend/src/components/Modals/Question.vue:166
 #: frontend/src/pages/QuizForm.vue:200
 msgid "Add a new question"
-msgstr ""
+msgstr "Neue Frage hinzufügen"
 
 #: frontend/src/components/AppSidebar.vue:600
 msgid "Add a program"
@@ -231,15 +231,15 @@ msgstr ""
 
 #: frontend/src/components/AssessmentPlugin.vue:7
 msgid "Add a quiz to your lesson"
-msgstr ""
+msgstr "Eine Quiz zu ihrer Lektion hinzufügen"
 
 #: frontend/src/components/Modals/AssessmentModal.vue:5
 msgid "Add an assessment"
-msgstr ""
+msgstr "Eine Aufgabe hinzufügen"
 
 #: frontend/src/components/AssessmentPlugin.vue:8
 msgid "Add an assignment to your lesson"
-msgstr ""
+msgstr "Eine Aufgabe zu ihrer Lektion hinzufügen"
 
 #: lms/lms/doctype/lms_question/lms_question.py:67
 msgid "Add at least one possible answer for this question: {0}"
@@ -247,19 +247,19 @@ msgstr "Fügen Sie mindestens eine mögliche Antwort für diese Frage hinzu: {0}
 
 #: frontend/src/components/AppSidebar.vue:549
 msgid "Add courses to your batch"
-msgstr ""
+msgstr "Kurs zu ihrer Klasse hinzufügen"
 
 #: frontend/src/components/Modals/QuizInVideo.vue:5
 msgid "Add quiz to this video"
-msgstr ""
+msgstr "Ein Quiz zu diesem Video hinzufügen"
 
 #: frontend/src/components/AppSidebar.vue:528
 msgid "Add students to your batch"
-msgstr ""
+msgstr "Nutzer zu ihrer Klasse hinzufügen"
 
 #: frontend/src/components/Notes/InlineLessonMenu.vue:39
 msgid "Add to Notes"
-msgstr ""
+msgstr "Zu Notizen hinzufügen"
 
 #: frontend/src/components/Modals/PageModal.vue:6
 msgid "Add web page to sidebar"
@@ -271,11 +271,11 @@ msgstr "Aufgabe als {0} hinzufügen"
 
 #: frontend/src/components/AppSidebar.vue:461
 msgid "Add your first chapter"
-msgstr ""
+msgstr "Erstes Kapitel hinzufügen"
 
 #: frontend/src/components/AppSidebar.vue:477
 msgid "Add your first lesson"
-msgstr ""
+msgstr "Erste Lektion erstellen"
 
 #. Label of the address (Link) field in DocType 'LMS Payment'
 #: frontend/src/components/Settings/TransactionDetails.vue:56
@@ -325,7 +325,7 @@ msgstr "Alle Fragen sollten die gleiche Punktzahl haben, wenn das Limit festgele
 #. Label of the allow_guest_access (Check) field in DocType 'LMS Settings'
 #: lms/lms/doctype/lms_settings/lms_settings.json
 msgid "Allow Guest Access"
-msgstr ""
+msgstr "Gastzugang erlauben"
 
 #. Label of the allow_posting (Check) field in DocType 'Job Settings'
 #: lms/job/doctype/job_settings/job_settings.json
@@ -397,11 +397,11 @@ msgstr "Ankündigung"
 
 #: frontend/src/components/Modals/AnnouncementModal.vue:105
 msgid "Announcement has been sent successfully"
-msgstr ""
+msgstr "Ankündigung wurde erfolgreich gesendet"
 
 #: frontend/src/components/Modals/AnnouncementModal.vue:97
 msgid "Announcement is required"
-msgstr ""
+msgstr "Ankündigung wird benötigt"
 
 #. Label of the answer (Text Editor) field in DocType 'LMS Assignment'
 #. Label of the answer (Text Editor) field in DocType 'LMS Assignment
@@ -416,11 +416,11 @@ msgstr "Antwort"
 
 #: frontend/src/pages/CourseForm.vue:104 frontend/src/pages/CourseForm.vue:123
 msgid "Appears on the course card in the course list"
-msgstr ""
+msgstr "Erscheint auf der Kurskarte in der Kursliste"
 
 #: frontend/src/pages/BatchForm.vue:250
 msgid "Appears when the batch URL is shared on any online platform"
-msgstr ""
+msgstr "Erscheint, wenn die Klassen URL auf Onlineplatformen geteilt wird"
 
 #: frontend/src/pages/BatchForm.vue:231
 msgid "Appears when the batch URL is shared on socials"
@@ -470,7 +470,7 @@ msgstr ""
 
 #: frontend/src/pages/Programs/ProgramEnrollment.vue:38
 msgid "Are you sure you want to enroll?"
-msgstr ""
+msgstr "Sicher, dass sie sich Einschreiben wollen?"
 
 #: frontend/src/components/UserDropdown.vue:177
 msgid "Are you sure you want to login to your Frappe Cloud dashboard?"
@@ -501,11 +501,11 @@ msgstr "Prüfungstyp"
 
 #: frontend/src/components/Modals/AssessmentModal.vue:91
 msgid "Assessment added successfully"
-msgstr ""
+msgstr "Aufgabe erfolgreich hinzugefügt"
 
 #: lms/lms/doctype/lms_batch/lms_batch.py:78
 msgid "Assessment {0} has already been added to this batch."
-msgstr ""
+msgstr "Die Prüfung {0} wurde bereits zu dieser Klasse hinzugefügt"
 
 #. Label of the show_assessments (Check) field in DocType 'LMS Settings'
 #: frontend/src/components/AppSidebar.vue:603
@@ -530,11 +530,11 @@ msgstr "Zuweisen an"
 
 #: frontend/src/components/Settings/BadgeAssignmentForm.vue:7
 msgid "Assign a Badge"
-msgstr ""
+msgstr "Badge vergeben"
 
 #: frontend/src/components/Settings/Badges.vue:221
 msgid "Assigned For"
-msgstr ""
+msgstr "Erhalten für"
 
 #. Label of the section_break_16 (Section Break) field in DocType 'Course
 #. Lesson'
@@ -4402,11 +4402,11 @@ msgstr "Weiter"
 
 #: frontend/src/components/Assessments.vue:75 lms/templates/assessments.html:58
 msgid "No Assessments"
-msgstr ""
+msgstr "Keine Prüfungen"
 
 #: frontend/src/components/Settings/BadgeAssignments.vue:87
 msgid "No Assignments"
-msgstr ""
+msgstr "Keine Aufgaben"
 
 #: lms/templates/notifications.html:26
 msgid "No Notifications"
@@ -5802,7 +5802,7 @@ msgstr "Planen"
 #: frontend/src/components/Modals/EvaluationModal.vue:5
 #: frontend/src/components/UpcomingEvaluations.vue:13
 msgid "Schedule Evaluation"
-msgstr ""
+msgstr "Prüfungstermin Festlegen"
 
 #: frontend/src/components/UpcomingEvaluations.vue:100
 msgid "Schedule an evaluation to get certified."
@@ -7093,7 +7093,7 @@ msgstr "Sichtbarkeit"
 
 #: frontend/src/components/BatchOverlay.vue:73
 msgid "Visit Batch"
-msgstr ""
+msgstr "Klasse öffnen"
 
 #: frontend/src/pages/JobDetail.vue:41
 msgid "Visit Website"
@@ -7106,7 +7106,7 @@ msgstr ""
 #: lms/templates/emails/batch_start_reminder.html:23
 #: lms/templates/emails/live_class_reminder.html:20
 msgid "Visit your batch"
-msgstr ""
+msgstr "Ihre Klasse öffnen"
 
 #. Label of the internship (Table) field in DocType 'User'
 #: lms/fixtures/custom_field.json
