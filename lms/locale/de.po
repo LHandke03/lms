@@ -4956,7 +4956,7 @@ msgstr ""
 
 #: frontend/src/components/LiveClass.vue:8
 msgid "Please add a zoom account to the batch to create live classes."
-msgstr ""
+msgstr "Bitte fügen sie ein Zoomaccount zu dieser Klasse um eine Livestunde anzulegen"
 
 #: lms/lms/user.py:75
 msgid "Please ask your administrator to verify your sign-up"
@@ -4988,7 +4988,7 @@ msgstr ""
 
 #: frontend/src/components/Modals/LiveClassModal.vue:186
 msgid "Please enter a title."
-msgstr ""
+msgstr "Bitte geben sie einen Titel ein"
 
 #: lms/lms/doctype/lms_assignment_submission/lms_assignment_submission.py:29
 #: lms/lms/doctype/lms_assignment_submission/lms_assignment_submission.py:80
@@ -4997,11 +4997,11 @@ msgstr "Bitte geben Sie eine gültige URL ein."
 
 #: frontend/src/components/Modals/LiveClassModal.vue:198
 msgid "Please enter a valid time in the format HH:mm."
-msgstr ""
+msgstr "Bitte geben sie eine Zeit an, im format HH:mm"
 
 #: frontend/src/components/Modals/QuizInVideo.vue:181
 msgid "Please enter a valid timestamp"
-msgstr ""
+msgstr "Bitte geben sie einen validen Zeitstempel an"
 
 #: lms/lms/doctype/lms_assignment_submission/lms_assignment_submission.py:74
 msgid "Please enter the URL for assignment submission."
@@ -5074,7 +5074,7 @@ msgstr ""
 
 #: frontend/src/components/Modals/LiveClassModal.vue:195
 msgid "Please select a timezone."
-msgstr ""
+msgstr "Bitte wählen sie eine Zeitzone aus"
 
 #: frontend/src/components/Quiz.vue:533
 msgid "Please select an option"
@@ -5086,7 +5086,7 @@ msgstr ""
 
 #: frontend/src/components/Modals/ChapterModal.vue:175
 msgid "Please upload a SCORM package"
-msgstr ""
+msgstr "Bitte laden sie ein SCORM package hoch"
 
 #: lms/lms/doctype/lms_assignment_submission/lms_assignment_submission.py:77
 msgid "Please upload the assignment file."
@@ -5167,7 +5167,7 @@ msgstr ""
 #. Label of the prevent_skipping_videos (Check) field in DocType 'LMS Settings'
 #: lms/lms/doctype/lms_settings/lms_settings.json
 msgid "Prevent Skipping Videos"
-msgstr ""
+msgstr "Videos nicht überspringbar"
 
 #. Label of the image (Attach Image) field in DocType 'LMS Course'
 #: lms/lms/doctype/lms_course/lms_course.json
@@ -5424,7 +5424,7 @@ msgstr "Frage"
 #. Label of the question_detail (Text) field in DocType 'LMS Quiz Question'
 #: lms/lms/doctype/lms_quiz_question/lms_quiz_question.json
 msgid "Question Detail"
-msgstr ""
+msgstr "Fragen details"
 
 #. Label of the question_name (Link) field in DocType 'LMS Quiz Result'
 #: lms/lms/doctype/lms_quiz_result/lms_quiz_result.json
