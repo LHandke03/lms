@@ -1,5 +1,5 @@
 <template>
-	<div v-if="user.data?.is_moderator || isStudent" class="">
+	<div v-if="user.data?.is_moderator || isStudent || user.data?.is_evaluator" class="">
 		<header
 			class="sticky top-0 z-10 flex items-center justify-between border-b bg-surface-white px-3 py-2.5 sm:px-5"
 		>
@@ -318,6 +318,7 @@ const batch = createResource({
 
 const breadcrumbs = computed(() => {
 	let crumbs = [{ label: __('Batches'), route: { name: 'Batches' } }]
+	console.log("isStudent:", isStudent)
 	if (!isStudent.value) {
 		crumbs.push({
 			label: 'Details',
@@ -340,7 +341,9 @@ const isStudent = computed(() => {
 	return (
 		user?.data &&
 		batch.data?.students?.length &&
-		batch.data?.students.includes(user.data.name)
+		batch.data?.students.includes(user.data.name) &&
+		user.data?.is_student
+
 	)
 })
 

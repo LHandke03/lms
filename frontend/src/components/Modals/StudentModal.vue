@@ -19,6 +19,8 @@
 					doctype="User"
 					v-model="student"
 					:filters="{ ignore_user_type: 1 }"
+					:noOwner=true
+					:batchfilter=true
 					:onCreate="
 						(value, close) => {
 							openSettings('Members', close)

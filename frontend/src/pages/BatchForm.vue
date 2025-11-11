@@ -48,7 +48,7 @@
 				</div>
 			</div>
 
-			<div class="px-5 md:px-20 pb-5 space-y-5 border-b mb-5">
+			<!-- <div class="px-5 md:px-20 pb-5 space-y-5 border-b mb-5">
 				<div class="text-lg text-ink-gray-9 font-semibold mb-4">
 					{{ __('Settings') }}
 				</div>
@@ -69,7 +69,7 @@
 						:label="__('Certification')"
 					/>
 				</div>
-			</div>
+			</div> -->
 
 			<div class="px-5 md:px-20 pb-5 space-y-5 border-b mb-5">
 				<div class="text-lg text-ink-gray-9 font-semibold mb-4">
@@ -260,7 +260,7 @@
 				</div>
 			</div>
 
-			<div class="px-5 md:px-20 pb-5 space-y-5">
+			<!-- <div class="px-5 md:px-20 pb-5 space-y-5">
 				<div class="text-lg text-ink-gray-9 font-semibold">
 					{{ __('Pricing') }}
 				</div>
@@ -285,7 +285,7 @@
 						:label="__('Currency')"
 					/>
 				</div>
-			</div>
+			</div> -->
 
 			<div class="px-5 md:px-20 pb-5 space-y-5 border-b">
 				<div class="text-lg text-ink-gray-9 font-semibold">

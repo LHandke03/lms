@@ -6,7 +6,7 @@
 		</label>
 		<Autocomplete
 			ref="autocomplete"
-			:options="options.data"
+			:options="filteredOptions"
 			v-model="value"
 			:size="attrs.size || 'sm'"
 			:variant="attrs.variant"
@@ -88,6 +88,14 @@ const props = defineProps({
 		type: String,
 		default: '',
 	},
+	noOwner: {
+		type: Boolean,
+		default: false,
+	},
+	batchfilter: {
+		type: Boolean,
+		default: false,
+	},
 })
 
 const emit = defineEmits(['update:modelValue', 'change'])
@@ -132,10 +140,11 @@ const options = createResource({
 	params: {
 		txt: text.value,
 		doctype: props.doctype,
-		filters: user ? {
+		filters: user && !(props.noOwner) ? {
 			...props.filters,
 			owner: user.data?.name,
 		} : props.filters,
+		// ignore_user_permissions: true,
 		// filters: props.filters,
 	},
 	transform: (data) => {
@@ -149,12 +158,60 @@ const options = createResource({
 	},
 })
 
+const batchesEnrollment = createResource({
+	url: 'lms.lms.utils.get_my_batches',
+	auto: true,
+})
+
+// ---- Gefilterte Optionsliste ----
+const filteredOptions = computed(() => {
+	if (!options.data) return []
+
+	const isAdmin =
+		user?.data?.name === 'Administrator' ||
+		user?.data?.is_system_manager
+
+	// Wenn StudentModal false oder Admin/System Manager, keine Einschränkung
+	if (!props.batchfilter || isAdmin) {
+		return options.data
+	}
+
+	// Wenn keine Batchdaten geladen sind
+	if (props.batchfilter&&!batchesEnrollment.data) {
+		return []
+	}
+
+	const myName = user.data?.name
+	const myBatches = batchesEnrollment.data || []
+	const sharedUsers = new Set()
+
+	// Alle Nutzer sammeln, die mit dem aktuellen Nutzer in einem Batch sind
+	for (const batch of myBatches) {
+		const allParticipants = [
+			...(batch.students || []),
+			...(batch.instructors?.map((i) => i.name) || []),
+		]
+
+		if (allParticipants.includes(myName)) {
+			for (const u of allParticipants) {
+				sharedUsers.add(u)
+			}
+		}
+	}
+
+	// Nur Nutzer behalten, die im gleichen Batch sind (außer man selbst)
+	return options.data.filter(
+		(opt) => sharedUsers.has(opt.value) && opt.value !== myName
+	)
+	// return options.data
+})
+console.log("filteredOptions:", filteredOptions, filteredOptions._value, options.data)
 const reload = (val) => {
 	options.update({
 		params: {
 			txt: val,
 			doctype: props.doctype,
-			filters: user ? {
+			filters: user && !(props.noOwner) ? {
 				...props.filters,
 				owner: user.data?.name,
 			}:props.filters,
