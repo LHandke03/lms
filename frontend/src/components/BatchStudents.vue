@@ -150,13 +150,13 @@ const students = createResource({
 const getStudentColumns = () => {
 	let columns = [
 		{
-			label: 'Full Name',
+			label: __('Full Name'),
 			key: 'full_name',
 			width: '20rem',
 			icon: 'user',
 		},
 		{
-			label: 'Progress',
+			label: __('Progress'),
 			key: 'progress',
 			width: '15rem',
 			icon: 'activity',

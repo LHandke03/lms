@@ -60,28 +60,28 @@
 					</template>
 					<template #tab-panel="{ tab }">
 						<div class="pt-5 px-5 pb-10">
-							<div v-if="tab.label == 'Courses'">
+							<div v-if="tab.label == __('Courses')">
 								<BatchCourses :batch="batch.data.name" />
 							</div>
-							<div v-else-if="tab.label == 'Dashboard' && isStudent">
+							<div v-else-if="tab.label == __('Dashboard') && isStudent">
 								<BatchDashboard :batch="batch" :isStudent="isStudent" />
 							</div>
-							<div v-else-if="tab.label == 'Dashboard'">
+							<div v-else-if="tab.label == __('Dashboard')">
 								<AdminBatchDashboard :batch="batch" />
 							</div>
-							<div v-else-if="tab.label == 'Students'">
+							<div v-else-if="tab.label == __('Students')">
 								<BatchStudents :batch="batch" />
 							</div>
-							<div v-else-if="tab.label == 'Classes'">
+							<div v-else-if="tab.label == __('live classes')">
 								<LiveClass
 									:batch="batch.data.name"
 									:zoomAccount="batch.data.zoom_account"
 								/>
 							</div>
-							<div v-else-if="tab.label == 'Assessments'">
+							<div v-else-if="tab.label == __('Assessments')">
 								<Assessments :batch="batch.data.name" />
 							</div>
-							<div v-else-if="tab.label == 'Announcements'">
+							<div v-else-if="tab.label == __('Announcements')">
 								<Announcements :batch="batch.data.name" />
 							</div>
 							<!-- <div v-else-if="tab.label == 'Discussions'">
@@ -98,7 +98,7 @@
 					</template>
 				</Tabs>
 			</div>
-			<div class="p-5 border-t md:border-t-0">
+			<!-- <div class="p-5 border-t md:border-t-0">
 				<div class="mb-10">
 					<div class="text-ink-gray-7 font-semibold mb-2">
 						{{ __('About this batch') }}
@@ -144,13 +144,13 @@
 						</span>
 					</div>
 				</div>
-				<!-- <div v-if="dayjs().isSameOrAfter(dayjs(batch.data.start_date))">
+				<div v-if="dayjs().isSameOrAfter(dayjs(batch.data.start_date))">
 					<div class="text-ink-gray-7 font-semibold mb-2">
 						{{ __('Feedback') }}
 					</div>
 					<BatchFeedback :batch="batch.data?.name" />
-				</div> -->
-			</div>
+				</div>
+			</div> -->
 			<AnnouncementModal
 				v-model="showAnnouncementModal"
 				:batch="batch.data.name"
@@ -260,43 +260,43 @@ const readOnlyMode = window.read_only_mode
 const tabs = computed(() => {
 	let batchTabs = []
 	batchTabs.push({
-		label: 'Dashboard',
+		label: __('Dashboard'),
 		icon: LayoutDashboard,
 	})
 
 	if (isAdmin.value) {
 		batchTabs.push({
-			label: 'Students',
+			label: __('Students'),
 			icon: ClipboardPen,
 		})
 	}
 
 	batchTabs.push({
-		label: 'Courses',
+		label: __('Courses'),
 		icon: BookOpen,
 	})
 
 	batchTabs.push({
-		label: 'Classes',
+		label: __('live classes'),
 		icon: Laptop,
 	})
 
 	if (isAdmin.value) {
 		batchTabs.push({
-			label: 'Assessments',
+			label: __('Assessments'),
 			icon: BookOpenCheck,
 		})
 	}
 
 	batchTabs.push({
-		label: 'Announcements',
+		label: __('Announcements'),
 		icon: Mail,
 	})
-
+/* 
 	batchTabs.push({
 		label: 'Discussions',
 		icon: MessageCircle,
-	})
+	}) */
 	return batchTabs
 })
 

@@ -3940,7 +3940,7 @@ msgstr ""
 
 #: frontend/src/components/BatchOverlay.vue:73
 msgid "Manage Batch"
-msgstr ""
+msgstr "Klasse verwalten"
 
 #: frontend/src/pages/Home/Home.vue:120
 msgid "Manage your courses and batches at a glance"
@@ -3963,7 +3963,7 @@ msgstr ""
 
 #: frontend/src/components/Quiz.vue:120
 msgid "Mark"
-msgstr ""
+msgstr "Punkt"
 
 #: frontend/src/pages/Notifications.vue:12
 msgid "Mark all as read"
@@ -3978,7 +3978,7 @@ msgstr "Alle als gelesen markieren"
 #: lms/lms/doctype/lms_quiz_question/lms_quiz_question.json
 #: lms/lms/doctype/lms_quiz_result/lms_quiz_result.json
 msgid "Marks"
-msgstr ""
+msgstr "Punkte"
 
 #. Label of the marks_to_cut (Int) field in DocType 'LMS Quiz'
 #: lms/lms/doctype/lms_quiz/lms_quiz.json
@@ -3987,17 +3987,17 @@ msgstr ""
 
 #: lms/lms/doctype/lms_quiz_submission/lms_quiz_submission.py:41
 msgid "Marks for question number {0} cannot be greater than the marks allotted for that question."
-msgstr ""
+msgstr "Punkte für die Frage Nummer {0} können nicht größer sein, als die Punkte die der Frage zugewiesen sind"
 
 #. Label of the marks_out_of (Int) field in DocType 'LMS Quiz Result'
 #: frontend/src/pages/QuizSubmission.vue:67
 #: lms/lms/doctype/lms_quiz_result/lms_quiz_result.json
 msgid "Marks out of"
-msgstr ""
+msgstr "Punkte von"
 
 #: frontend/src/pages/QuizForm.vue:122
 msgid "Marks to Deduct"
-msgstr ""
+msgstr "Abzuziehende Punkte"
 
 #. Label of the max_attempts (Int) field in DocType 'LMS Quiz'
 #: frontend/src/pages/Quizzes.vue:249 lms/lms/doctype/lms_quiz/lms_quiz.json
@@ -4127,7 +4127,7 @@ msgstr "E-Mail des Mitglieds"
 #: lms/lms/doctype/lms_video_watch_duration/lms_video_watch_duration.json
 #: lms/lms/doctype/lms_zoom_settings/lms_zoom_settings.json
 msgid "Member Image"
-msgstr ""
+msgstr "Profilbild"
 
 #. Label of the member_name (Data) field in DocType 'LMS Assignment Submission'
 #. Label of the member_name (Data) field in DocType 'LMS Badge Assignment'
@@ -4194,7 +4194,7 @@ msgstr "Nutzername des Nutzers"
 
 #: frontend/src/pages/Programs/ProgramForm.vue:463
 msgid "Member added to program successfully"
-msgstr ""
+msgstr "Nutzer erfolgreich zum Programm hinzugefügt"
 
 #: lms/lms/doctype/lms_batch_enrollment/lms_batch_enrollment.py:26
 msgid "Member already enrolled in this batch"
@@ -4213,7 +4213,7 @@ msgstr "Mitglieder"
 #. Label of the membership (Select) field in DocType 'LMS Batch Old'
 #: lms/lms/doctype/lms_batch_old/lms_batch_old.json
 msgid "Membership"
-msgstr ""
+msgstr "Mitgliedschaft"
 
 #. Option for the 'Required Role' (Select) field in DocType 'Cohort Web Page'
 #. Label of the mentor (Link) field in DocType 'LMS Course Mentor Mapping'
@@ -4259,7 +4259,7 @@ msgstr "Nachricht"
 
 #: frontend/src/pages/JobApplications.vue:240
 msgid "Message is required"
-msgstr ""
+msgstr "Nachricht wird benötigt"
 
 #. Label of the meta_description (Small Text) field in DocType 'LMS Settings'
 #: frontend/src/pages/BatchForm.vue:297 frontend/src/pages/CourseForm.vue:303
@@ -4279,7 +4279,7 @@ msgstr "Meta-Bild"
 #: frontend/src/pages/BatchForm.vue:303 frontend/src/pages/CourseForm.vue:309
 #: lms/lms/doctype/lms_settings/lms_settings.json
 msgid "Meta Keywords"
-msgstr ""
+msgstr "Meta Schlüsselworte"
 
 #: frontend/src/pages/BatchForm.vue:292 frontend/src/pages/CourseForm.vue:298
 msgid "Meta Tags"
@@ -4287,7 +4287,7 @@ msgstr "Meta-Tags"
 
 #: lms/lms/api.py:1456
 msgid "Meta tags should be a list."
-msgstr ""
+msgstr "Meta tags müssen eine Liste sein"
 
 #. Label of the milestone (Check) field in DocType 'LMS Batch Timetable'
 #: lms/lms/doctype/lms_batch_timetable/lms_batch_timetable.json
@@ -4326,7 +4326,7 @@ msgstr "Minidestens 2 optionen sind für eine multiple choice Frage benötigt"
 #: lms/lms/doctype/lms_video_watch_duration/lms_video_watch_duration.json
 #: lms/lms/doctype/lms_zoom_settings/lms_zoom_settings.json
 msgid "Moderator"
-msgstr ""
+msgstr "Moderator"
 
 #: frontend/src/pages/ProgrammingExercises/ProgrammingExerciseSubmissions.vue:286
 #: frontend/src/pages/Quizzes.vue:263
@@ -4406,7 +4406,7 @@ msgstr "Neu"
 
 #: lms/www/lms.py:149
 msgid "New Batch"
-msgstr ""
+msgstr "Neue Klasse"
 
 #: frontend/src/pages/CourseForm.vue:690 lms/www/lms.py:93
 msgid "New Course"
@@ -4414,7 +4414,7 @@ msgstr "Neuer Kurs"
 
 #: frontend/src/components/Modals/EmailTemplateModal.vue:7
 msgid "New Email Template"
-msgstr ""
+msgstr "Neue Emailvorlage"
 
 #: frontend/src/pages/Jobs.vue:23
 msgid "New Job"
@@ -4426,31 +4426,31 @@ msgstr ""
 
 #: frontend/src/components/Settings/PaymentGatewayDetails.vue:7
 msgid "New Payment Gateway"
-msgstr ""
+msgstr "Neues Bezahlungsgateway"
 
 #: frontend/src/pages/QuizForm.vue:137
 msgid "New Question"
-msgstr ""
+msgstr "Neue Frage"
 
 #: frontend/src/pages/QuizForm.vue:400 frontend/src/pages/QuizForm.vue:408
 msgid "New Quiz"
-msgstr ""
+msgstr "Neues Quiz"
 
 #: lms/www/new-sign-up.html:3
 msgid "New Sign Up"
-msgstr ""
+msgstr "Neue Anmeldung"
 
 #: frontend/src/components/Modals/ZoomAccountModal.vue:6
 msgid "New Zoom Account"
-msgstr ""
+msgstr "Neuer Zoom Account"
 
 #: lms/lms/utils.py:592
 msgid "New comment in batch {0}"
-msgstr ""
+msgstr "Neuer Kommentar in der Klasse {0}"
 
 #: lms/lms/utils.py:587
 msgid "New reply on the topic {0} in course {1}"
-msgstr ""
+msgstr "Neue antwort zum Thema {0} im Kurs {1}"
 
 #: frontend/src/components/Discussions.vue:11
 #: frontend/src/components/Discussions.vue:66
@@ -4476,11 +4476,11 @@ msgstr "Keine Benachrichtigungen"
 
 #: frontend/src/components/Quiz.vue:307
 msgid "No Quiz submissions found"
-msgstr ""
+msgstr "Keine Quizeinreichungen gefunden"
 
 #: frontend/src/pages/Quizzes.vue:19
 msgid "No Quizzes"
-msgstr ""
+msgstr "Keine Quizze"
 
 #. Option for the 'Auto Recording' (Select) field in DocType 'LMS Live Class'
 #: lms/lms/doctype/lms_live_class/lms_live_class.json
@@ -4489,7 +4489,7 @@ msgstr "Keine Aufzeichnung"
 
 #: frontend/src/pages/ProgrammingExercises/ProgrammingExerciseSubmissions.vue:13
 msgid "No Submissions"
-msgstr ""
+msgstr "Keine Einreichungen"
 
 #: lms/templates/upcoming_evals.html:43
 msgid "No Upcoming Evaluations"
@@ -4505,11 +4505,11 @@ msgstr "Keine Zertifikate"
 
 #: frontend/src/components/BatchCourses.vue:67
 msgid "No courses added"
-msgstr ""
+msgstr "Keine Kurse hinzugefügt"
 
 #: frontend/src/pages/Programs/ProgramForm.vue:103
 msgid "No courses added yet."
-msgstr ""
+msgstr "Keine Kurse hinzugefügt bis jetzt"
 
 #: frontend/src/pages/Home/AdminHome.vue:65
 #: lms/templates/courses_created.html:14
@@ -7677,7 +7677,7 @@ msgstr ""
 
 #: frontend/src/pages/Home/Home.vue:99 frontend/src/pages/Home/Home.vue:123
 msgid "live classes"
-msgstr ""
+msgstr "Live Klassen"
 
 #: frontend/src/pages/Programs/Programs.vue:42
 #: frontend/src/pages/Programs/StudentPrograms.vue:36
