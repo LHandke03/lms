@@ -71,7 +71,6 @@ import { useAttrs, computed, ref, inject } from 'vue'
 import { useSettings } from '@/stores/settings'
 
 const user = inject('$user')
-console.log(user)
 const props = defineProps({
 	doctype: {
 		type: String,
@@ -217,7 +216,6 @@ const filteredOptions = computed(() => {
 	)
 	// return options.data
 })
-console.log("filteredOptions:", filteredOptions, filteredOptions._value, options.data)
 const reload = (val) => {
 	options.update({
 		params: {

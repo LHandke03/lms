@@ -154,7 +154,6 @@ function resetEditor(value: string, resetHistory = false) {
 }
 
 watch(isDark, () => {
-	console.log(isDark.value)
 	aceEditor?.setTheme(isDark.value ? 'ace/theme/twilight' : 'ace/theme/chrome')
 })
 

@@ -40,7 +40,6 @@ import { Dialog } from 'frappe-ui'
 import { onMounted, ref, nextTick, inject } from 'vue'
 import Link from '@/components/Controls/Link.vue'
 const user = inject('$user')
-console.log(user)
 
 const show = ref(false)
 const quiz = ref(null)

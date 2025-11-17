@@ -56,7 +56,6 @@ const user = inject('$user')
 const courses = defineModel('courses')
 const router = useRouter()
 const { updateOnboardingStep } = useOnboarding('learning')
-console.log(user)
 
 const props = defineProps({
 	batch: {

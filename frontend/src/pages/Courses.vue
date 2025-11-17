@@ -174,12 +174,7 @@ const identifyUserPersona = async () => {
 	}
 }
 const pushHome = async () => {
-	console.log("user course:",user)
-	console.log("user data:", user.data)
-	console.log("course:", courses)
-	console.log("route:", route.fullPath)		
 	if (user.data.is_student && (route.fullPath == '/courses')) {
-		console.log("Router push true")
 		router.push({ name: 'Home' })
 	}
 }

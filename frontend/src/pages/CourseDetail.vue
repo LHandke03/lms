@@ -143,7 +143,6 @@ watch(
 	}
 )
 watch(course, () => {
-	console.log("course", course)
 	if (
 		!isInstructor() &&
 		!user.data?.is_moderator &&
