@@ -68,6 +68,7 @@ import { createResource, Button } from 'frappe-ui'
 import { Plus, X } from 'lucide-vue-next'
 import { useAttrs, computed, ref, inject } from 'vue'
 // import { useAttrs, computed, ref } from 'vue'
+import { useSettings } from '@/stores/settings'
 
 const user = inject('$user')
 console.log(user)
@@ -114,6 +115,7 @@ const value = computed({
 
 const autocomplete = ref(null)
 const text = ref('')
+const settingsStore = useSettings()
 
 watchDebounced(
 	() => autocomplete.value?.query,
@@ -130,6 +132,16 @@ watchDebounced(
 	() => props.doctype,
 	() => reload(''),
 	{ debounce: 300, immediate: true }
+)
+
+watchDebounced(
+	() => settingsStore.isSettingsOpen,
+	(isOpen, wasOpen) => {
+		if (wasOpen && !isOpen) {
+			reload('')
+		}
+	},
+	{ debounce: 200 }
 )
 
 const options = createResource({

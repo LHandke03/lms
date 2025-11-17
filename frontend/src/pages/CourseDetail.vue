@@ -144,7 +144,12 @@ watch(
 )
 watch(course, () => {
 	console.log("course", course)
-	if (!isInstructor() && !course.data?.published && !course.data?.upcoming && !course.data?.membership?.some(e => e.member == user.data?.name)) {
+	if (
+		!isInstructor() &&
+		!user.data?.is_moderator &&
+		!course.data?.published &&
+		!course.data?.upcoming && !course.data?.membership?.some(e => e.member == user.data?.name)
+	) {
 		router.push({
 			name: 'Courses',
 		})

@@ -2,15 +2,15 @@ import hashlib
 import json
 import re
 import string
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 import frappe
-import razorpay
 import requests
 from frappe import _
 from frappe.desk.doctype.dashboard_chart.dashboard_chart import get_result
 from frappe.desk.doctype.notification_log.notification_log import make_notification_logs
 from frappe.desk.notifications import extract_mentions
+from frappe.rate_limiter import rate_limit
 from frappe.utils import (
 	add_months,
 	ceil,
@@ -18,7 +18,6 @@ from frappe.utils import (
 	cstr,
 	flt,
 	fmt_money,
-	format_date,
 	format_datetime,
 	get_datetime,
 	get_fullname,
@@ -27,7 +26,6 @@ from frappe.utils import (
 	nowtime,
 	pretty_date,
 )
-from frappe.utils.dateutils import get_period
 
 from lms.lms.md import find_macros, markdown_to_html
 
@@ -203,6 +201,7 @@ def get_lesson_icon(body, content):
 
 
 @frappe.whitelist(allow_guest=True)
+@rate_limit(limit=50, seconds=60 * 60)
 def get_tags(course):
 	tags = frappe.db.get_value("LMS Course", course, "tags")
 	return tags.split(",") if tags else []
@@ -247,6 +246,7 @@ def get_average_rating(course):
 
 
 @frappe.whitelist(allow_guest=True)
+@rate_limit(limit=50, seconds=60 * 60)
 def get_reviews(course):
 	reviews = frappe.get_all(
 		"LMS Course Review",
@@ -737,6 +737,7 @@ def has_lessons(course):
 
 
 @frappe.whitelist(allow_guest=True)
+@rate_limit(limit=50, seconds=60 * 60)
 def get_chart_data(
 	chart_name,
 	timespan="Select Date Range",
@@ -784,6 +785,7 @@ def get_chart_data(
 
 
 @frappe.whitelist(allow_guest=True)
+@rate_limit(limit=50, seconds=60 * 60)
 def get_course_completion_data():
 	all_membership = frappe.db.count("LMS Enrollment")
 	completed = frappe.db.count("LMS Enrollment", {"progress": ["like", "%100%"]})
@@ -959,6 +961,7 @@ def change_currency(amount, currency, country=None):
 
 
 @frappe.whitelist(allow_guest=True)
+@rate_limit(limit=50, seconds=60 * 60)
 def get_courses(filters=None, start=0):
 	"""Returns the list of courses."""
 
@@ -1099,6 +1102,7 @@ def get_course_fields():
 
 
 @frappe.whitelist(allow_guest=True)
+@rate_limit(limit=50, seconds=60 * 60)
 def get_course_details(course):
 	course_details = frappe.db.get_value(
 		"LMS Course",
@@ -1193,6 +1197,7 @@ def get_categorized_courses(courses):
 
 
 @frappe.whitelist(allow_guest=True)
+@rate_limit(limit=50, seconds=60 * 60)
 def get_course_outline(course, progress=False):
 	"""Returns the course outline."""
 	outline = []
@@ -1220,6 +1225,7 @@ def get_course_outline(course, progress=False):
 
 
 @frappe.whitelist(allow_guest=True)
+@rate_limit(limit=50, seconds=60 * 60)
 def get_lesson(course, chapter, lesson):
 	chapter_name = frappe.db.get_value("Chapter Reference", {"parent": course, "idx": chapter}, "chapter")
 	lesson_name = frappe.db.get_value("Lesson Reference", {"parent": chapter_name, "idx": lesson}, "lesson")
@@ -1330,6 +1336,7 @@ def get_neighbour_lesson(course, chapter, lesson):
 
 
 @frappe.whitelist(allow_guest=True)
+@rate_limit(limit=50, seconds=60 * 60)
 def get_batch_details(batch):
 	batch_students = frappe.get_all("LMS Batch Enrollment", {"batch": batch}, pluck="member")
 	if (
@@ -1450,6 +1457,7 @@ def get_question_details(question):
 
 
 @frappe.whitelist(allow_guest=True)
+@rate_limit(limit=50, seconds=60 * 60)
 def get_batch_courses(batch):
 	courses = []
 	course_list = frappe.get_all("Batch Course", {"parent": batch}, ["name", "course"])
@@ -1579,6 +1587,28 @@ def get_batch_students(batch):
 		"LMS Batch Enrollment", filters={"batch": batch}, fields=["member", "name"]
 	)
 
+	for student in students_list:
+		details = get_batch_student_details(student)
+		calculate_student_progress(batch, details)
+		students.append(details)
+		students = sorted(students, key=lambda x: x.progress, reverse=True)
+	return students
+
+
+def get_batch_student_details(student):
+	details = frappe.db.get_value(
+		"User",
+		student.member,
+		["full_name", "email", "username", "last_active", "user_image"],
+		as_dict=True,
+	)
+	details.last_active = format_datetime(details.last_active, "dd MMM YY")
+	details.name = student.name
+	details.assessments = frappe._dict()
+	return details
+
+
+def calculate_student_progress(batch, details):
 	batch_courses = frappe.get_all("Batch Course", {"parent": batch}, ["course", "title"])
 	assessments = frappe.get_all(
 		"LMS Assessment",
@@ -1586,53 +1616,55 @@ def get_batch_students(batch):
 		fields=["name", "assessment_type", "assessment_name"],
 	)
 
-	for student in students_list:
-		courses_completed = 0
-		assessments_completed = 0
-		detail = frappe.db.get_value(
-			"User",
-			student.member,
-			["full_name", "email", "username", "last_active", "user_image"],
-			as_dict=True,
+	calculate_course_progress(batch_courses, details)
+	calculate_assessment_progress(assessments, details)
+
+	if len(batch_courses) + len(assessments):
+		details.progress = flt(
+			(
+				(details.average_course_progress * len(batch_courses))
+				+ (details.average_assessments_progress * len(assessments))
+			)
+			/ (len(batch_courses) + len(assessments)),
+			2,
 		)
-		detail.last_active = format_datetime(detail.last_active, "dd MMM YY")
-		detail.name = student.name
-		detail.courses = frappe._dict()
-		detail.assessments = frappe._dict()
+	else:
+		details.progress = 0
 
-		""" Iterate through courses and track their progress """
-		for course in batch_courses:
-			progress = frappe.db.get_value(
-				"LMS Enrollment", {"course": course.course, "member": student.member}, "progress"
-			)
-			detail.courses[course.title] = progress
-			if progress == 100:
-				courses_completed += 1
 
-		""" Iterate through assessments and track their progress """
-		for assessment in assessments:
-			title = frappe.db.get_value(assessment.assessment_type, assessment.assessment_name, "title")
-			assessment_info = has_submitted_assessment(
-				assessment.assessment_name, assessment.assessment_type, student.member
-			)
-			detail.assessments[title] = assessment_info
+def calculate_course_progress(batch_courses, details):
+	course_progress = []
+	details.courses = frappe._dict()
 
-			if assessment_info.result == "Pass":
-				assessments_completed += 1
+	for course in batch_courses:
+		progress = frappe.db.get_value(
+			"LMS Enrollment", {"course": course.course, "member": details.email}, "progress"
+		)
+		details.courses[course.title] = progress
+		course_progress.append(progress)
 
-		detail.courses_completed = courses_completed
-		detail.assessments_completed = assessments_completed
-		if len(batch_courses) + len(assessments):
-			detail.progress = flt(
-				((courses_completed + assessments_completed) / (len(batch_courses) + len(assessments)) * 100),
-				2,
-			)
-		else:
-			detail.progress = 0
+	details.average_course_progress = (
+		flt(sum(course_progress) / len(batch_courses), 2) if len(batch_courses) else 0
+	)
 
-		students.append(detail)
-		students = sorted(students, key=lambda x: x.progress, reverse=True)
-	return students
+
+def calculate_assessment_progress(assessments, details):
+	assessments_completed = 0
+	details.assessments = frappe._dict()
+
+	for assessment in assessments:
+		title = frappe.db.get_value(assessment.assessment_type, assessment.assessment_name, "title")
+		assessment_info = has_submitted_assessment(
+			assessment.assessment_name, assessment.assessment_type, details.email
+		)
+		details.assessments[title] = assessment_info
+
+		if assessment_info.result == "Pass":
+			assessments_completed += 1
+
+	details.average_assessments_progress = (
+		flt((assessments_completed / len(assessments) * 100), 2) if len(assessments) else 0
+	)
 
 
 def has_submitted_assessment(assessment, assessment_type, member=None):
@@ -1744,49 +1776,138 @@ def get_discussion_replies(topic):
 
 
 @frappe.whitelist()
-def get_order_summary(doctype, docname, country=None):
-	if doctype == "LMS Course":
-		details = frappe.db.get_value(
-			"LMS Course",
-			docname,
-			[
-				"title",
-				"name",
-				"paid_course",
-				"paid_certificate",
-				"course_price as amount",
-				"currency",
-				"amount_usd",
-			],
-			as_dict=True,
-		)
-
-		if not details.paid_course and not details.paid_certificate:
-			raise frappe.throw(_("This course is free."))
-
-	else:
-		details = frappe.db.get_value(
-			"LMS Batch",
-			docname,
-			["title", "name", "paid_batch", "amount", "currency", "amount_usd"],
-			as_dict=True,
-		)
-
-		if not details.paid_batch:
-			raise frappe.throw(_("To join this batch, please contact the Administrator."))
+def get_order_summary(doctype, docname, coupon=None, country=None):
+	details = get_paid_course_details(docname) if doctype == "LMS Course" else get_paid_batch_details(docname)
 
 	details.amount, details.currency = check_multicurrency(
 		details.amount, details.currency, country, details.amount_usd
 	)
+
 	details.original_amount = details.amount
 	details.original_amount_formatted = fmt_money(details.amount, 0, details.currency)
 
-	if details.currency == "INR":
-		details.amount, details.gst_applied = apply_gst(details.amount, country)
-		details.gst_amount_formatted = fmt_money(details.gst_applied, 0, details.currency)
+	adjust_amount_for_coupon(details, coupon, doctype, docname)
+	get_gst_details(details, country)
 
+	details.total_amount = details.amount
 	details.total_amount_formatted = fmt_money(details.amount, 0, details.currency)
+
 	return details
+
+
+def get_paid_course_details(docname):
+	details = frappe.db.get_value(
+		"LMS Course",
+		docname,
+		[
+			"title",
+			"name",
+			"paid_course",
+			"paid_certificate",
+			"course_price as amount",
+			"currency",
+			"amount_usd",
+		],
+		as_dict=True,
+	)
+
+	if not details.paid_course and not details.paid_certificate:
+		raise frappe.throw(_("This course is free."))
+
+	return details
+
+
+def get_paid_batch_details(docname):
+	details = frappe.db.get_value(
+		"LMS Batch",
+		docname,
+		["title", "name", "paid_batch", "amount", "currency", "amount_usd"],
+		as_dict=True,
+	)
+
+	if not details.paid_batch:
+		raise frappe.throw(_("To join this batch, please contact the Administrator."))
+
+	return details
+
+
+def adjust_amount_for_coupon(details, coupon, doctype, docname):
+	if not coupon:
+		return
+	discount_amount, subtotal, coupon_name = apply_coupon(doctype, docname, coupon, details.amount)
+	details.amount = subtotal
+	details.discount_amount = discount_amount
+	details.discount_amount_formatted = fmt_money(discount_amount, 0, details.currency)
+	details.coupon = coupon_name
+
+
+def get_gst_details(details, country):
+	if details.currency != "INR":
+		return
+
+	details.amount, details.gst_applied = apply_gst(details.amount, country)
+	details.gst_amount_formatted = fmt_money(details.gst_applied, 0, details.currency)
+
+
+def apply_coupon(doctype, docname, code, base_amount):
+	coupon_name = frappe.db.exists("LMS Coupon", {"code": code, "enabled": 1})
+	if not coupon_name:
+		frappe.throw(_("The coupon code '{0}' is invalid.").format(code))
+
+	coupon = frappe.db.get_value(
+		"LMS Coupon",
+		coupon_name,
+		[
+			"expires_on",
+			"usage_limit",
+			"redemption_count",
+			"discount_type",
+			"percentage_discount",
+			"fixed_amount_discount",
+			"name",
+			"code",
+		],
+		as_dict=True,
+	)
+
+	validate_coupon(code, coupon)
+	validate_coupon_applicability(doctype, docname, coupon_name)
+
+	discount_amount = calculate_discount_amount(base_amount, coupon)
+	subtotal = max(flt(base_amount) - flt(discount_amount), 0)
+
+	return discount_amount, subtotal, coupon_name
+
+
+def validate_coupon(code, coupon):
+	if coupon.expires_on and getdate(coupon.expires_on) < getdate():
+		frappe.throw(_("This coupon has expired."))
+
+	if coupon.usage_limit and cint(coupon.redemption_count) >= cint(coupon.usage_limit):
+		frappe.throw(_("This coupon has reached its maximum usage limit."))
+
+
+def validate_coupon_applicability(doctype, docname, coupon_name):
+	applicable_item = frappe.db.exists(
+		"LMS Coupon Item", {"parent": coupon_name, "reference_doctype": doctype, "reference_name": docname}
+	)
+	if not applicable_item:
+		frappe.throw(
+			_("This coupon is not applicable to this {0}.").format(
+				"Course" if doctype == "LMS Course" else "Batch"
+			)
+		)
+
+
+def calculate_discount_amount(base_amount, coupon):
+	discount_amount = 0
+
+	if coupon.discount_type == "Percentage":
+		discount_amount = (base_amount * coupon.percentage_discount) / 100
+	elif coupon.discount_type == "Fixed Amount":
+		discount_amount = base_amount - coupon.fixed_amount_discount
+
+	return discount_amount
 
 
 @frappe.whitelist()
@@ -1835,49 +1956,79 @@ def publish_notifications(doc, method):
 
 
 def update_payment_record(doctype, docname):
-	request = frappe.get_all(
+	request = get_integration_requests(doctype, docname)
+
+	if len(request):
+		data = request[0].data
+		data = frappe._dict(json.loads(data))
+		payment_doc = get_payment_doc(data.payment)
+
+		update_payment_details(data)
+		update_coupon_redemption(payment_doc)
+
+		if payment_doc.payment_for_certificate:
+			update_certificate_purchase(docname, data.payment)
+		elif doctype == "LMS Course":
+			enroll_in_course(docname, data.payment)
+		else:
+			enroll_in_batch(docname, data.payment)
+
+
+def get_integration_requests(doctype, docname):
+	return frappe.get_all(
 		"Integration Request",
 		{
 			"reference_doctype": doctype,
 			"reference_docname": docname,
 			"owner": frappe.session.user,
 		},
+		["data"],
 		order_by="creation desc",
 		limit=1,
 	)
 
-	if len(request):
-		data = frappe.db.get_value("Integration Request", request[0].name, "data")
-		data = frappe._dict(json.loads(data))
 
-		payment_gateway = data.get("payment_gateway")
-		if payment_gateway == "Razorpay":
-			payment_id = "razorpay_payment_id"
-		elif "Stripe" in payment_gateway:
-			payment_id = "stripe_token_id"
-		else:
-			payment_id = "order_id"
+def get_payment_doc(payment_name):
+	return frappe.db.get_value(
+		"LMS Payment", payment_name, ["name", "coupon", "payment_for_certificate"], as_dict=True
+	)
+
+
+def update_payment_details(data):
+	payment_id = get_payment_id(data)
+
+	frappe.db.set_value(
+		"LMS Payment",
+		data.payment,
+		{
+			"payment_received": 1,
+			"payment_id": data.get(payment_id),
+			"order_id": data.get("order_id"),
+		},
+	)
+
+
+def get_payment_id(data):
+	payment_gateway = data.get("payment_gateway")
+	if payment_gateway == "Razorpay":
+		payment_id = "razorpay_payment_id"
+	elif "Stripe" in payment_gateway:
+		payment_id = "stripe_token_id"
+	else:
+		payment_id = "order_id"
+	return payment_id
+
+
+def update_coupon_redemption(payment_doc):
+	if payment_doc.coupon:
+		redemption_count = frappe.db.get_value("LMS Coupon", payment_doc.coupon, "redemption_count") or 0
 
 		frappe.db.set_value(
-			"LMS Payment",
-			data.payment,
-			{
-				"payment_received": 1,
-				"payment_id": data.get(payment_id),
-				"order_id": data.get("order_id"),
-			},
+			"LMS Coupon",
+			payment_doc.coupon,
+			"redemption_count",
+			redemption_count + 1,
 		)
-		payment_for_certificate = frappe.db.get_value("LMS Payment", data.payment, "payment_for_certificate")
-
-		try:
-			if payment_for_certificate:
-				update_certificate_purchase(docname, data.payment)
-			elif doctype == "LMS Course":
-				enroll_in_course(docname, data.payment)
-			else:
-				enroll_in_batch(docname, data.payment)
-		except Exception as e:
-			frappe.log_error(frappe.get_traceback(), _("Enrollment Failed, {0}").format(e))
 
 
 def enroll_in_course(course, payment_name):
@@ -2024,6 +2175,7 @@ def enroll_in_program(program):
 
 
 @frappe.whitelist(allow_guest=True)
+@rate_limit(limit=50, seconds=60 * 60)
 def get_batches(filters=None, start=0, order_by="start_date"):
 	if not filters:
 		filters = {}
@@ -2137,6 +2289,7 @@ def get_palette(full_name):
 
 
 @frappe.whitelist(allow_guest=True)
+@rate_limit(limit=50, seconds=60 * 60)
 def get_related_courses(course):
 	related_course_details = []
 	related_courses = frappe.get_all("Related Courses", {"parent": course}, order_by="idx", pluck="course")

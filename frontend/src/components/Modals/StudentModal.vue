@@ -24,6 +24,7 @@
 					:onCreate="
 						(value, close) => {
 							openSettings('Members', close)
+							show = false
 						}
 					"
 				/>
