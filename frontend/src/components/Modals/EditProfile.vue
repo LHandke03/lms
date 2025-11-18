@@ -73,6 +73,7 @@
 						:label="__('Language')"
 						v-model="profile.language"
 						doctype="Language"
+						:noOwner=true
 					/>
 				</div>
 				<div>
