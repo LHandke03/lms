@@ -44,25 +44,25 @@
 							:label="__('Type')"
 							v-model="question.type"
 							type="select"
-							:options="['Choices', 'User Input', 'Open Ended']"
+							:options="[__('Choices'), __('User Input'), __('Open Ended')]"
 							class="pb-2"
 							:required="true"
 						/>
 					</div>
 					<div
-						v-if="question.type == 'Choices'"
+						v-if="question.type == __('Choices')"
 						class="text-base font-semibold text-ink-gray-9 mb-5 mt-10"
 					>
 						{{ __('Options') }}
 					</div>
 					<div
-						v-else-if="question.type == 'User Input'"
+						v-else-if="question.type == __('User Input')"
 						class="text-base font-semibold text-ink-gray-9 mb-5 mt-5"
 					>
 						{{ __('Possibilities') }}
 					</div>
 					<div
-						v-if="question.type == 'Choices'"
+						v-if="question.type == __('Choices')"
 						class="grid grid-cols-2 gap-x-8 gap-y-4"
 					>
 						<div v-for="n in 4" class="space-y-4 py-2">
@@ -83,7 +83,7 @@
 						</div>
 					</div>
 					<div
-						v-else-if="question.type == 'User Input'"
+						v-else-if="question.type == __('User Input')"
 						class="grid grid-cols-2 gap-x-8 gap-y-4 py-2"
 					>
 						<div v-for="n in 4">
@@ -144,7 +144,7 @@ const existingQuestion = reactive({
 
 const question = reactive({
 	question: '',
-	type: 'Choices',
+	type: __('Choices'),
 	marks: 1,
 })
 
@@ -204,7 +204,7 @@ watch(show, () => {
 		else {
 			question.question = ''
 			question.marks = 1
-			question.type = 'Choices'
+			question.type = __('Choices')
 			existingQuestion.question = ''
 			existingQuestion.marks = 1
 			chooseFromExisting.value = false

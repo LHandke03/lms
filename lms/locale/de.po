@@ -1134,12 +1134,12 @@ msgstr "Diskussion prüfen"
 
 #: frontend/src/pages/ProgrammingExercises/ProgrammingExerciseForm.vue:97
 msgid "Check Submission"
-msgstr ""
+msgstr "Einreichung ansehen"
 
 #: frontend/src/components/Modals/AssignmentForm.vue:55
 #: frontend/src/pages/QuizForm.vue:39
 msgid "Check Submissions"
-msgstr ""
+msgstr "Einreichungen ansehen"
 
 #: lms/templates/certificates_section.html:24
 msgid "Check out the {0} to know more about certification."
@@ -1166,7 +1166,7 @@ msgstr "Wählen Sie alle zutreffenden Antworten aus"
 
 #: frontend/src/components/Modals/Question.vue:19
 msgid "Choose an existing question"
-msgstr ""
+msgstr "Eine bereits existierende Frage wählen"
 
 #: frontend/src/components/Controls/IconPicker.vue:27
 msgid "Choose an icon"
@@ -1545,7 +1545,7 @@ msgstr "Richtig"
 
 #: frontend/src/components/Modals/Question.vue:79
 msgid "Correct Answer"
-msgstr ""
+msgstr "Korrekte Antwort"
 
 #. Label of the country (Link) field in DocType 'User'
 #. Label of the country (Link) field in DocType 'Job Opportunity'
@@ -2163,7 +2163,7 @@ msgstr "Dauer"
 #. Label of the duration (Data) field in DocType 'LMS Quiz'
 #: frontend/src/pages/QuizForm.vue:67 lms/lms/doctype/lms_quiz/lms_quiz.json
 msgid "Duration (in minutes)"
-msgstr ""
+msgstr "Bearbeitungszeit (in Minuten)"
 
 #: frontend/src/components/Modals/LiveClassModal.vue:32
 msgid "Duration of the live class in minutes"
@@ -2313,7 +2313,7 @@ msgstr "Aktivieren Sie die Google API in den Google-Einstellungen, um Kalenderei
 #. Label of the enable_negative_marking (Check) field in DocType 'LMS Quiz'
 #: frontend/src/pages/QuizForm.vue:117 lms/lms/doctype/lms_quiz/lms_quiz.json
 msgid "Enable Negative Marking"
-msgstr ""
+msgstr "Negative Punkte Aktivieren"
 
 #: frontend/src/components/Modals/ChapterModal.vue:24
 msgid "Enable this only if you want to upload a SCORM package as a chapter."
@@ -4546,7 +4546,7 @@ msgstr ""
 
 #: frontend/src/pages/QuizForm.vue:188
 msgid "No questions added yet"
-msgstr ""
+msgstr "Bis Jetzt keine Fragen erstellt"
 
 #: frontend/src/components/Modals/QuizInVideo.vue:93
 msgid "No quizzes added yet."
@@ -6073,12 +6073,12 @@ msgstr ""
 #: frontend/src/pages/QuizForm.vue:93 frontend/src/pages/Quizzes.vue:256
 #: lms/lms/doctype/lms_quiz/lms_quiz.json
 msgid "Show Answers"
-msgstr ""
+msgstr "Antworten anzeigen"
 
 #. Label of the show_submission_history (Check) field in DocType 'LMS Quiz'
 #: frontend/src/pages/QuizForm.vue:98 lms/lms/doctype/lms_quiz/lms_quiz.json
 msgid "Show Submission History"
-msgstr ""
+msgstr "Antworthistorie anzeigen"
 
 #. Label of the column_break_2 (Column Break) field in DocType 'LMS Settings'
 #: lms/lms/doctype/lms_settings/lms_settings.json
@@ -6103,7 +6103,7 @@ msgstr ""
 #. Label of the shuffle_questions (Check) field in DocType 'LMS Quiz'
 #: frontend/src/pages/QuizForm.vue:105 lms/lms/doctype/lms_quiz/lms_quiz.json
 msgid "Shuffle Questions"
-msgstr ""
+msgstr "Fragen mischen"
 
 #. Label of the sidebar_tab (Tab Break) field in DocType 'LMS Settings'
 #: lms/lms/doctype/lms_settings/lms_settings.json
@@ -6908,7 +6908,7 @@ msgstr "Summe"
 #: frontend/src/pages/QuizForm.vue:73 frontend/src/pages/Quizzes.vue:235
 #: lms/lms/doctype/lms_quiz/lms_quiz.json
 msgid "Total Marks"
-msgstr ""
+msgstr "Volle Punktzahl"
 
 #: lms/lms/web_template/lms_statistics/lms_statistics.html:14
 #: lms/templates/statistics.html:12
