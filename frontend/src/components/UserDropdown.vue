@@ -198,7 +198,7 @@ const userDropdownOptions = computed(() => {
 				},
 				{
 					icon: LogOut,
-					label: 'Log out',
+					label: __('Log out'),
 					onClick: () => {
 						logout.submit().then(() => {
 							isLoggedIn = false

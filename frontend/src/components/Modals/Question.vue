@@ -204,7 +204,7 @@ watch(show, () => {
 		else {
 			question.question = ''
 			question.marks = 1
-			question.type = __('Choices')
+			question.type = 'Choices'
 			existingQuestion.question = ''
 			existingQuestion.marks = 1
 			chooseFromExisting.value = false
@@ -254,6 +254,13 @@ const addQuestion = () => {
 			marks: existingQuestion.marks,
 		})
 	} else {
+		if (question.type == __('Choices')) {
+			question.type = 'Choices'
+		} else if (question.type == __('User Input')) {
+			question.type = 'User Input'
+		} else {
+			question.type = 'Open Ended'
+		}
 		questionCreation.submit(
 			{},
 			{

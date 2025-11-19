@@ -1,10 +1,10 @@
 <template>
 	<div
-		class="flex h-full flex-col justify-between transition-all duration-300 ease-in-out border-r bg-surface-menu-bar"
+		class="flex w-full flex-row justify-between transition-all duration-300 ease-in-out border-r bg-surface-menu-bar"
 		:class="sidebarStore.isSidebarCollapsed ? 'w-14' : 'w-56'"
 	>
 		<div
-			class="flex flex-col overflow-hidden"
+			class="flex flex-row overflow-hidden"
 			:class="sidebarStore.isSidebarCollapsed ? 'items-center' : ''"
 		>
 			<UserDropdown :isCollapsed="sidebarStore.isSidebarCollapsed" />

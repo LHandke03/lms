@@ -1,22 +1,18 @@
+
 msgid ""
 msgstr ""
-"Project-Id-Version: frappe\n"
+"Project-Id-Version:  frappe\n"
 "Report-Msgid-Bugs-To: jannat@frappe.io\n"
 "POT-Creation-Date: 2025-11-07 16:04+0000\n"
-"PO-Revision-Date: 2025-11-13 11:41\n"
+"PO-Revision-Date: 2025-11-13 11:41+0000\n"
 "Last-Translator: jannat@frappe.io\n"
+"Language: de_DE\n"
 "Language-Team: German\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Crowdin-Project: frappe\n"
-"X-Crowdin-Project-ID: 639578\n"
-"X-Crowdin-Language: de\n"
-"X-Crowdin-File: /[frappe.lms] develop/lms/locale/main.pot\n"
-"X-Crowdin-File-ID: 90\n"
-"Language: de_DE\n"
 
 #: lms/templates/emails/assignment_submission.html:5
 msgid " Please evaluate and grade it."
@@ -1317,7 +1313,6 @@ msgstr ""
 #. Submission'
 #. Label of the comments (Small Text) field in DocType 'Exercise Submission'
 #. Label of the comments (Text Editor) field in DocType 'LMS Assignment
-#. Submission'
 #. Label of the comments (Small Text) field in DocType 'LMS Mentor Request'
 #: frontend/src/components/Assignment.vue:170
 #: lms/lms/doctype/exercise_latest_submission/exercise_latest_submission.json
@@ -2530,7 +2525,6 @@ msgstr "Bewertende Person"
 #. Label of the evaluator_name (Data) field in DocType 'LMS Certificate'
 #. Label of the evaluator_name (Data) field in DocType 'LMS Certificate
 #. Evaluation'
-#. Label of the evaluator_name (Data) field in DocType 'LMS Certificate
 #. Request'
 #: lms/lms/doctype/lms_certificate/lms_certificate.json
 #: lms/lms/doctype/lms_certificate_evaluation/lms_certificate_evaluation.json
@@ -3897,6 +3891,9 @@ msgstr ""
 #: lms/fixtures/custom_field.json
 msgid "Location Preference"
 msgstr ""
+
+msgid "Log out"
+msgstr "Abmelden"
 
 #: frontend/src/components/NoPermission.vue:28
 #: frontend/src/components/QuizBlock.vue:9 frontend/src/pages/Batch.vue:196
@@ -6574,7 +6571,6 @@ msgstr ""
 #. Label of the test_results (Small Text) field in DocType 'Exercise Latest
 #. Submission'
 #. Label of the test_results (Small Text) field in DocType 'Exercise
-#. Submission'
 #: lms/lms/doctype/exercise_latest_submission/exercise_latest_submission.json
 #: lms/lms/doctype/exercise_submission/exercise_submission.json
 msgid "Test Results"
