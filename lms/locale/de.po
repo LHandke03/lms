@@ -6787,6 +6787,9 @@ msgstr ""
 msgid "Time must be in 24 hour format (HH:mm). Example 11:30 or 22:00"
 msgstr "Die Zeit muss im 24 Stunden format (HH:mm) sein. Zum Beispiel 11:30 oder 22:00"
 
+msgid "Time per lesson"
+msgstr "Zeit Pro Lektion"
+
 #. Label of the schedule_tab (Tab Break) field in DocType 'LMS Batch'
 #. Label of the timetable (Table) field in DocType 'LMS Batch'
 #. Label of the timetable (Table) field in DocType 'LMS Timetable Template'

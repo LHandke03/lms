@@ -22,6 +22,7 @@
 								lessonNumber: course.data.current_lesson
 									? course.data.current_lesson.split('-')[1]
 									: 1,
+								time_per_lesson: course.data.Time_per_lesson,
 							},
 						}"
 					>
@@ -30,7 +31,7 @@
 								<BookText class="size-4 stroke-1.5" />
 							</template>
 							<span>
-								{{ __('Continue Learning') }}
+								{{ __('Continue Learning') }} {{course.data.Time_per_lesson}}
 							</span>
 						</Button>
 					</router-link>
@@ -208,7 +209,6 @@ const props = defineProps({
 		default: null,
 	},
 })
-
 const video_link = computed(() => {
 	if (props.course.data.video_link) {
 		return 'https://www.youtube.com/embed/' + props.course.data.video_link

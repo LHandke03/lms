@@ -419,8 +419,14 @@ const props = defineProps({
 		type: String,
 		required: true,
 	},
+	time_per_lesson: {
+		type: String,
+		required: true,
+	}
 })
 
+console.log("props lesson: ", props.time_per_lesson)
+props.time_per_lesson = parseInt(props.time_per_lesson) || 30
 onMounted(() => {
 	startTimer()
 	sidebarStore.isSidebarCollapsed = true
@@ -589,6 +595,7 @@ const switchLesson = (direction) => {
 			courseName: props.courseName,
 			chapterNumber: lessonIndex[0],
 			lessonNumber: lessonIndex[1],
+			time_per_lesson: props.time_per_lesson
 		},
 	})
 }
@@ -734,7 +741,8 @@ const updateVideoTime = (video) => {
 const startTimer = () => {
 	let timerInterval = setInterval(() => {
 		timer.value++
-		if (timer.value == 1) {
+		console.log("Timer: ", timer.value," / ", props.time_per_lesson)
+		if (timer.value == props.time_per_lesson) {
 			clearInterval(timerInterval)
 			markProgress()
 		}

@@ -295,6 +295,12 @@
    "fieldname": "timezone",
    "fieldtype": "Data",
    "label": "Timezone"
+  },
+  {
+    "default": 0,
+    "fieldname": "Time_per_lesson",
+    "fieldtype": "Data",
+    "label": "Time per Lesson (in seconds)"
   }
  ],
  "is_published_field": "published",
