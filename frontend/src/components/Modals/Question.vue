@@ -50,13 +50,13 @@
 						/>
 					</div>
 					<div
-						v-if="question.type == __('Choices')"
+						v-if="question.type == __('Choices') || 'Choices' == question.type"
 						class="text-base font-semibold text-ink-gray-9 mb-5 mt-10"
 					>
 						{{ __('Options') }}
 					</div>
 					<div
-						v-else-if="question.type == __('User Input')"
+						v-else-if="question.type == __('User Input') || 'User Input' == question.type"
 						class="text-base font-semibold text-ink-gray-9 mb-5 mt-5"
 					>
 						{{ __('Possibilities') }}
@@ -144,7 +144,7 @@ const existingQuestion = reactive({
 
 const question = reactive({
 	question: '',
-	type: __('Choices'),
+	type: 'Choices',
 	marks: 1,
 })
 
@@ -193,6 +193,13 @@ const questionData = createResource({
 				: false
 			counter++
 		}
+		if (question.type == 'Choices'){
+			question.type = __('Choices')
+		} else if (question.type == 'User Input') {
+			question.type = __('User Input')
+		} else if (question.type == 'Open Ended') {
+			question.type = __('Open Ended')
+		}	
 		question.marks = props.questionDetail.marks
 	},
 })
@@ -204,7 +211,7 @@ watch(show, () => {
 		else {
 			question.question = ''
 			question.marks = 1
-			question.type = 'Choices'
+			question.type = __('Choices')
 			existingQuestion.question = ''
 			existingQuestion.marks = 1
 			chooseFromExisting.value = false
@@ -330,6 +337,13 @@ const marksUpdate = createResource({
 })
 
 const updateQuestion = () => {
+	if (question.type == __('Choices')) {
+			question.type = 'Choices'
+		} else if (question.type == __('User Input')) {
+			question.type = 'User Input'
+		} else {
+			question.type = 'Open Ended'
+		}
 	questionUpdate.submit(
 		{},
 		{
