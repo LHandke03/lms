@@ -3892,6 +3892,9 @@ msgstr ""
 msgid "Location Preference"
 msgstr ""
 
+msgid "Log in"
+msgstr "Anmelden"
+
 msgid "Log out"
 msgstr "Abmelden"
 
@@ -4373,6 +4376,9 @@ msgstr "Ihre Kurse"
 #: frontend/src/components/Notes/Notes.vue:3
 msgid "My Notes"
 msgstr "Ihre Notizen"
+
+msgid "My Profile"
+msgstr "Mein Profil"
 
 #: frontend/src/pages/ProfileEvaluator.vue:4
 msgid "My availability"
@@ -6891,6 +6897,9 @@ msgstr "Bis-Datum"
 #: lms/lms/utils.py:1784
 msgid "To join this batch, please contact the Administrator."
 msgstr "Um dieser Gruppe beizutreten, wenden Sie sich bitte an den Administrator."
+
+msgid "Toggel Theme"
+msgstr "Thema umschalten"
 
 #: lms/lms/user.py:41
 msgid "Too many users signed up recently, so the registration is disabled. Please try back in an hour"

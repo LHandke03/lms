@@ -7,7 +7,14 @@
 			class="flex flex-col overflow-hidden"
 			:class="sidebarStore.isSidebarCollapsed ? 'items-center' : ''"
 		>
-			<UserDropdown :isCollapsed="sidebarStore.isSidebarCollapsed" />
+			<UserDropdown 
+				:isCollapsed="sidebarStore.isSidebarCollapsed" 
+				:login="__('Log in')"
+				:logout="__('Log out')"
+				:myProfile="__('My Profile')"
+				:toggleTheme="__('Toggel Theme')"
+				:settings="__('Settings')"
+			/>
 			<div class="flex flex-col" v-if="sidebarSettings.data">
 				<div v-for="link in sidebarLinks" class="mx-2 my-0.5">
 					<SidebarLink
@@ -279,6 +286,7 @@ const setSidebarLinks = () => {
 		}
 	)
 }
+
 
 const unreadNotifications = createResource({
 	cache: 'Unread Notifications Count',

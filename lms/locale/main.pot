@@ -3902,7 +3902,16 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
+msgid "Toggel Theme"
+msgstr ""
+
+msgid "My Profile"
+msgstr ""
+
 msgid "Log out"
+msgstr ""
+
+msgid "Log in"
 msgstr ""
 
 #: frontend/src/components/UserDropdown.vue:176

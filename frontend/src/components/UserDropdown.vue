@@ -72,7 +72,7 @@ import { useRouter } from 'vue-router'
 import { convertToTitleCase } from '@/utils'
 import { usersStore } from '@/stores/user'
 import { useSettings } from '@/stores/settings'
-import { markRaw, watch, ref, onMounted, computed } from 'vue'
+import { markRaw, watch, ref, onMounted, computed, reactive,  inject } from 'vue'
 import { createDialog } from '@/utils/dialogs'
 import SettingsModal from '@/components/Settings/Settings.vue'
 import FrappeCloudIcon from '@/components/Icons/FrappeCloudIcon.vue'
@@ -102,6 +102,26 @@ const props = defineProps({
 		type: Boolean,
 		default: false,
 	},
+	login:{
+		type: String,
+		default: 'Log in'
+	},
+	logout:{
+		type: String,
+		default: 'Log out'
+	},
+	toggleTheme:{
+		type: String,
+		default: "Toggel Theme"
+	},
+	myProfile:{
+		type: String,
+		default: 'My Profile'
+	},
+	settings:{
+		type: String,
+		default: 'Settings'
+	}
 })
 
 onMounted(() => {
@@ -124,6 +144,12 @@ const toggleTheme = () => {
 	document.documentElement.setAttribute('data-theme', theme.value)
 	localStorage.setItem('theme', theme.value)
 }
+const logOut = __('Log out')
+const courses = __('Courses')
+const enrolled = __('Enrolled')
+const message = __('Are you sure you want to login to your Frappe Cloud dashboard?')
+
+console.log("Logged out Userdropdown:", logOut, courses, enrolled, logOut, message)
 
 const userDropdownOptions = computed(() => {
 	return [
@@ -132,7 +158,7 @@ const userDropdownOptions = computed(() => {
 			items: [
 				{
 					icon: User,
-					label: 'My Profile',
+					label: props.myProfile,
 					onClick: () => {
 						router.push(`/user/${userResource.data?.username}`)
 					},
@@ -142,7 +168,7 @@ const userDropdownOptions = computed(() => {
 				},
 				{
 					icon: theme.value === 'light' ? Moon : Sun,
-					label: 'Toggle Theme',
+					label: props.toggleTheme,
 					onClick: () => {
 						toggleTheme()
 					},
@@ -160,7 +186,7 @@ const userDropdownOptions = computed(() => {
 				},
 				{
 					icon: Settings,
-					label: 'Settings',
+					label: props.settings,
 					onClick: () => {
 						settingsStore.isSettingsOpen = true
 					},
@@ -198,7 +224,7 @@ const userDropdownOptions = computed(() => {
 				},
 				{
 					icon: LogOut,
-					label: __('Log out'),
+					label: props.logout,
 					onClick: () => {
 						logout.submit().then(() => {
 							isLoggedIn = false
@@ -210,7 +236,7 @@ const userDropdownOptions = computed(() => {
 				},
 				{
 					icon: LogIn,
-					label: 'Log in',
+					label: props.login,
 					onClick: () => {
 						window.location.href = '/login'
 					},
