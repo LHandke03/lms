@@ -576,6 +576,7 @@ const breadcrumbs = computed(() => {
 				courseName: props.courseName,
 				chapterNumber: props.chapterNumber,
 				lessonNumber: props.lessonNumber,
+				time_per_lesson: props.time_per_lesson
 			},
 		},
 	})

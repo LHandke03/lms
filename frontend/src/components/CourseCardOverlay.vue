@@ -22,7 +22,7 @@
 								lessonNumber: course.data.current_lesson
 									? course.data.current_lesson.split('-')[1]
 									: 1,
-								time_per_lesson: course.data.Time_per_lesson,
+								time_per_lesson: course.data.Time_per_lesson
 							},
 						}"
 					>
@@ -31,7 +31,7 @@
 								<BookText class="size-4 stroke-1.5" />
 							</template>
 							<span>
-								{{ __('Continue Learning') }} {{course.data.Time_per_lesson}}
+								{{ __('Continue Learning') }}
 							</span>
 						</Button>
 					</router-link>
@@ -238,6 +238,7 @@ function enrollStudent() {
 							courseName: props.course.data.name,
 							chapterNumber: 1,
 							lessonNumber: 1,
+							time_per_lesson: course.data.Time_per_lesson
 						},
 					})
 				}, 1000)

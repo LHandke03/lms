@@ -21,7 +21,7 @@ const routes = [
 		props: true,
 	},
 	{
-		path: '/courses/:courseName/learn/:chapterNumber-:lessonNumber',
+		path: '/courses/:courseName/learn/:chapterNumber-:lessonNumber/:time_per_lesson',
 		name: 'Lesson',
 		component: () => import('@/pages/Lesson.vue'),
 		props: true,
