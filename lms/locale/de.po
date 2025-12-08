@@ -629,7 +629,7 @@ msgstr "Teilnehmer"
 #. Label of the attire (Select) field in DocType 'User'
 #: lms/fixtures/custom_field.json
 msgid "Attire Preference"
-msgstr "Kleidungspreferencen"
+msgstr "Kleidungspräferenzen"
 
 #: frontend/src/pages/ProfileEvaluator.vue:146
 msgid "Authorize Google Calendar Access"
@@ -953,7 +953,7 @@ msgstr "Storniert"
 #. 'User'
 #: lms/fixtures/custom_field.json
 msgid "Career Preference Details"
-msgstr "Kariere Preferencen"
+msgstr "Kariere Präferenzen"
 
 #. Option for the 'Attire Preference' (Select) field in DocType 'User'
 #: lms/fixtures/custom_field.json
@@ -1284,7 +1284,7 @@ msgstr "Kohorten-Webseite"
 #. Label of the collaboration (Select) field in DocType 'User'
 #: lms/fixtures/custom_field.json
 msgid "Collaboration Preference"
-msgstr "Zusammenarbeitspreferencen"
+msgstr "Zusammenarbeitspräferenzen"
 
 #: frontend/src/components/AppSidebar.vue:145
 msgid "Collapse"
@@ -3059,7 +3059,7 @@ msgstr "Indentifizierung der Nutzerkategory"
 
 #: frontend/src/components/LessonHelp.vue:11
 msgid "If Include in Preview is enabled for a lesson then the lesson will also be accessible to non logged in users."
-msgstr "Wenn "In Vorschau einbeziehen" aktiv ist für die Lektion, dann wird die lektion auch zugreifbar sein für nicht eingeloggte Nutzer "
+msgstr "Wenn 'In Vorschau einbeziehen' aktiv ist für die Lektion, dann wird die lektion auch zugreifbar sein für nicht eingeloggte Nutzer "
 
 #: frontend/src/components/Quiz.vue:46
 msgid "If you answer incorrectly, {0} {1} will be deducted from your score for each incorrect answer."
@@ -6459,7 +6459,7 @@ msgstr "Verdächtiges verhalten gefunden in {0}: {1}"
 
 #: frontend/src/components/Controls/ColorSwatches.vue:50
 msgid "Swatches"
-msgstr ""
+msgstr "Swatches"
 
 #. Name of a role
 #: lms/job/doctype/job_opportunity/job_opportunity.json
@@ -6525,23 +6525,23 @@ msgstr "Schlagworte"
 
 #: frontend/src/components/InstallPrompt.vue:52
 msgid "Tap"
-msgstr ""
+msgstr "Tap"
 
 #. Option for the 'Color' (Select) field in DocType 'LMS Course'
 #: lms/lms/doctype/lms_course/lms_course.json
 msgid "Teal"
-msgstr ""
+msgstr "Teal"
 
 #: lms/templates/emails/community_course_membership.html:18
 #: lms/templates/emails/mentor_request_creation_email.html:8
 #: lms/templates/emails/mentor_request_status_update_email.html:7
 msgid "Team School"
-msgstr ""
+msgstr "Team Schule"
 
 #. Option for the 'Collaboration Preference' (Select) field in DocType 'User'
 #: lms/fixtures/custom_field.json
 msgid "Team Work"
-msgstr ""
+msgstr "Teamwork"
 
 #. Label of the template (Link) field in DocType 'Cohort Web Page'
 #. Label of the template (Link) field in DocType 'LMS Certificate'
@@ -6572,7 +6572,7 @@ msgstr "Testfall"
 
 #: frontend/src/pages/QuizForm.vue:23
 msgid "Test Quiz"
-msgstr ""
+msgstr "Test Quiz"
 
 #. Label of the test_results (Small Text) field in DocType 'Exercise Latest
 #. Submission'
@@ -6588,12 +6588,12 @@ msgstr "Teste diese Aufgabe"
 
 #: frontend/src/pages/ProgrammingExercises/ProgrammingExerciseSubmission.vue:93
 msgid "Test {0}"
-msgstr ""
+msgstr "Test {0}"
 
 #. Label of the tests (Code) field in DocType 'LMS Exercise'
 #: lms/lms/doctype/lms_exercise/lms_exercise.json
 msgid "Tests"
-msgstr ""
+msgstr "Tests"
 
 #. Option for the 'Type' (Select) field in DocType 'LMS Assignment'
 #. Option for the 'Type' (Select) field in DocType 'LMS Assignment Submission'
@@ -6732,7 +6732,7 @@ msgstr "Diese Lektion ist nicht als Vorschau verfügbar. Bitte treten sie den Ku
 
 #: frontend/src/pages/Programs/ProgramEnrollment.vue:18
 msgid "This program consists of {0} courses"
-msgstr ""
+msgstr "Dieses Programm besteht aus {0} courses"
 
 #: frontend/src/components/Quiz.vue:11
 msgid "This quiz consists of {0} questions."
@@ -6765,7 +6765,7 @@ msgstr "Zeit"
 #. Label of the time (Select) field in DocType 'User'
 #: lms/fixtures/custom_field.json
 msgid "Time Preference"
-msgstr ""
+msgstr "Zeit Präferenz"
 
 #: frontend/src/components/VideoBlock.vue:140
 msgid "Time for a Quiz"
@@ -6773,7 +6773,7 @@ msgstr "Zeit für das Quiz"
 
 #: frontend/src/components/Modals/QuizInVideo.vue:13
 msgid "Time in Video"
-msgstr ""
+msgstr "Zeit im Video"
 
 #: frontend/src/components/Modals/QuizInVideo.vue:220
 msgid "Time in Video (minutes)"
@@ -6781,7 +6781,7 @@ msgstr "Zeitpunk im Video (Minuten)"
 
 #: frontend/src/components/Modals/QuizInVideo.vue:173
 msgid "Time in video exceeds the total duration of the video."
-msgstr ""
+msgstr "Zeit im Video überschreitet die dauer des Videos"
 
 #: frontend/src/components/Modals/LiveClassModal.vue:44
 msgid "Time must be in 24 hour format (HH:mm). Example 11:30 or 22:00"
@@ -6826,13 +6826,13 @@ msgstr "Zeitzone"
 
 #: lms/lms/doctype/lms_course/lms_course.py:72
 msgid "Timezone is required for paid certificates."
-msgstr ""
+msgstr "Zeitzone wird benötigt bei bezahlten Zertifikaten"
 
 #: lms/templates/emails/batch_confirmation.html:21
 #: lms/templates/emails/batch_start_reminder.html:16
 #: lms/templates/emails/live_class_reminder.html:16
 msgid "Timings:"
-msgstr ""
+msgstr "Zeitpunkte:"
 
 #. Label of the title (Data) field in DocType 'Cohort'
 #. Label of the title (Data) field in DocType 'Cohort Subgroup'
@@ -7001,11 +7001,11 @@ msgstr "UUID"
 #. Evaluator'
 #: lms/lms/doctype/course_evaluator/course_evaluator.json
 msgid "Unavailability"
-msgstr ""
+msgstr "Unverfügbarkeit"
 
 #: frontend/src/pages/ProfileEvaluator.vue:276
 msgid "Unavailability updated successfully"
-msgstr ""
+msgstr "unverfügbarkeit erfolgreich angepasst"
 
 #: lms/lms/doctype/course_evaluator/course_evaluator.py:31
 msgid "Unavailable From Date cannot be greater than Unavailable To Date"
@@ -7028,17 +7028,17 @@ msgstr "Nicht Veröffentlicht"
 #: frontend/src/components/Modals/EditCoverImage.vue:60
 #: frontend/src/components/UnsplashImageBrowser.vue:54
 msgid "Unsplash"
-msgstr ""
+msgstr "Unsplash"
 
 #. Label of the unsplash_access_key (Data) field in DocType 'LMS Settings'
 #: lms/lms/doctype/lms_settings/lms_settings.json
 msgid "Unsplash Access Key"
-msgstr ""
+msgstr "Unsplash zugriffsschlüssel"
 
 #. Option for the 'Role Preference' (Select) field in DocType 'User'
 #: lms/fixtures/custom_field.json
 msgid "Unstructured Role"
-msgstr ""
+msgstr "Unstrukturierte Rolle"
 
 #. Option for the 'Status' (Select) field in DocType 'Cohort'
 #. Option for the 'Status' (Select) field in DocType 'LMS Certificate Request'
@@ -7062,7 +7062,7 @@ msgstr "Bevorstehenden Bewertungen"
 #: frontend/src/pages/Home/AdminHome.vue:128
 #: frontend/src/pages/Home/StudentHome.vue:71
 msgid "Upcoming Live Classes"
-msgstr ""
+msgstr "Bald verfügbare Live Klassen"
 
 #: frontend/src/components/Settings/BrandSettings.vue:24
 #: frontend/src/components/Settings/SettingDetails.vue:23
@@ -7125,11 +7125,11 @@ msgstr "Benutzereingabe"
 #. Name of a DocType
 #: lms/lms/doctype/user_skill/user_skill.json
 msgid "User Skill"
-msgstr ""
+msgstr "Nutzerfähigkeiten"
 
 #: lms/job/doctype/job_opportunity/job_opportunity.py:41
 msgid "User {0} has reported the job post {1}"
-msgstr ""
+msgstr "Der Nutzer {0} hat die Stellenanzeige {1} gemeldet"
 
 #. Label of the username (Data) field in DocType 'Course Evaluator'
 #: lms/lms/doctype/course_evaluator/course_evaluator.json
@@ -7175,7 +7175,7 @@ msgstr "Ansicht"
 
 #: frontend/src/pages/JobDetail.vue:31
 msgid "View Applications"
-msgstr ""
+msgstr "Anwendungen anzeigen"
 
 #: frontend/src/components/CertificationLinks.vue:10
 #: frontend/src/components/Modals/Event.vue:67
@@ -7184,7 +7184,7 @@ msgstr "Zertifikat Ansehen"
 
 #: frontend/src/pages/JobApplications.vue:262
 msgid "View Resume"
-msgstr ""
+msgstr "Lebenslauf anzeigen"
 
 #: frontend/src/components/BatchFeedback.vue:56
 msgid "View all feedback"
@@ -7220,25 +7220,25 @@ msgstr "Ihre Klasse öffnen"
 #. Label of the internship (Table) field in DocType 'User'
 #: lms/fixtures/custom_field.json
 msgid "Volunteering or Internship"
-msgstr ""
+msgstr "Ehrenamtliche oder Praktikum"
 
 #. Label of the watch_time (Data) field in DocType 'LMS Video Watch Duration'
 #: frontend/src/components/Modals/VideoStatistics.vue:34
 #: lms/lms/doctype/lms_video_watch_duration/lms_video_watch_duration.json
 msgid "Watch Time"
-msgstr ""
+msgstr "Zuschauzeit"
 
 #: lms/templates/emails/batch_confirmation.html:6
 msgid "We are pleased to inform you that you have been enrolled in our upcoming batch. Congratulations!"
-msgstr ""
+msgstr "Wir Freuen uns, dass wir ihnen mitteilen können, dass sie in die in unserer bald verfügbaren Klasse eingeschrieben wurden. Glückwunsch!"
 
 #: lms/templates/emails/payment_reminder.html:7
 msgid "We have a limited number of seats, and they won't be available for long!"
-msgstr ""
+msgstr "Wir haben nur eine limitierte nummer an Sitzplätzen, und diese werden nicht lang verfügbar sein!"
 
 #: lms/templates/emails/payment_reminder.html:4
 msgid "We noticed that you started enrolling in the"
-msgstr ""
+msgstr "Wir haben bemerkt, das sie angefangen haben sich einzuschreiben in"
 
 #. Label of the web_page (Link) field in DocType 'LMS Sidebar Item'
 #: frontend/src/components/Modals/PageModal.vue:23
@@ -7263,23 +7263,23 @@ msgstr "Willkommen auf {0}!"
 
 #: frontend/src/pages/PersonaForm.vue:32
 msgid "What best describes your role?"
-msgstr ""
+msgstr "Was berschreibt ihre rolle am besten"
 
 #: frontend/src/components/LessonHelp.vue:6
 msgid "What does include in preview mean?"
-msgstr ""
+msgstr "Was Bedeutet 'Verfügbar in Vorschau'"
 
 #: frontend/src/pages/PersonaForm.vue:21
 msgid "What is your use case for Frappe Learning?"
-msgstr ""
+msgstr "Was ist ihr nutzen für Frappe Learning"
 
 #: lms/templates/courses_under_review.html:15
 msgid "When a course gets submitted for review, it will be listed here."
-msgstr ""
+msgstr "Wenn ein kurs zur überprüfung eingereicht wird, wird er hier gelistet"
 
 #: frontend/src/pages/Billing.vue:106
 msgid "Where did you hear about us?"
-msgstr ""
+msgstr "Wo haben sie von uns gehört"
 
 #: lms/templates/emails/certification.html:10
 msgid "With this certification, you can now showcase your updated skills and share your achievement with your colleagues and on LinkedIn. To access your certificate, please click on the link provided below. Make sure you are logged in to the portal."
@@ -7293,7 +7293,7 @@ msgstr "Zurückgezogen"
 #. Label of the work_environment (Section Break) field in DocType 'User'
 #: lms/fixtures/custom_field.json
 msgid "Work Environment"
-msgstr ""
+msgstr "Arbeitsumfeld"
 
 #. Label of the work_experience (Table) field in DocType 'User'
 #. Name of a DocType
@@ -7305,7 +7305,7 @@ msgstr "Berufserfahrung"
 #. Label of the work_experience_details (Section Break) field in DocType 'User'
 #: lms/fixtures/custom_field.json
 msgid "Work Experience Details"
-msgstr ""
+msgstr "Arbeitserfahrung Details"
 
 #. Label of the work_mode (Select) field in DocType 'Job Opportunity'
 #: frontend/src/pages/JobForm.vue:32 frontend/src/pages/Jobs.vue:73
@@ -7337,7 +7337,7 @@ msgstr "Gelb"
 
 #: lms/lms/doctype/lms_certificate_request/lms_certificate_request.py:96
 msgid "You already have an evaluation on {0} at {1} for the course {2}."
-msgstr ""
+msgstr "Sie habe bereits eine Bewertung für {0} mit {1} für den Kurs {2}"
 
 #: frontend/src/pages/CourseCertification.vue:14
 msgid "You are already certified for this course. Click on the card below to open your certificate."
@@ -7374,27 +7374,27 @@ msgstr "Sie können dieses Quiz {0} versuchen"
 
 #: frontend/src/pages/Home/Streak.vue:16
 msgid "You can do better,"
-msgstr ""
+msgstr "Das Können sie besser,"
 
 #: lms/templates/emails/job_application.html:6
 msgid "You can find their resume attached to this email."
-msgstr ""
+msgstr "Sie können deren Lebenslauf im Anhang dieser Email"
 
 #: frontend/src/pages/ProfileEvaluator.vue:14
 msgid "You cannot change the availability when the site is being updated."
-msgstr ""
+msgstr "Sie Können nicht die Verfügbarkeit anpassen wen die Seite aktualisiert wird"
 
 #: frontend/src/pages/ProfileRoles.vue:12
 msgid "You cannot change the roles in read-only mode."
-msgstr ""
+msgstr "Sie können keine rollen ändern im read-only Modus"
 
 #: lms/lms/doctype/lms_certificate_request/lms_certificate_request.py:112
 msgid "You cannot schedule evaluations after {0}."
-msgstr ""
+msgstr "Sie können keine Bewertungen nach {0} planen"
 
 #: lms/lms/doctype/lms_certificate_request/lms_certificate_request.py:103
 msgid "You cannot schedule evaluations for past slots."
-msgstr ""
+msgstr "Sie können keine Prüfung für einen Zeitpunkt in der Vergangenheit planen"
 
 #: frontend/src/components/NoPermission.vue:11
 msgid "You do not have permission to access this page."
@@ -7411,7 +7411,7 @@ msgstr "Sie haben {0}% richtige Antworten mit einer Punktzahl von {1} von {2}"
 
 #: lms/templates/emails/live_class_reminder.html:6
 msgid "You have a live class scheduled tomorrow. Please be prepared and be on time for the session."
-msgstr ""
+msgstr "Sie haben eine Live Klasse Morgen. Bitte seien sie vorbereitet und Pünktlich"
 
 #: lms/job/doctype/lms_job_application/lms_job_application.py:26
 msgid "You have already applied for this job."
@@ -7423,7 +7423,7 @@ msgstr "Sie haben die maximal zulässige Anzahl von Versuchen für dieses Quiz b
 
 #: lms/lms/api.py:224
 msgid "You have already purchased the certificate for this course."
-msgstr ""
+msgstr "Sie haben bereits das Zertifikat für diesen Kurs gekauft"
 
 #: lms/lms/doctype/lms_course_review/lms_course_review.py:15
 msgid "You have already reviewed this course"
