@@ -10,7 +10,7 @@
 		></iframe>
 	</div>
 	<div v-for="block in content?.split('\n\n')">
-		<div v-if="block.includes('{{ YouTubeVideo')">
+		<div v-if="block.includes('{{ YouTubeVideo}}')">
 			<iframe
 				class="youtube-video"
 				:src="getYouTubeVideoSource(block)"
@@ -20,10 +20,10 @@
 				allowfullscreen
 			></iframe>
 		</div>
-		<div v-else-if="block.includes('{{ Quiz')">
+		<div v-else-if="block.includes('{{ Quiz}}')">
 			<Quiz :quiz="getId(block)" />
 		</div>
-		<div v-else-if="block.includes('{{ Video')">
+		<div v-else-if="block.includes('{{ Video}}')">
 			<video
 				controls
 				width="100%"
@@ -33,7 +33,7 @@
 				<source :src="getId(block)" type="video/mp4" />
 			</video>
 		</div>
-		<div v-else-if="block.includes('{{ PDF')">
+		<div v-else-if="block.includes('{{ PDF}}')">
 			<iframe
 				:src="getPDFSource(block)"
 				width="100%"
@@ -42,12 +42,12 @@
 				allowfullscreen
 			></iframe>
 		</div>
-		<div v-else-if="block.includes('{{ Audio')">
+		<div v-else-if="block.includes('{{ Audio}}')">
 			<audio width="100%" controls controlsList="nodownload">
 				<source :src="getId(block)" type="audio/mp3" />
 			</audio>
 		</div>
-		<div v-else-if="block.includes('{{ Embed')">
+		<div v-else-if="block.includes('{{ Embed}}')">
 			<iframe
 				width="100%"
 				height="400"

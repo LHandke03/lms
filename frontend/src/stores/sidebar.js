@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useSidebar = defineStore('sidebar', () => {
-	const isSidebarCollapsed = ref(false)
+	const isSidebarCollapsed = ref(true)
 	const isWebpagesCollapsed = ref(true)
 
 	if (localStorage.getItem('isSidebarCollapsed')) {

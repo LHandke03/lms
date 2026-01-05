@@ -1,21 +1,25 @@
 <template>
 	<div
-		class="flex h-full flex-col justify-between transition-all duration-300 ease-in-out border-r bg-surface-menu-bar"
-		:class="sidebarStore.isSidebarCollapsed ? 'w-14' : 'w-56'"
+		class="flex w-full flex-row justify-between transition-all duration-300 ease-in-out border-r bg-surface-menu-bar"
+		@mouseover="sidebarStore.isSidebarCollapsed = false"
+		@mouseleave="sidebarStore.isSidebarCollapsed = true"
+		
 	>
+	<!-- :class="sidebarStore.isSidebarCollapsed ? 'w-14' : 'w-56'" -->
 		<div
-			class="flex flex-col overflow-hidden"
-			:class="sidebarStore.isSidebarCollapsed ? 'items-center' : ''"
+			class="flex flex-row overflow-hidden"
+			:class="/* sidebarStore.isSidebarCollapsed  */ true? 'items-center' : ''"
 		>
 			<UserDropdown 
-				:isCollapsed="sidebarStore.isSidebarCollapsed" 
+				:isCollapsed="false"
 				:login="__('Log in')"
 				:logout="__('Log out')"
 				:myProfile="__('My Profile')"
 				:toggleTheme="__('Toggel Theme')"
 				:settings="__('Settings')"
 			/>
-			<div class="flex flex-col" v-if="sidebarSettings.data">
+			<!-- :isCollapsed="sidebarStore.isSidebarCollapsed"  -->
+			<div class="flex flex-row" v-if="sidebarSettings.data">
 				<div v-for="link in sidebarLinks" class="mx-2 my-0.5">
 					<SidebarLink
 						:link="link"
@@ -58,7 +62,7 @@
 				</div>
 				<div
 					v-if="sidebarSettings.data?.web_pages?.length"
-					class="flex flex-col transition-all duration-300 ease-in-out"
+					class="flex flex-row transition-all duration-300 ease-in-out"
 					:class="!sidebarStore.isWebpagesCollapsed ? 'block' : 'hidden'"
 				>
 					<div
@@ -76,7 +80,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="m-2 flex flex-col gap-1">
+		<div class="m-2 flex flex-row gap-1">
 			<div
 				v-if="readOnlyMode && !sidebarStore.isSidebarCollapsed"
 				class="z-10 m-2 bg-surface-modal py-2.5 px-3 text-xs text-ink-gray-7 leading-5 rounded-md"
@@ -102,13 +106,13 @@
 			<div
 				class="flex items-center mt-4"
 				:class="
-					sidebarStore.isSidebarCollapsed ? 'flex-col space-y-3' : 'flex-row'
+					/* sidebarStore.isSidebarCollapsed  */ false? 'flex-col space-y-3' : 'flex-row'
 				"
 			>
 				<div
 					class="flex items-center flex-1"
 					:class="
-						sidebarStore.isSidebarCollapsed
+						/* sidebarStore.isSidebarCollapsed */ false
 							? 'flex-col space-y-3'
 							: 'flex-row space-x-3'
 					"
