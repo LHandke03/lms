@@ -12,6 +12,7 @@
   "column_break_zdel",
   "allow_guest_access",
   "prevent_skipping_videos",
+  "disable_pwa",
   "column_break_bjis",
   "unsplash_access_key",
   "livecode_url",
@@ -75,6 +76,7 @@
  ],
  "fields": [
   {
+   "default": "https://falcon.frappe.io/",
    "fieldname": "livecode_url",
    "fieldtype": "Data",
    "label": "LiveCode URL"
@@ -352,7 +354,7 @@
    "options": "Email Template"
   },
   {
-   "default": "0",
+   "default": "1",
    "fieldname": "disable_signup",
    "fieldtype": "Check",
    "label": "Disable Signup"
@@ -438,13 +440,19 @@
    "fieldname": "certifications",
    "fieldtype": "Check",
    "label": "Certifications"
+  },
+  {
+   "default": "0",
+   "fieldname": "disable_pwa",
+   "fieldtype": "Check",
+   "label": "Disable PWA"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-10-07 19:22:48.705933",
+ "modified": "2025-12-22 11:30:13.868031",
  "modified_by": "sayali@frappe.io",
  "module": "LMS",
  "name": "LMS Settings",

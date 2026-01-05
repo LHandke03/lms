@@ -44,6 +44,8 @@ const user = inject('$user')
 const show = ref(false)
 const quiz = ref(null)
 const assignment = ref(null)
+const filterAssignmentsByCourse = ref(false)
+const route = useRoute()
 
 const props = defineProps({
 	type: {
@@ -70,7 +72,7 @@ const addAssessment = () => {
 }
 
 const redirectToForm = () => {
-	if (props.type == 'quiz') window.open('/lms/quizzes/new', '_blank')
-	else window.open('/lms/assignments/new', '_blank')
+	if (props.type == 'quiz') window.open('/lms/quizzes?new=true', '_blank')
+	else window.open('/lms/assignments?new=true', '_blank')
 }
 </script>

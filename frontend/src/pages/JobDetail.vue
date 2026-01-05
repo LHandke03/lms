@@ -32,7 +32,7 @@
 					</Button>
 				</router-link>
 				<router-link
-					v-if="user.data.name == job.data?.owner"
+					v-if="canManageJob"
 					:to="{
 						name: 'JobForm',
 						params: { jobName: job.data?.name },
@@ -196,8 +196,8 @@ const job = createResource({
 	onSuccess: (data) => {
 		if (user.data?.name) {
 			jobApplication.submit()
+			applicationCount.submit()
 		}
-		applicationCount.submit()
 	},
 })
 
@@ -240,9 +240,7 @@ const redirectToWebsite = (url) => {
 
 const canManageJob = computed(() => {
 	if (!user.data?.name || !job.data) return false
-	return (
-		user.data.name === job.data.owner || user.data.roles?.includes('Moderator')
-	)
+	return user.data.name === job.data.owner || user.data?.is_moderator
 })
 
 usePageMeta(() => {

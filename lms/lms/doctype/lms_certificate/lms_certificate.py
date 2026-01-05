@@ -6,9 +6,7 @@ from frappe import _
 from frappe.email.doctype.email_template.email_template import get_email_template
 from frappe.model.document import Document
 from frappe.model.naming import make_autoname
-from frappe.utils import add_years, nowdate
-
-from lms.lms.utils import is_certified
+from frappe.utils import nowdate
 
 
 class LMSCertificate(Document):
@@ -113,31 +111,23 @@ def has_website_permission(doc, ptype, user, verbose=False):
 	return False
 
 
+def is_certified(course):
+	certificate = frappe.get_all("LMS Certificate", {"member": frappe.session.user, "course": course})
+	if len(certificate):
+		return certificate[0].name
+	return
+
+
 @frappe.whitelist()
 def create_certificate(course):
-	certificate = is_certified(course)
-
-	if certificate:
+	if is_certified(course):
 		return frappe.db.get_value(
 			"LMS Certificate", certificate, ["name", "course", "template"], as_dict=True
 		)
 
 	else:
-		default_certificate_template = frappe.db.get_value(
-			"Property Setter",
-			{
-				"doc_type": "LMS Certificate",
-				"property": "default_print_format",
-			},
-			"value",
-		)
-		if not default_certificate_template:
-			default_certificate_template = frappe.db.get_value(
-				"Print Format",
-				{
-					"doc_type": "LMS Certificate",
-				},
-			)
+		validate_certification_eligibility(course)
+		default_certificate_template = get_default_certificate_template()
 		certificate = frappe.get_doc(
 			{
 				"doctype": "LMS Certificate",
@@ -149,3 +139,37 @@ def create_certificate(course):
 		)
 		certificate.save(ignore_permissions=True)
 		return certificate
+
+
+def get_default_certificate_template():
+	default_certificate_template = frappe.db.get_value(
+		"Property Setter",
+		{
+			"doc_type": "LMS Certificate",
+			"property": "default_print_format",
+		},
+		"value",
+	)
+	if not default_certificate_template:
+		default_certificate_template = frappe.db.get_value(
+			"Print Format",
+			{
+				"doc_type": "LMS Certificate",
+			},
+		)
+
+	return default_certificate_template
+
+
+def validate_certification_eligibility(course):
+	if not frappe.db.exists("LMS Enrollment", {"course": course, "member": frappe.session.user}):
+		frappe.throw(_("You are not enrolled in this course."))
+
+	if not frappe.db.get_value("LMS Course", course, "enable_certification"):
+		frappe.throw(_("Certification is not enabled for this course."))
+
+	progress = frappe.db.get_value(
+		"LMS Enrollment", {"course": course, "member": frappe.session.user}, "progress"
+	)
+	if progress < 100:
+		frappe.throw(_("You have not completed the course yet."))

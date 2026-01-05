@@ -319,7 +319,7 @@
 		</div>
 	</div>
 	<InlineLessonMenu
-		v-if="lesson.data"
+		v-if="lesson.data?.name"
 		v-model="showInlineMenu"
 		:lesson="lesson.data?.name"
 		v-model:notes="notes"
@@ -342,6 +342,7 @@ import {
 	TabButtons,
 	Tooltip,
 	usePageMeta,
+	toast,
 } from 'frappe-ui'
 import {
 	computed,
@@ -732,6 +733,7 @@ const updateVideoTime = (video) => {
 }
 
 const startTimer = () => {
+	if (!lesson.data?.membership) return
 	let timerInterval = setInterval(() => {
 		timer.value++
 		if (timer.value == 1) {
@@ -799,6 +801,10 @@ const enrollStudent = () => {
 		{
 			onSuccess() {
 				window.location.reload()
+			},
+			onError(err) {
+				toast.error(__(err.messages?.[0] || err))
+				console.error(err)
 			},
 		}
 	)

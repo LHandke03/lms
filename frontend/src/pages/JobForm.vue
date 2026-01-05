@@ -158,7 +158,7 @@ import { computed, onMounted, reactive, inject } from 'vue'
 import { FileText, X } from 'lucide-vue-next'
 import { sessionStore } from '@/stores/session'
 import { useRouter } from 'vue-router'
-import { escapeHTML, getFileSize, validateFile } from '@/utils'
+import { escapeHTML, getFileSize, sanitizeHTML, validateFile } from '@/utils'
 
 const user = inject('$user')
 const router = useRouter()
@@ -207,6 +207,11 @@ const jobDetail = createResource({
 		}
 	},
 	onSuccess(data) {
+		if (data.owner != user.data?.name && !user.data?.is_moderator) {
+			router.push({
+				name: 'Jobs',
+			})
+		}
 		Object.keys(data).forEach((key) => {
 			if (Object.hasOwn(job, key)) job[key] = data[key]
 		})
@@ -242,10 +247,24 @@ const job = reactive({
 })
 
 onMounted(() => {
-	if (!user.data) window.location.href = '/login'
+	if (!user.data) {
+		router.push({
+			name: 'Jobs',
+		})
+	}
 
 	if (props.jobName != 'new') jobDetail.reload()
+	addKeyboardShortcuts()
 })
+
+const addKeyboardShortcuts = () => {
+	document.addEventListener('keydown', (e) => {
+		if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') {
+			e.preventDefault()
+			saveJob()
+		}
+	})
+}
 
 const saveJob = () => {
 	validateJobFields()
@@ -295,6 +314,7 @@ const editJobDetails = () => {
 }
 
 const validateJobFields = () => {
+	job.description = sanitizeHTML(job.description)
 	Object.keys(job).forEach((key) => {
 		if (key != 'description' && typeof job[key] === 'string') {
 			job[key] = escapeHTML(job[key])
@@ -350,7 +370,7 @@ const breadcrumbs = computed(() => {
 
 usePageMeta(() => {
 	return {
-		title: props.jobName == 'new' ? 'New Job' : jobDetail.data?.title,
+		title: props.jobName == 'new' ? 'New Job' : jobDetail.data?.job_title,
 		icon: brand.favicon,
 	}
 })

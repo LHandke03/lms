@@ -30,7 +30,7 @@
 
 		<div v-if="createdBatches.data?.length" class="mt-10">
 			<div class="flex items-center justify-between mb-3">
-				<span class="font-semibold text-lg">
+				<span class="font-semibold text-lg text-ink-gray-9">
 					{{ __('Upcoming Batches') }}
 				</span>
 				<router-link
@@ -88,7 +88,7 @@
 
 		<div class="grid grid-cols-2 gap-5 mt-10">
 			<div v-if="evals?.data?.length">
-				<div class="font-semibold text-lg mb-3">
+				<div class="font-semibold text-lg text-ink-gray-9 mb-3">
 					{{ __('Upcoming Evaluations') }}
 				</div>
 				<div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
@@ -124,7 +124,7 @@
 				</div>
 			</div>
 			<div v-if="liveClasses?.data?.length">
-				<div class="font-semibold text-lg mb-3">
+				<div class="font-semibold text-lg text-ink-gray-9 mb-3">
 					{{ __('Upcoming Live Classes') }}
 				</div>
 				<div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
@@ -222,12 +222,12 @@ const props = defineProps<{
 }>()
 
 const createdCourses = createResource({
-	url: 'lms.lms.utils.get_created_courses',
+	url: 'lms.lms.api.get_created_courses',
 	auto: true,
 })
 
 const createdBatches = createResource({
-	url: 'lms.lms.utils.get_created_batches',
+	url: 'lms.lms.api.get_created_batches',
 	auto: true,
 })
 
