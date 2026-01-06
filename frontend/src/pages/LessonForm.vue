@@ -61,14 +61,6 @@
 							<label class="block font-medium text-ink-gray-5 mb-1">
 								{{ __('Content') }}
 							</label>
-							<TabButtons
-								v-model="currentTab"
-								:buttons="[
-									{ label: __('Content'), value: 'Content' },
-									{ label: __('Preview'), value: 'Preview' },
-								]"
-								class="mb-4"
-							/>
 							<div
 								id="content"
 								class="ProseMirror prose prose-table:table-fixed prose-td:p-2 prose-th:p-2 prose-td:border prose-th:border prose-td:border-outline-gray-2 prose-th:border-outline-gray-2 prose-td:relative prose-th:relative prose-th:bg-surface-gray-2 prose-sm max-w-none !whitespace-normal py-3"
@@ -93,7 +85,6 @@ import {
 	FormControl,
 	usePageMeta,
 	toast,
-	TabButtons,
 } from 'frappe-ui'
 import {
 	computed,
@@ -116,7 +107,6 @@ const editor = ref(null)
 const instructorEditor = ref(null)
 const user = inject('$user')
 const openInstructorEditor = ref(false)
-const currentTab = ref<'Content' | 'Preview'>('Content')
 const { updateOnboardingStep } = useOnboarding('learning')
 let autoSaveInterval
 let showSuccessMessage = false

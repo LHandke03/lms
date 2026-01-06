@@ -7,7 +7,7 @@
 		:placeholder="__('Make notes for quick revision. Press / for menu.')"
 		@change="(val: string) => updateNoteText(val)"
 		:editable="true"
-		editorClass="prose prose-sm min-h-[200px] h-[20%] max-w-none"
+		editorClass="prose prose-sm min-h-[200px] max-w-none"
 	/>
 </template>
 <script setup lang="ts">

@@ -7431,27 +7431,27 @@ msgstr "Sie haben diesen Kurs bereits bewertet"
 
 #: frontend/src/pages/JobDetail.vue:68
 msgid "You have applied"
-msgstr "Sie haben sich beworben"
+msgstr ""
 
 #: frontend/src/components/BatchOverlay.vue:181
 msgid "You have been enrolled in this batch"
-msgstr "Sie wurden in diese Klasse eingeschrieben"
+msgstr ""
 
 #: frontend/src/components/CourseCardOverlay.vue:230
 msgid "You have been enrolled in this course"
-msgstr "Sie wurden in diesen Kurs eingeschrieben"
+msgstr ""
 
 #: lms/lms/doctype/lms_quiz_submission/lms_quiz_submission.py:30
 msgid "You have exceeded the maximum number of attempts ({0}) for this quiz"
-msgstr "Sie haben die maximale Anzahl an versuchen ({0}) für dieses Quiz erreicht"
+msgstr ""
 
 #: lms/lms/doctype/lms_quiz_submission/lms_quiz_submission.py:56
 msgid "You have got a score of {0} for the quiz {1}"
-msgstr "Sie haben ein Punktestand {0} für das Quiz {1}"
+msgstr ""
 
 #: frontend/src/pages/ProfileCertificates.vue:26
 msgid "You have not received any certificates yet."
-msgstr "Sie haben bisher noch kein Zertifikat erhalten"
+msgstr ""
 
 #: lms/lms/widgets/NoPreviewModal.html:12
 msgid "You have opted to be notified for this course. You will receive an email when the course becomes available."
@@ -7459,7 +7459,7 @@ msgstr "Sie haben sich für eine Benachrichtigung zu diesem Kurs entschieden. Si
 
 #: frontend/src/pages/Home/Home.vue:103 frontend/src/pages/Home/Home.vue:126
 msgid "You have {0} upcoming {1} and {2} {3} scheduled."
-msgstr "Sie haben {0} als nächstes, {1} "
+msgstr ""
 
 #: frontend/src/pages/Home/Home.vue:110 frontend/src/pages/Home/Home.vue:133
 msgid "You have {0} upcoming {1}."
@@ -7479,7 +7479,7 @@ msgstr ""
 
 #: frontend/src/components/Quiz.vue:7
 msgid "You will have to complete the quiz to continue the video"
-msgstr "Sie Müssen das Quiz abschliesen um das Video fortzusetzen"
+msgstr ""
 
 #: frontend/src/components/Quiz.vue:30
 #, python-format
@@ -7511,11 +7511,11 @@ msgstr "Ihr Konto wurde erfolgreich erstellt!"
 
 #: frontend/src/pages/ProgrammingExercises/ProgrammingExerciseSubmission.vue:121
 msgid "Your Output"
-msgstr "Ihre Ausgabe"
+msgstr ""
 
 #: lms/lms/doctype/lms_batch/lms_batch.py:308
 msgid "Your batch {0} is starting tomorrow"
-msgstr "Ihre Klasse {0} startet Morgen"
+msgstr ""
 
 #: frontend/src/pages/ProfileEvaluator.vue:143
 msgid "Your calendar is set."
@@ -7523,24 +7523,24 @@ msgstr "Ihr Kalender ist eingestellt."
 
 #: lms/lms/doctype/lms_live_class/lms_live_class.py:95
 msgid "Your class on {0} is today"
-msgstr "Sie haben heute den Kurs über {0}"
+msgstr ""
 
 #: frontend/src/components/Modals/EmailTemplateModal.vue:35
 msgid "Your enrollment in {{ batch_name }} is confirmed"
-msgstr "Ihre einschreibung in {{ batch_name }} ist Bestätigt"
+msgstr ""
 
 #: lms/lms/notification/certificate_request_reminder/certificate_request_reminder.html:3
 #: lms/templates/emails/certificate_request_notification.html:3
 msgid "Your evaluation for the course {0} has been scheduled on {1} at {2} {3}."
-msgstr "Ihre Prüfung für den Kurs {0} wurde für den {1} um {2} {3} geplant"
+msgstr ""
 
 #: lms/lms/doctype/lms_certificate_request/lms_certificate_request.py:136
 msgid "Your evaluation slot has been booked"
-msgstr "Ihr Prüfungstermin wurde gebucht"
+msgstr ""
 
 #: lms/templates/emails/certificate_request_notification.html:5
 msgid "Your evaluator is {0}"
-msgstr "Ihr Prüfer ist {0}"
+msgstr ""
 
 #: frontend/src/pages/Home/Streak.vue:54
 msgid "Your learning streak counts the number of days in a row you’ve kept up your learning, whether it’s a lesson, quiz, or assignment. Don’t worry, weekends don’t break your streak."
@@ -7568,11 +7568,11 @@ msgstr ""
 
 #: frontend/src/components/Modals/ZoomAccountModal.vue:164
 msgid "Zoom Account created successfully"
-msgstr "Zoom Account erfolgreich erstellt"
+msgstr ""
 
 #: frontend/src/components/Modals/ZoomAccountModal.vue:202
 msgid "Zoom Account updated successfully"
-msgstr "Zoom Account erfolgreich angepasst"
+msgstr ""
 
 #. Name of a DocType
 #: lms/lms/doctype/zoom_settings/zoom_settings.json

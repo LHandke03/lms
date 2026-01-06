@@ -1,7 +1,7 @@
 <template>
 	<button
 		v-if="link && !link.onlyMobile"
-		class="flex w-[200px] h-7 cursor-pointer items-center rounded text-ink-gray-8 duration-300 ease-in-out focus:outline-none focus:transition-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-outline-gray-3"
+		class="flex w-full h-7 cursor-pointer items-center rounded text-ink-gray-8 duration-300 ease-in-out focus:outline-none focus:transition-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-outline-gray-3"
 		:class="
 			isActive ? 'bg-surface-selected shadow-sm' : 'hover:bg-surface-gray-2'
 		"
@@ -9,7 +9,7 @@
 	>
 		<div
 			class="flex items-center w-full duration-300 ease-in-out group"
-			:class="/* isCollapsed  */ false ? 'p-1 relative' : 'px-2 py-1'"
+			:class="isCollapsed ? 'p-1 relative' : 'px-2 py-1'"
 		>
 			<Tooltip :text="__(link.label)" placement="right">
 				<slot name="icon">
@@ -24,10 +24,9 @@
 			<span
 				class="flex-shrink-0 text-sm duration-300 ease-in-out"
 				:class="
-					// isCollapsed
-					// 	? 'ml-0 w-0 overflow-hidden opacity-0'
-					// 	: 'ml-2 w-auto opacity-100'
-					'ml-2 w-auto opacity-100'
+					isCollapsed
+						? 'ml-0 w-0 overflow-hidden opacity-0'
+						: 'ml-2 w-auto opacity-100'
 				"
 			>
 				{{ __(link.label) }}
