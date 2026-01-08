@@ -1,5 +1,5 @@
 <template>
-	<div v-if="lesson.data" class="">
+	<div v-if="lesson.data" class="overflow-hidden">
 		<header
 			class="sticky top-0 z-10 flex items-center justify-between border-b bg-surface-white px-3 py-2.5 sm:px-5"
 		>
@@ -65,7 +65,7 @@
 				</router-link>
 			</div>
 		</header>
-		<div class="grid md:grid-cols-[70%,30%] h-screen">
+		<div class="grid md:grid-cols-[85%,15%] h-screen">
 			<div v-if="lesson.data.no_preview" class="border-r">
 				<div class="shadow rounded-md w-3/4 mt-10 mx-auto text-center p-4">
 					<div class="flex items-center justify-center mt-4 space-x-2">
@@ -118,7 +118,7 @@
 						'w-full md:w-3/5 mx-auto border-none !pt-10': zenModeEnabled,
 					}"
 				>
-					<div class="px-5">
+					<div class="px-5 h-[70%] overflow-y-auto">
 						<div
 							class="flex flex-col space-y-3 md:space-y-0 md:flex-row md:items-center justify-between"
 						>
@@ -261,10 +261,27 @@
 								:quizId="lesson.data.quiz_id"
 							/>
 						</div>
+						
 					</div>
+					<div class="mt-10 px-5">
+						<ProgressBar
+							v-if="user && lesson.data.membership && (progressPercent < 100)"
+							:progress="100 - progressPercent"
+							size="md"
+							
+						/>
+						<p 
+							v-if="user && lesson.data.membership && (progressPercent >= 100)"
+							class="flex items-center transition-all duration-200 font-medium"
+						>
+							{{ __('Lesson Completed ') }}
+							<Check class="h-4 w-4 text-green-700 ml-2"/>
+						</p>	
+					</div>
+					
 					<div
 						v-if="lesson.data"
-						class="mt-10 pb-20 pt-5 border-t px-5"
+						class="mt-10 pb-20 max-h-[168px] pt-5 border-t px-5"
 						ref="discussionsContainer"
 					>
 						<TabButtons
@@ -362,6 +379,7 @@ import {
 	Info,
 	MessageCircleQuestion,
 	TrendingUp,
+	Check,
 } from 'lucide-vue-next'
 import { getEditorTools, enablePlyr, highlightText } from '@/utils'
 import { sessionStore } from '@/stores/session'
@@ -437,6 +455,9 @@ onMounted(() => {
 		}
 	})
 	
+})
+const progressPercent = computed(() => {
+  return Math.min(100, (timer.value / props.time_per_lesson) * 100)
 })
 
 const attachFullscreenEvent = () => {
