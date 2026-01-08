@@ -107,119 +107,136 @@
 			<div
 				v-else
 				ref="lessonContainer"
-				class="bg-surface-white"
-				:class="{
-					'overflow-y-auto': zenModeEnabled,
-				}"
+				class="bg-surface-white h-full overflow-y-auto"
+				
 			>
+			<!-- :class="{
+					'overflow-y-auto': zenModeEnabled,
+				}" -->
 				<div
 					class="border-r pt-5 pb-10 h-full"
 					:class="{
 						'w-full md:w-3/5 mx-auto border-none !pt-10': zenModeEnabled,
 					}"
 				>
-					<div class="px-5 h-[70%] overflow-y-auto">
-						<div
-							class="flex flex-col space-y-3 md:space-y-0 md:flex-row md:items-center justify-between"
-						>
-							<div class="flex flex-col">
-								<div class="text-3xl font-semibold text-ink-gray-9">
-									{{ lesson.data.title }}
+					<div class="px-5">
+						<div class="top-0 py-5 sticky bg-surface-white z-10">
+							<div
+								class="flex flex-col space-y-3 md:space-y-0 md:flex-row md:items-center justify-between"
+							>
+								<div class="flex flex-col w-full">
+									<div class="text-3xl flex flex-row font-semibold w-full justify-between text-ink-gray-9">
+										{{ lesson.data.title }}
+										<div class="px-5 text-sm w-1/2 flex flex-col items-end">
+											<ProgressBar
+												v-if="user && lesson.data.membership && (progressPercent < 100) && !(lesson.data.progress)"
+												:progress="100 - progressPercent"
+												size="sm"
+												
+											/>
+											<p 
+												v-if="(user && lesson.data.membership && (progressPercent >= 100)) || lesson.data.progress"
+												class="flex items-center transition-all duration-200 font-medium"
+											>
+												{{ __('Lesson Completed ') }}
+												<Check class="h-4 w-4 text-green-700 ml-2"/>
+											</p>	
+										</div>
+									</div>
+
+									<div
+										v-if="zenModeEnabled"
+										class="relative flex items-center space-x-2 text-sm mt-1 text-ink-gray-7 group w-fit mt-2"
+									>
+										<span>
+											{{ lesson.data.chapter_title }} -
+											{{ lesson.data.course_title }}
+										</span>
+										<Info class="size-3" />
+										<div
+											class="hidden group-hover:block rounded bg-gray-900 px-2 py-1 text-xs text-white shadow-xl absolute left-0 top-full mt-2"
+										>
+											{{ Math.ceil(lesson.data.membership.progress) }}%
+											{{ __('completed') }}
+										</div>
+									</div>
 								</div>
 
 								<div
 									v-if="zenModeEnabled"
-									class="relative flex items-center space-x-2 text-sm mt-1 text-ink-gray-7 group w-fit mt-2"
+									class="flex items-center space-x-2 mt-2 md:mt-0"
 								>
-									<span>
-										{{ lesson.data.chapter_title }} -
-										{{ lesson.data.course_title }}
-									</span>
-									<Info class="size-3" />
-									<div
-										class="hidden group-hover:block rounded bg-gray-900 px-2 py-1 text-xs text-white shadow-xl absolute left-0 top-full mt-2"
+									<Button @click="showDiscussionsInZenMode()">
+										<template #icon>
+											<MessageCircleQuestion class="w-4 h-4 stroke-1.5" />
+										</template>
+									</Button>
+									<Button v-if="lesson.data.prev" @click="switchLesson('prev')">
+										<template #prefix>
+											<ChevronLeft class="w-4 h-4 stroke-1" />
+										</template>
+										<span>
+											{{ __('Previous') }}
+										</span>
+									</Button>
+
+									<router-link
+										v-if="allowEdit()"
+										:to="{
+											name: 'LessonForm',
+											params: {
+												courseName: courseName,
+												chapterNumber: props.chapterNumber,
+												lessonNumber: props.lessonNumber,
+											},
+										}"
 									>
-										{{ Math.ceil(lesson.data.membership.progress) }}%
-										{{ __('completed') }}
-									</div>
+										<Button>
+											{{ __('Edit') }}
+										</Button>
+									</router-link>
+
+									<Button v-if="lesson.data.next" @click="switchLesson('next')">
+										<template #suffix>
+											<ChevronRight class="w-4 h-4 stroke-1" />
+										</template>
+										<span>
+											{{ __('Next') }}
+										</span>
+									</Button>
+
+									<router-link
+										v-else
+										:to="{
+											name: 'CourseDetail',
+											params: { courseName: courseName },
+										}"
+									>
+										<Button>
+											{{ __('Back to Course') }}
+										</Button>
+									</router-link>
 								</div>
 							</div>
 
-							<div
-								v-if="zenModeEnabled"
-								class="flex items-center space-x-2 mt-2 md:mt-0"
-							>
-								<Button @click="showDiscussionsInZenMode()">
-									<template #icon>
-										<MessageCircleQuestion class="w-4 h-4 stroke-1.5" />
-									</template>
-								</Button>
-								<Button v-if="lesson.data.prev" @click="switchLesson('prev')">
-									<template #prefix>
-										<ChevronLeft class="w-4 h-4 stroke-1" />
-									</template>
-									<span>
-										{{ __('Previous') }}
-									</span>
-								</Button>
-
-								<router-link
-									v-if="allowEdit()"
-									:to="{
-										name: 'LessonForm',
-										params: {
-											courseName: courseName,
-											chapterNumber: props.chapterNumber,
-											lessonNumber: props.lessonNumber,
-										},
+							<div v-if="!zenModeEnabled" class="flex items-center mt-4 md:mt-2">
+								<span
+									class="h-6 mr-1"
+									:class="{
+										'avatar-group overlap': lesson.data.instructors?.length > 1,
 									}"
 								>
-									<Button>
-										{{ __('Edit') }}
-									</Button>
-								</router-link>
-
-								<Button v-if="lesson.data.next" @click="switchLesson('next')">
-									<template #suffix>
-										<ChevronRight class="w-4 h-4 stroke-1" />
-									</template>
-									<span>
-										{{ __('Next') }}
-									</span>
-								</Button>
-
-								<router-link
-									v-else
-									:to="{
-										name: 'CourseDetail',
-										params: { courseName: courseName },
-									}"
-								>
-									<Button>
-										{{ __('Back to Course') }}
-									</Button>
-								</router-link>
+									<UserAvatar
+										v-for="instructor in lesson.data.instructors"
+										:user="instructor"
+									/>
+								</span>
+								<CourseInstructors
+									v-if="lesson.data?.instructors"
+									:instructors="lesson.data.instructors"
+								/>
 							</div>
 						</div>
-
-						<div v-if="!zenModeEnabled" class="flex items-center mt-4 md:mt-2">
-							<span
-								class="h-6 mr-1"
-								:class="{
-									'avatar-group overlap': lesson.data.instructors?.length > 1,
-								}"
-							>
-								<UserAvatar
-									v-for="instructor in lesson.data.instructors"
-									:user="instructor"
-								/>
-							</span>
-							<CourseInstructors
-								v-if="lesson.data?.instructors"
-								:instructors="lesson.data.instructors"
-							/>
-						</div>
-
 						<div
 							v-if="
 								lesson.data.instructor_content &&
@@ -262,23 +279,7 @@
 							/>
 						</div>
 						
-					</div>
-					<div class="mt-10 px-5">
-						<ProgressBar
-							v-if="user && lesson.data.membership && (progressPercent < 100)"
-							:progress="100 - progressPercent"
-							size="md"
-							
-						/>
-						<p 
-							v-if="user && lesson.data.membership && (progressPercent >= 100)"
-							class="flex items-center transition-all duration-200 font-medium"
-						>
-							{{ __('Lesson Completed ') }}
-							<Check class="h-4 w-4 text-green-700 ml-2"/>
-						</p>	
-					</div>
-					
+					</div>				
 					<div
 						v-if="lesson.data"
 						class="mt-10 pb-20 max-h-[168px] pt-5 border-t px-5"
@@ -442,7 +443,6 @@ const props = defineProps({
 		required: true,
 	}
 })
-
 console.log("props lesson: ", props.time_per_lesson)
 props.time_per_lesson = parseInt(props.time_per_lesson) || 30
 onMounted(() => {
@@ -489,6 +489,7 @@ const lesson = createResource({
 	},
 	auto: true,
 })
+
 
 const setupLesson = (data) => {
 	if (Object.keys(data).length === 0) {
@@ -706,7 +707,6 @@ watch(
 		if (data.icon == 'icon-youtube') clearInterval(timerInterval)
 	}
 )
-
 const getPlyrSource = async () => {
 	await nextTick()
 	if (plyrSources.value.length == 0) {
@@ -764,6 +764,7 @@ const startTimer = () => {
 	let timerInterval = setInterval(() => {
 		timer.value++
 		console.log("Timer: ", timer.value," / ", props.time_per_lesson)
+		console.log("lesson data: ", lesson.data)
 		if (timer.value == props.time_per_lesson) {
 			clearInterval(timerInterval)
 			markProgress()
