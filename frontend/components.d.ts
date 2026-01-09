@@ -78,6 +78,7 @@ declare module 'vue' {
     JobApplicationModal: typeof import('./src/components/Modals/JobApplicationModal.vue')['default']
     JobCard: typeof import('./src/components/JobCard.vue')['default']
     LessonContent: typeof import('./src/components/LessonContent.vue')['default']
+    LessonContentEditor: typeof import('./src/components/LessonContentEditor.vue')['default']
     LessonHelp: typeof import('./src/components/LessonHelp.vue')['default']
     Link: typeof import('./src/components/Controls/Link.vue')['default']
     LiveClass: typeof import('./src/components/LiveClass.vue')['default']

@@ -59,8 +59,11 @@
 						params: { courseName: courseName },
 					}"
 				>
-					<Button>
+					<Button v-if="lessonProgress < 100">
 						{{ __('Back to Course') }}
+					</Button>
+					<Button v-else>
+						{{ __('Complete Course') }}
 					</Button>
 				</router-link>
 			</div>

@@ -79,6 +79,7 @@ const editor = ref<HTMLElement | null>(null)
 let aceEditor = null as ace.Ace.Editor | null
 
 onMounted(() => {
+	console.log('CodeEditor mounted, modelValue:', props.modelValue)
 	isDark.value = localStorage.getItem('theme') === 'dark'
 	setupEditor()
 })

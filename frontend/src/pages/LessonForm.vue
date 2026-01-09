@@ -1,6 +1,6 @@
 <template>
 	<div class="">
-		<div class="grid md:grid-cols-[75%,25%] h-screen">
+		<div class="grid md:grid-cols-[85%,15%] h-screen">
 			<div class="border-r">
 				<header
 					class="sticky top-0 z-10 flex flex-col md:flex-row md:items-center justify-between border-b overflow-hidden bg-surface-white px-3 py-2.5 sm:px-5"
@@ -56,7 +56,17 @@
 							></div>
 						</div>
 					</div>
-					<div class="border-t mt-4">
+					<div class="w-5/6 mx-auto mt-6">
+						<!-- <Button
+							variant="solid"
+							@click="destroyEditors()"
+							class="mt-3 md:mt-0"
+						>
+							{{ __('Destroy Editors') }}
+						</Button> -->
+						<TabButtons v-model="currentTab" :buttons="tabs" />
+					</div>
+					<div v-show="isEditorTab" class="border-t mt-4">
 						<div class="w-5/6 mx-auto pt-4">
 							<label class="block font-medium text-ink-gray-5 mb-1">
 								{{ __('Content') }}
@@ -65,6 +75,14 @@
 								id="content"
 								class="ProseMirror prose prose-table:table-fixed prose-td:p-2 prose-th:p-2 prose-td:border prose-th:border prose-td:border-outline-gray-2 prose-th:border-outline-gray-2 prose-td:relative prose-th:relative prose-th:bg-surface-gray-2 prose-sm max-w-none !whitespace-normal py-3"
 							></div>
+						</div>
+					</div>
+					<div v-show="isHtmlTab" class="border-t mt-4">
+						<div class="w-5/6 mx-auto pt-4">
+							<label class="block font-medium text-ink-gray-5 mb-1">
+								{{ __('Content (HTML)') }}
+							</label>
+							<p>soon</p>
 						</div>
 					</div>
 				</div>
@@ -84,6 +102,7 @@ import {
 	createResource,
 	FormControl,
 	usePageMeta,
+	TabButtons,
 	toast,
 } from 'frappe-ui'
 import {
@@ -93,8 +112,10 @@ import {
 	inject,
 	ref,
 	onBeforeUnmount,
+	watch,
 } from 'vue'
 import { sessionStore } from '../stores/session'
+import { useSidebar } from '@/stores/sidebar'
 import EditorJS from '@editorjs/editorjs'
 import LessonHelp from '@/components/LessonHelp.vue'
 import { ChevronRight } from 'lucide-vue-next'
@@ -108,6 +129,14 @@ const instructorEditor = ref(null)
 const user = inject('$user')
 const openInstructorEditor = ref(false)
 const { updateOnboardingStep } = useOnboarding('learning')
+const tabs = [
+	{ label: __('Editor'), value: 'editor' },
+	{ label: __('HTML'), value: 'html' },
+]
+const currentTab = ref(tabs[0].value)
+const isEditorTab = computed(() => currentTab.value === tabs[0].value)
+const isHtmlTab = computed(() => currentTab.value === tabs[1].value)
+const sidebarStore = useSidebar()
 let autoSaveInterval
 let showSuccessMessage = false
 
@@ -132,6 +161,7 @@ onMounted(() => {
 	}
 	capture('lesson_form_opened')
 	startRecording()
+	sidebarStore.isSidebarCollapsed = true
 	editor.value = renderEditor('content')
 	instructorEditor.value = renderEditor('instructor-notes')
 	window.addEventListener('keydown', keyboardShortcut)
@@ -166,20 +196,38 @@ const lessonDetails = createResource({
 	},
 	auto: true,
 	onSuccess(data) {
-		if (data.lesson) {
-			Object.keys(data.lesson).forEach((key) => {
-				lesson[key] = data.lesson[key]
-			})
-			lesson.include_in_preview = data?.lesson?.include_in_preview
-				? true
-				: false
-			addLessonContent(data)
-			addInstructorNotes(data)
-			enableAutoSave()
+		try {
+			if (data.lesson) {
+				Object.keys(data.lesson).forEach((key) => {
+					lesson[key] = data.lesson[key]
+				})
+				lesson.include_in_preview = data?.lesson?.include_in_preview
+					? true
+					: false
+				if (lesson.body) {
+					currentTab.value = tabs[1].value
+				} else {
+					currentTab.value = tabs[0].value
+				}
+				addLessonContent(data)
+				addInstructorNotes(data)
+				enableAutoSave()
+			}
+		} catch (e) {
+			console.error('Error processing lesson details:', e)
 		}
 	},
 })
-
+const destroyEditors = () => {
+	if (editor.value) {
+		editor.value.destroy()
+	}
+	if (instructorEditor.value) {
+		instructorEditor.value.destroy()
+	}
+	isEditorTab.value = false
+	isHtmlTab.value = true
+}
 const addLessonContent = (data) => {
 	editor.value.isReady.then(() => {
 		if (data.lesson.content) {
@@ -226,6 +274,7 @@ const keyboardShortcut = (e) => {
 onBeforeUnmount(() => {
 	clearInterval(autoSaveInterval)
 	window.removeEventListener('keydown', keyboardShortcut)
+	sidebarStore.isSidebarCollapsed = false
 	stopRecording()
 })
 
@@ -503,7 +552,9 @@ const breadcrumbs = computed(() => {
 	})
 	return crumbs
 })
-
+watch(currentTab, () => {
+	console.log('Current Tab:', currentTab.value)
+})
 usePageMeta(() => {
 	return {
 		title: lessonDetails?.data?.lesson
