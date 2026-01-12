@@ -9,7 +9,7 @@
 							? 'px-0 w-auto'
 							: open
 							? 'bg-surface-white shadow-sm px-2 w-52'
-							: 'hover:bg-surface-gray-3 px-2 w-52'
+							: 'hover:bg-surface-blue-2 px-2 w-52'
 					"
 				>
 					<img
