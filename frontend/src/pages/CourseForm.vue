@@ -307,6 +307,20 @@
 					</div>
 					<div class="px-5 md:px-10 pb-5 space-y-5">
 						<div class="text-lg font-semibold mt-5 text-ink-gray-9">
+							{{ __('Completion Text') }}
+						</div>
+						<div class="space-y-5">
+							<FormControl
+								v-model="course.course_completion_text"
+								:label="__('Completion Text')"
+								type="textarea"
+								:rows="7"
+								:placeholder="__('')"
+							/>
+						</div>
+					</div>
+					<div class="px-5 md:px-10 pb-5 space-y-5">
+						<div class="text-lg font-semibold mt-5 text-ink-gray-9">
 							{{ __('Meta Tags') }}
 						</div>
 						<div class="space-y-5">
@@ -413,7 +427,8 @@ const course = reactive({
 	currency: '',
 	evaluator: '',
 	timezone: '',
-	Time_per_lesson: 30
+	Time_per_lesson: "30",
+	course_completion_text: ''
 })
 
 const meta = reactive({

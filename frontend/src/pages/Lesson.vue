@@ -54,16 +54,29 @@
 					</Button>
 
 					<router-link
-						v-else
+						v-else-if="lessonProgress < 100"
 						:to="{
 							name: 'CourseDetail',
 							params: { courseName: courseName },
 						}"
 					>
-						<Button v-if="lessonProgress < 100">
+						<Button>
 							{{ __('Back to Course') }}
 						</Button>
-						<Button v-else>
+					</router-link>
+					<router-link
+						v-else
+						:to="{
+							name: 'CoursesCompletion',
+							params: { 
+								courseName: courseName,
+								/* chapterNumber: props.chapterNumber,
+								lessonNumber: props.lessonNumber,
+								time_per_lesson: props.time_per_lesson */
+							},
+						}"
+					>
+						<Button>
 							{{ __('Complete Course') }}
 						</Button>
 					</router-link>
@@ -73,14 +86,20 @@
 				<div class="text-3xl flex flex-row font-semibold w-full justify-between text-ink-gray-9">
 					{{ lesson.data.title }}
 					<div class="px-5 text-sm w-1/2 flex flex-col items-end">
+						<p 
+							v-if="user && lesson.data.membership && !lesson.data.progress && hasQuiz"
+							class="flex items-center transition-all duration-200 font-medium"
+						>
+							{{ __('Please Complete Quiz to Complete Lesson ') }}
+						</p>
 						<ProgressBar
-							v-if="user && lesson.data.membership && (progressPercent < 100) && !(lesson.data.progress)"
+							v-else-if="user && lesson.data.membership && (progressPercent < 100) && !(lesson.data.progress)"
 							:progress="100 - progressPercent"
 							size="sm"
 							
 						/>
 						<p 
-							v-if="(user && lesson.data.membership && (progressPercent >= 100)) || lesson.data.progress"
+							v-else-if="(user && lesson.data.membership && (progressPercent >= 100)) || lesson.data.progress"
 							class="flex items-center transition-all duration-200 font-medium"
 						>
 							{{ __('Lesson Completed ') }}
@@ -168,10 +187,10 @@
 			<div
 				v-else
 				ref="lessonContainer"
-				class="flex flex-row h-full"
+				class="flex flex-row h-full w-full"
 			>
 				<div
-					class="flex flex-col bg-surface-blue-2 h-full overflow-y-auto"
+					class="flex flex-col bg-surface-blue-2 h-full w-full overflow-y-auto"
 					
 				>
 				<!-- :class="{
@@ -364,7 +383,9 @@
 					</div>
 				</div>
 				<div class="flex flex-col flex-1 min-h-0 justify-between">
-					<div class="overflow-y-auto h-1/2">
+					<div class="overflow-y-auto"
+						:class="NotesShow?'h-1/2':'h-5/6'"
+					>
 						<CourseOutline
 							:courseName="courseName"
 							:key="chapterNumber"
@@ -372,8 +393,8 @@
 							:lessonProgress="lessonProgress"
 						/>
 					</div>
-					<div :class="NotesShow?'h-1/2':'h-fit'">
-						<div class="w-full flex items-center justify-center">
+					<div :class="NotesShow && !hasQuiz?'h-1/2':'h-fit'">
+						<div class="w-full flex items-center justify-center pt-2" :class="hasQuiz?'hidden':''">
 							<div 
 								class="w-1/5 border-r border-l border-t border-outline-gray-3 hover:bg-surface-gray-2 rounded-t-lg px-3 py-1 flex items-center justify-center cursor-pointer"
 								@click="openNotesMenu()"
@@ -524,7 +545,7 @@ const showInlineMenu = ref(false)
 const NotesShow = ref(false)
 const currentTab = ref('Notes')
 const showNotesModal = ref(false)
-const ShowOutline = ref(true)
+const ShowOutline = ref(false)
 let timerInterval
 
 const tabs = ref([
@@ -553,7 +574,7 @@ const props = defineProps({
 	}
 })
 console.log("props lesson: ", props.time_per_lesson)
-props.time_per_lesson = parseInt(props.time_per_lesson) || 30
+const time_per_lesson = parseInt(props.time_per_lesson) || 30
 onMounted(() => {
 	startTimer()
 	sidebarStore.isSidebarCollapsed = true
@@ -566,7 +587,7 @@ onMounted(() => {
 	
 })
 const progressPercent = computed(() => {
-  return Math.min(100, (timer.value / props.time_per_lesson) * 100)
+  return Math.min(100, (timer.value / time_per_lesson) * 100)
 })
 
 const attachFullscreenEvent = () => {
@@ -604,9 +625,24 @@ const lesson = createResource({
 		}
 	},
 	auto: true,
+	/* onSuccess(data) {
+		console.log("Lesson data loaded: ", data)
+		if (data.content.length > 0) {
+			const Content = JSON.parse(data.content)
+			console.log("Lesson Content: ", Content)
+			const Quiz = hasQuizBlock(Content)
+		}
+	} */
 })
 
+/* const hasQuizBlock = (obj) => {
+  if (!obj?.blocks || !Array.isArray(obj.blocks)) {
+    return false;
+  }
 
+  return obj.blocks.some(block => block.type === "quiz");
+}
+ */
 const setupLesson = (data) => {
 	if (Object.keys(data).length === 0) {
 		router.push({
@@ -881,7 +917,7 @@ const startTimer = () => {
 		timer.value++
 		console.log("Timer: ", timer.value," / ", props.time_per_lesson)
 		console.log("lesson data: ", lesson.data)
-		if (timer.value == props.time_per_lesson) {
+		if (timer.value == time_per_lesson) {
 			clearInterval(timerInterval)
 			markProgress()
 		}

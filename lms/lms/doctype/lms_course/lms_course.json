@@ -55,7 +55,9 @@
   "statistics_section",
   "enrollments",
   "lessons",
-  "rating"
+  "rating",
+  "Time_per_lesson",
+  "course_completion_text"
  ],
  "fields": [
   {
@@ -297,10 +299,15 @@
    "label": "Timezone"
   },
   {
-    "default": 0,
-    "fieldname": "Time_per_lesson",
-    "fieldtype": "Data",
-    "label": "Time per Lesson (in seconds)"
+   "default": "0",
+   "fieldname": "Time_per_lesson",
+   "fieldtype": "Data",
+   "label": "Time per Lesson (in seconds)"
+  },
+  {
+   "fieldname": "course_completion_text",
+   "fieldtype": "Long Text",
+   "label": "Course Completion Text"
   }
  ],
  "is_published_field": "published",
@@ -319,8 +326,8 @@
   }
  ],
  "make_attachments_public": 1,
- "modified": "2025-10-13 15:08:11.734204",
- "modified_by": "sayali@frappe.io",
+ "modified": "2026-01-13 15:27:58.912608",
+ "modified_by": "Administrator",
  "module": "LMS",
  "name": "LMS Course",
  "owner": "Administrator",
