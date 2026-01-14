@@ -22,6 +22,7 @@
 								lessonNumber: course.data.current_lesson
 									? course.data.current_lesson.split('-')[1]
 									: 1,
+								time_per_lesson: course.data.Time_per_lesson
 							},
 						}"
 					>
@@ -208,7 +209,6 @@ const props = defineProps({
 		default: null,
 	},
 })
-
 const video_link = computed(() => {
 	if (props.course.data.video_link) {
 		return 'https://www.youtube.com/embed/' + props.course.data.video_link
@@ -242,6 +242,7 @@ function enrollStudent() {
 							courseName: props.course.data.name,
 							chapterNumber: 1,
 							lessonNumber: 1,
+							time_per_lesson: course.data.Time_per_lesson
 						},
 					})
 				}, 1000)

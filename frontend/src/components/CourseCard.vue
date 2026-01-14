@@ -2,10 +2,13 @@
 	<div
 		v-if="course.title"
 		class="flex flex-col h-full rounded-md overflow-auto text-ink-gray-9"
+		@mouseover="hover = true"
+		@mouseleave="hover = false"
 		style="min-height: 350px"
 	>
 		<div
-			class="w-[100%] h-[168px] bg-cover bg-center bg-no-repeat border-t border-x rounded-t-md"
+			class="w-[100%] bg-cover bg-center bg-no-repeat border-t border-x rounded-t-md"
+			:class="hover ? 'h-[50%] transition-all duration-300 ease-in-out' : course.image ? 'h-[70%] transition-all duration-300 ease-in-out' : 'h-[100%] transition-all duration-300 ease-in-out'"
 			:style="
 				course.image
 					? { backgroundImage: `url('${encodeURI(course.image)}')` }
@@ -15,6 +18,7 @@
 					  }
 			"
 		>
+		<!-- h-[168px] -->
 			<!-- <div class="flex items-center flex-wrap relative top-4 px-2 w-fit">
 				<div
 					v-if="course.featured"
@@ -47,8 +51,17 @@
 				{{ course.title }}
 			</div>
 		</div>
-		<div class="flex flex-col flex-auto p-4 border-x-2 border-b-2 rounded-b-md">
-			<div class="flex items-center justify-between mb-2">
+		<div class="flex flex-col flex-auto p-4 transition-all duration-300 ease-in-out border-x-2 border-b-2 rounded-b-md">
+			
+			<div
+				v-if="course.image"
+				class="font-extrabold leading-6" 
+				:class="course.title.length > 32 ? 'text-lg' : 'text-xl', course.membership && !hover ? 'mb-2' : ''"
+			>
+			<!-- "font-semibold  -->
+				{{ course.title }} 
+			</div>
+			<div class="flex items-center transition-all duration-300 ease-in-out justify-between mb-2" v-if="hover">
 				<div v-if="course.lessons">
 					<Tooltip :text="__('Lessons')">
 						<span class="flex items-center">
@@ -81,15 +94,9 @@
 				</Tooltip>
 			</div>
 
-			<div
-				v-if="course.image"
-				class="font-semibold leading-6"
-				:class="course.title.length > 32 ? 'text-lg' : 'text-xl'"
-			>
-				{{ course.title }}
-			</div>
-
-			<div class="short-introduction text-sm">
+			<div 
+			v-if="hover"
+			class="short-introduction transition-all duration-300 ease-in-out text-sm">
 				{{ course.short_introduction }}
 			</div>
 
@@ -98,11 +105,11 @@
 				:progress="course.membership.progress"
 			/>
 
-			<div v-if="user && course.membership" class="text-sm mt-2 mb-4">
+			<div v-if="user && course.membership && hover" class="text-sm transition-all duration-300 ease-in-out mt-2 mb-4">
 				{{ Math.ceil(course.membership.progress) }}% {{ __('completed') }}
 			</div>
 
-			<div class="flex items-center justify-between mt-auto">
+			<!-- <div class="flex items-center justify-between mt-auto">
 				<div class="flex avatar-group overlap">
 					<div
 						class="h-6 mr-1"
@@ -128,13 +135,14 @@
 						<GraduationCap class="size-5 stroke-1.5 text-ink-gray-7" />
 					</Tooltip>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </template>
 <script setup>
 import { Award, BookOpen, GraduationCap, Star, Users } from 'lucide-vue-next'
 import { sessionStore } from '@/stores/session'
+import { ref } from 'vue'
 import { Tooltip } from 'frappe-ui'
 import { formatAmount } from '@/utils'
 import CourseInstructors from '@/components/CourseInstructors.vue'
@@ -143,6 +151,7 @@ import ProgressBar from '@/components/ProgressBar.vue'
 import colors from '@/utils/frappe-ui-colors.json'
 
 const { user } = sessionStore()
+const hover = ref(false)
 
 const props = defineProps({
 	course: {

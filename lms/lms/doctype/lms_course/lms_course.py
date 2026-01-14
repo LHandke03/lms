@@ -23,10 +23,15 @@ class LMSCourse(Document):
 		self.validate_amount_and_currency()
 		self.image = validate_image(self.image)
 		self.validate_card_gradient()
+		self.validate_time_per_lesson()
 
 	def validate_published(self):
 		if self.published and not self.published_on:
 			self.published_on = today()
+
+	def validate_time_per_lesson(self):
+		if self.Time_per_lesson and not self.Time_per_lesson.isdigit():
+			frappe.throw("Time per lesson must be a number.")
 
 	def validate_instructors(self):
 		if self.is_new() and not self.instructors:

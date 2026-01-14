@@ -3871,6 +3871,9 @@ msgstr ""
 msgid "Log in"
 msgstr ""
 
+msgid "Time per lesson"
+msgstr ""
+
 #: frontend/src/components/UserDropdown.vue:176
 #: frontend/src/components/Sidebar/UserDropdown.vue:190
 msgid "Login to Frappe Cloud?"

@@ -30,6 +30,9 @@ class CourseLesson(Document):
 
 	def save_lesson_details_in_quiz(self, content):
 		content = json.loads(self.content)
+		print(f"content: {content}")
+		if (content == None) or (content == ""):
+			return
 		for block in content.get("blocks"):
 			if block.get("type") == "quiz":
 				quiz = block.get("data").get("quiz")

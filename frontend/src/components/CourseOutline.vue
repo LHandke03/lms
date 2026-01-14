@@ -187,210 +187,377 @@ const currentChapter = ref(null)
 const app = getCurrentInstance()
 const { $dialog } = app.appContext.config.globalProperties
 
+console.log('CourseOutline.vue app:', app)
+console.log('CourseOutline.vue route:', route)
+console.log('CourseOutline.vue user:', user)
+
 const props = defineProps({
-	courseName: {
-		type: String,
-		required: true,
-	},
-	showOutline: {
-		type: Boolean,
-		default: false,
-	},
-	title: {
-		type: String,
-		default: '',
-	},
-	allowEdit: {
-		type: Boolean,
-		default: false,
-	},
-	getProgress: {
-		type: Boolean,
-		default: false,
-	},
-	lessonProgress: {
-		type: Number,
-		default: 0,
-	},
+	courseName: { type: String, required: true },
+	showOutline: { type: Boolean, default: false },
+	title: { type: String, default: '' },
+	allowEdit: { type: Boolean, default: false },
+	getProgress: { type: Boolean, default: false },
+	lessonProgress: { type: Number, default: 0 },
 })
+
+console.log('CourseOutline.vue props:', props)
+
+// --- Resources ---
 
 const outline = createResource({
 	url: 'lms.lms.utils.get_course_outline',
 	cache: ['course_outline', props.courseName],
 	makeParams() {
-		return {
-			course: props.courseName,
-			progress: props.getProgress,
+		try {
+			return {
+				course: props.courseName,
+				progress: props.getProgress,
+			}
+		} catch (err) {
+			console.error('[CourseOutline] outline.makeParams error:', err)
+			return { course: props.courseName, progress: props.getProgress }
 		}
 	},
 	auto: true,
+	onSuccess(data) {
+		try {
+			console.log('CourseOutline.vue outline data loaded:', data)
+		} catch (err) {
+			console.error('[CourseOutline] outline.onSuccess error:', err)
+		}
+	},
+	onError(err) {
+		console.error('[CourseOutline] outline load error:', err)
+		toast.error(__('Failed to load course outline'))
+	},
 })
 
 watch(
 	() => props.courseName,
 	() => {
-		outline.reload()
+		try {
+			console.log('CourseOutline.vue courseName changed:', props.courseName)
+			outline.reload()
+		} catch (err) {
+			console.error('[CourseOutline] watch(courseName) error:', err)
+		}
 	}
 )
 
 watch(
 	() => props.lessonProgress,
 	() => {
-		outline.reload()
+		try {
+			console.log(
+				'CourseOutline.vue lessonProgress changed:',
+				props.lessonProgress
+			)
+			outline.reload()
+		} catch (err) {
+			console.error('[CourseOutline] watch(lessonProgress) error:', err)
+		}
 	}
 )
 
 const deleteLesson = createResource({
 	url: 'lms.lms.api.delete_lesson',
 	makeParams(values) {
-		return {
-			lesson: values.lesson,
-			chapter: values.chapter,
+		try {
+			return {
+				lesson: values.lesson,
+				chapter: values.chapter,
+			}
+		} catch (err) {
+			console.error('[CourseOutline] deleteLesson.makeParams error:', err, values)
+			return values
 		}
 	},
 	onSuccess() {
-		outline.reload()
-		toast.success(__('Lesson deleted successfully'))
+		try {
+			outline.reload()
+			toast.success(__('Lesson deleted successfully'))
+		} catch (err) {
+			console.error('[CourseOutline] deleteLesson.onSuccess error:', err)
+		}
+	},
+	onError(err) {
+		console.error('[CourseOutline] deleteLesson error:', err)
+		toast.error(__('Failed to delete lesson'))
 	},
 })
 
 const updateLessonIndex = createResource({
 	url: 'lms.lms.api.update_lesson_index',
 	makeParams(values) {
-		return {
-			lesson: values.lesson,
-			sourceChapter: values.sourceChapter,
-			targetChapter: values.targetChapter,
-			idx: values.idx,
+		try {
+			return {
+				lesson: values.lesson,
+				sourceChapter: values.sourceChapter,
+				targetChapter: values.targetChapter,
+				idx: values.idx,
+			}
+		} catch (err) {
+			console.error('[CourseOutline] updateLessonIndex.makeParams error:', err, values)
+			return values
 		}
 	},
 	onSuccess() {
-		toast.success(__('Lesson moved successfully'))
+		try {
+			toast.success(__('Lesson moved successfully'))
+		} catch (err) {
+			console.error('[CourseOutline] updateLessonIndex.onSuccess error:', err)
+		}
+	},
+	onError(err) {
+		console.error('[CourseOutline] updateLessonIndex error:', err)
+		toast.error(__('Failed to move lesson'))
 	},
 })
 
 const updateChapterIndex = createResource({
 	url: 'lms.lms.api.update_chapter_index',
 	makeParams(values) {
-		return {
-			chapter: values.chapter,
-			course: values.course,
-			idx: values.idx,
+		try {
+			return {
+				chapter: values.chapter,
+				course: values.course,
+				idx: values.idx,
+			}
+		} catch (err) {
+			console.error('[CourseOutline] updateChapterIndex.makeParams error:', err, values)
+			return values
 		}
 	},
 	onSuccess() {
-		toast.success(__('Chapter moved successfully'))
+		try {
+			toast.success(__('Chapter moved successfully'))
+		} catch (err) {
+			console.error('[CourseOutline] updateChapterIndex.onSuccess error:', err)
+		}
+	},
+	onError(err) {
+		console.error('[CourseOutline] updateChapterIndex error:', err)
+		toast.error(__('Failed to move chapter'))
 	},
 })
-
-const trashLesson = (lessonName, chapterName) => {
-	$dialog({
-		title: __('Delete this lesson?'),
-		message: __(
-			'Deleting this lesson will permanently remove it from the course. This action cannot be undone. Are you sure you want to continue?'
-		),
-		actions: [
-			{
-				label: __('Delete'),
-				theme: 'red',
-				variant: 'solid',
-				onClick(close) {
-					deleteLesson.submit({
-						lesson: lessonName,
-						chapter: chapterName,
-					})
-					close()
-				},
-			},
-		],
-	})
-}
-
-const openChapterDetail = (index) => {
-	return index == route.params.chapterNumber || index == 1
-}
-
-const openChapterModal = (chapter = null) => {
-	currentChapter.value = chapter
-	showChapterModal.value = true
-}
-
-const getCurrentChapter = () => {
-	return currentChapter.value
-}
-
-const updateOutline = (e) => {
-	updateLessonIndex.submit({
-		lesson: e.item.__draggable_context.element.name,
-		sourceChapter: e.from.dataset.chapter,
-		targetChapter: e.to.dataset.chapter,
-		idx: e.newIndex,
-	})
-}
-
-const updateChapterOrder = (e) => {
-	updateChapterIndex.submit({
-		chapter: e.item.__draggable_context.element.name,
-		course: props.courseName,
-		idx: e.newIndex,
-	})
-}
 
 const deleteChapter = createResource({
 	url: 'lms.lms.api.delete_chapter',
 	makeParams(values) {
-		return {
-			chapter: values.chapter,
+		try {
+			return { chapter: values.chapter }
+		} catch (err) {
+			console.error('[CourseOutline] deleteChapter.makeParams error:', err, values)
+			return values
 		}
 	},
 	onSuccess() {
-		outline.reload()
-		toast.success(__('Chapter deleted successfully'))
+		try {
+			outline.reload()
+			toast.success(__('Chapter deleted successfully'))
+		} catch (err) {
+			console.error('[CourseOutline] deleteChapter.onSuccess error:', err)
+		}
+	},
+	onError(err) {
+		console.error('[CourseOutline] deleteChapter error:', err)
+		toast.error(__('Failed to delete chapter'))
 	},
 })
 
-const trashChapter = (chapterName) => {
-	$dialog({
-		title: __('Delete this chapter?'),
-		message: __(
-			'Deleting this chapter will also delete all its lessons and permanently remove it from the course. This action cannot be undone. Are you sure you want to continue?'
-		),
-		actions: [
-			{
-				label: __('Delete'),
-				theme: 'red',
-				variant: 'solid',
-				onClick(close) {
-					deleteChapter.submit({ chapter: chapterName })
-					close()
+// --- Functions (mit try/catch) ---
+
+const trashLesson = (lessonName, chapterName) => {
+	try {
+		$dialog({
+			title: __('Delete this lesson?'),
+			message: __(
+				'Deleting this lesson will permanently remove it from the course. This action cannot be undone. Are you sure you want to continue?'
+			),
+			actions: [
+				{
+					label: __('Delete'),
+					theme: 'red',
+					variant: 'solid',
+					onClick(close) {
+						try {
+							deleteLesson.submit({
+								lesson: lessonName,
+								chapter: chapterName,
+							})
+						} catch (err) {
+							console.error('[CourseOutline] trashLesson -> submit error:', err)
+							toast.error(__('Failed to delete lesson'))
+						} finally {
+							try {
+								close()
+							} catch (err) {
+								console.error('[CourseOutline] trashLesson -> close error:', err)
+							}
+						}
+					},
 				},
-			},
-		],
-	})
+			],
+		})
+	} catch (err) {
+		console.error('[CourseOutline] trashLesson dialog error:', err)
+		toast.error(__('Failed to open delete dialog'))
+	}
 }
 
-const redirectToChapter = (chapter) => {
-	if (!chapter.is_scorm_package) return
-	event.preventDefault()
-	if (props.allowEdit) return
-	if (!user.data) {
-		toast.success(__('Please enroll for this course to view this lesson'))
-		return
+const openChapterDetail = (index) => {
+	try {
+		return index == route.params.chapterNumber || index == 1
+	} catch (err) {
+		console.error('[CourseOutline] openChapterDetail error:', err)
+		return false
 	}
+}
 
-	router.push({
-		name: 'SCORMChapter',
-		params: {
-			courseName: props.courseName,
-			chapterName: chapter.name,
-		},
-	})
+const openChapterModal = (chapter = null) => {
+	try {
+		currentChapter.value = chapter
+		showChapterModal.value = true
+	} catch (err) {
+		console.error('[CourseOutline] openChapterModal error:', err)
+	}
+}
+
+const getCurrentChapter = () => {
+	try {
+		return currentChapter.value
+	} catch (err) {
+		console.error('[CourseOutline] getCurrentChapter error:', err)
+		return null
+	}
+}
+
+const updateOutline = (e) => {
+	try {
+		const ctx = e?.item?.__draggable_context?.element
+		const lessonName = ctx?.name
+		const sourceChapter = e?.from?.dataset?.chapter
+		const targetChapter = e?.to?.dataset?.chapter
+
+		if (!lessonName || !sourceChapter || !targetChapter) {
+			console.error('[CourseOutline] updateOutline missing data:', {
+				lessonName,
+				sourceChapter,
+				targetChapter,
+				event: e,
+			})
+			toast.error(__('Failed to move lesson'))
+			return
+		}
+
+		updateLessonIndex.submit({
+			lesson: lessonName,
+			sourceChapter,
+			targetChapter,
+			idx: e.newIndex,
+		})
+	} catch (err) {
+		console.error('[CourseOutline] updateOutline error:', err, e)
+		toast.error(__('Failed to move lesson'))
+	}
+}
+
+const updateChapterOrder = (e) => {
+	try {
+		const ctx = e?.item?.__draggable_context?.element
+		const chapterName = ctx?.name
+
+		if (!chapterName || !props.courseName) {
+			console.error('[CourseOutline] updateChapterOrder missing data:', {
+				chapterName,
+				courseName: props.courseName,
+				event: e,
+			})
+			toast.error(__('Failed to move chapter'))
+			return
+		}
+
+		updateChapterIndex.submit({
+			chapter: chapterName,
+			course: props.courseName,
+			idx: e.newIndex,
+		})
+	} catch (err) {
+		console.error('[CourseOutline] updateChapterOrder error:', err, e)
+		toast.error(__('Failed to move chapter'))
+	}
+}
+
+const trashChapter = (chapterName) => {
+	try {
+		$dialog({
+			title: __('Delete this chapter?'),
+			message: __(
+				'Deleting this chapter will also delete all its lessons and permanently remove it from the course. This action cannot be undone. Are you sure you want to continue?'
+			),
+			actions: [
+				{
+					label: __('Delete'),
+					theme: 'red',
+					variant: 'solid',
+					onClick(close) {
+						try {
+							deleteChapter.submit({ chapter: chapterName })
+						} catch (err) {
+							console.error('[CourseOutline] trashChapter -> submit error:', err)
+							toast.error(__('Failed to delete chapter'))
+						} finally {
+							try {
+								close()
+							} catch (err) {
+								console.error('[CourseOutline] trashChapter -> close error:', err)
+							}
+						}
+					},
+				},
+			],
+		})
+	} catch (err) {
+		console.error('[CourseOutline] trashChapter dialog error:', err)
+		toast.error(__('Failed to open delete dialog'))
+	}
+}
+
+const redirectToChapter = (chapter, event) => {
+	try {
+		if (!chapter?.is_scorm_package) return
+
+		// falls der click vom template kommt: @click="redirectToChapter(chapter, $event)"
+		if (event?.preventDefault) event.preventDefault()
+
+		if (props.allowEdit) return
+
+		if (!user?.data) {
+			toast.success(__('Please enroll for this course to view this lesson'))
+			return
+		}
+
+		router.push({
+			name: 'SCORMChapter',
+			params: {
+				courseName: props.courseName,
+				chapterName: chapter.name,
+			},
+		})
+	} catch (err) {
+		console.error('[CourseOutline] redirectToChapter error:', err, chapter)
+		toast.error(__('Failed to open chapter'))
+	}
 }
 
 const isActiveLesson = (lessonNumber) => {
-	return (
-		route.params.chapterNumber == lessonNumber.split('-')[0] &&
-		route.params.lessonNumber == lessonNumber.split('-')[1]
-	)
+	try {
+		const [ch, le] = String(lessonNumber || '').split('.')
+		return route.params.chapterNumber == ch && route.params.lessonNumber == le
+	} catch (err) {
+		console.error('[CourseOutline] isActiveLesson error:', err, lessonNumber)
+		return false
+	}
 }
 </script>
+
