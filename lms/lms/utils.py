@@ -1132,7 +1132,7 @@ def get_course_details(course):
 			"enrollments",
 			"rating",
 			"card_gradient",
-			"time_per_lesson",
+			"Time_per_lesson",
 			"course_completion_text"
 		],
 		as_dict=1,

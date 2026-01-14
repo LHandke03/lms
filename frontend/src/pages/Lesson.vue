@@ -84,7 +84,12 @@
 			</div>
 			<div class="flex flex-col mt-4 w-full">
 				<div class="text-3xl flex flex-row font-semibold w-full justify-between text-ink-gray-9">
-					{{ lesson.data.title }}
+					<div class="flex flex-row align-text-bottom">
+						{{ lesson.data.title }} 
+						<p v-if="!lesson.data.next && (TotalLesson > 0)" class="text-sm pt-2.5 ml-2">Dies ist ihre Letzte Lektion</p>
+						<p v-else-if="(TotalLesson-CurrentLesson == 1) && (TotalLesson > 0)" class="text-sm pt-2.5 ml-2">Noch eine Lektion verbleibend</p>
+						<p v-else-if="(TotalLesson > 0)" class="text-sm pt-2.5 ml-2">Noch {{ TotalLesson-CurrentLesson }} Lektionen verbleibend</p>
+					</div>
 					<div class="px-5 text-sm w-1/2 flex flex-col items-end">
 						<p 
 							v-if="user && lesson.data.membership && !lesson.data.progress && hasQuiz"
@@ -546,6 +551,9 @@ const NotesShow = ref(false)
 const currentTab = ref('Notes')
 const showNotesModal = ref(false)
 const ShowOutline = ref(false)
+const TotalLesson = ref(0)
+const CurrentLesson = ref(0)
+const BeforeLastLesson = ref('')
 let timerInterval
 
 const tabs = ref([
@@ -634,6 +642,37 @@ const lesson = createResource({
 		}
 	} */
 })
+
+const course = createResource({
+	url: 'lms.lms.utils.get_course_outline',
+	makeParams(values) {
+		return {
+			course: props.courseName,
+		}
+	},
+	auto: true,
+	onSuccess(data) {
+		console.log("Course data loaded: ", data)
+		data.forEach((chapter) => {
+			TotalLesson.value += chapter.lessons.length
+			chapter.lessons.forEach((lessonItem, index) => {
+				if (
+					lessonItem.number == `${props.chapterNumber}.${props.lessonNumber}`
+				) {
+					CurrentLesson.value = index + 1
+					if (data.indexOf(chapter) != 0 ) {
+						for (let index = 0; index < data.indexOf(chapter); index++) {
+							CurrentLesson.value += data[index].lessons.length							
+						}
+					} 
+				}
+			})
+		})
+		console.log("TotalLesson: ", TotalLesson.value)
+		console.log("CurrentLesson: ", CurrentLesson.value)
+	}
+})
+
 
 /* const hasQuizBlock = (obj) => {
   if (!obj?.blocks || !Array.isArray(obj.blocks)) {
@@ -1078,6 +1117,11 @@ watch(allowDiscussions, () => {
 			},
 		]
 	}
+})
+watch(props, () => {
+	TotalLesson.value = 0
+	CurrentLesson.value = 0
+	course.reload()
 })
 
 const redirectToLogin = () => {
