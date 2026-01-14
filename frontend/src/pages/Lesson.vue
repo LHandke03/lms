@@ -192,7 +192,7 @@
 			<div
 				v-else
 				ref="lessonContainer"
-				class="flex flex-row h-full w-full"
+				class="flex flex-row min-h-0 w-full"
 			>
 				<div
 					class="flex flex-col bg-surface-blue-2 h-full w-full overflow-y-auto"
