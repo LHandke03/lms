@@ -82,7 +82,12 @@
 							<label class="block font-medium text-ink-gray-5 mb-1">
 								{{ __('Content (HTML)') }}
 							</label>
-							<p>soon</p>
+							<CodeEditor
+								type="HTML"
+								height="500px"
+								:show-line-numbers="true"
+								:model-value="lesson.body"
+							></CodeEditor>
 						</div>
 					</div>
 				</div>
@@ -122,6 +127,7 @@ import { ChevronRight } from 'lucide-vue-next'
 import { getEditorTools, enablePlyr } from '@/utils'
 import { capture, startRecording, stopRecording } from '@/telemetry'
 import { useOnboarding } from 'frappe-ui/frappe'
+import CodeEditor from '@/components/Controls/CodeEditor.vue'
 
 const { brand } = sessionStore()
 const editor = ref(null)
@@ -133,7 +139,7 @@ const tabs = [
 	{ label: __('Editor'), value: 'editor' },
 	{ label: __('HTML'), value: 'html' },
 ]
-const currentTab = ref(tabs[0].value)
+const currentTab = ref(tabs[1].value)
 const isEditorTab = computed(() => currentTab.value === tabs[0].value)
 const isHtmlTab = computed(() => currentTab.value === tabs[1].value)
 const sidebarStore = useSidebar()
@@ -233,7 +239,8 @@ const addLessonContent = (data) => {
 		if (data.lesson.content) {
 			editor.value.render(JSON.parse(data.lesson.content))
 		} else if (data.lesson.body) {
-			let blocks = convertToJSON(data.lesson)
+			let blocks = []
+			currentTab.value = tabs[1].value
 			editor.value.render({
 				blocks: blocks,
 			})

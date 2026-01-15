@@ -1,9 +1,9 @@
 <template>
-	<!-- <header
-		class="sticky flex items-center justify-between top-0 z-10 border-b bg-surface-white px-3 py-2.5 sm:px-5"
+	<header
+		class="sticky flex items-center justify-between top-0 z-10 border-b bg-blue-400 px-3 py-2.5 sm:px-5"
 	>
 		<Breadcrumbs :items="[{ label: __('Home'), route: { name: 'Home' } }]" />
-	</header> -->
+	</header>
 	<div class="w-full px-5 pt-5 pb-10">
 		<div class="space-y-2">
 			<div class="flex items-center justify-between">
