@@ -8,7 +8,7 @@
 					<Breadcrumbs class="text-ellipsis" :items="breadcrumbs" />
 					<Button
 						variant="solid"
-						@click="saveLesson({ showSuccessMessage: true })"
+						@click="saveButtonClickaveButtonClick()"
 						class="mt-3 md:mt-0"
 					>
 						{{ __('Save') }}
@@ -83,11 +83,11 @@
 								{{ __('Content (HTML)') }}
 							</label>
 							<CodeEditor
+								v-model="lesson.body"
 								type="HTML"
 								height="500px"
 								:show-line-numbers="true"
-								:model-value="lesson.body"
-							></CodeEditor>
+							/>
 						</div>
 					</div>
 				</div>
@@ -123,7 +123,7 @@ import { sessionStore } from '../stores/session'
 import { useSidebar } from '@/stores/sidebar'
 import EditorJS from '@editorjs/editorjs'
 import LessonHelp from '@/components/LessonHelp.vue'
-import { ChevronRight } from 'lucide-vue-next'
+import { ChevronRight, Save } from 'lucide-vue-next'
 import { getEditorTools, enablePlyr } from '@/utils'
 import { capture, startRecording, stopRecording } from '@/telemetry'
 import { useOnboarding } from 'frappe-ui/frappe'
@@ -273,7 +273,7 @@ const keyboardShortcut = (e) => {
 		(e.ctrlKey || e.metaKey) &&
 		!e.target.classList.contains('ProseMirror')
 	) {
-		saveLesson({ showSuccessMessage: true })
+		saveButtonClick()
 		e.preventDefault()
 	}
 }
@@ -432,6 +432,12 @@ const convertToJSON = (lessonData) => {
 	}
 
 	return blocks
+}
+const saveButtonClick = () => {
+	if (currentTab.value === tabs[0].value) {
+		lesson.body = ''
+	}
+	saveLesson({ showSuccessMessage: true })
 }
 
 const saveLesson = (e) => {
