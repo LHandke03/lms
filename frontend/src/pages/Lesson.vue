@@ -148,7 +148,7 @@
 				</div> -->
 			</div>		
 		</header>
-		<div class="grid flex-1 border-l min-h-0"
+		<div class="grid flex-1 border-l min-h-0 transition-[grid-template-columns] duration-300 ease-out"
 			:class="ShowOutline ? 'md:grid-cols-[85%,15%]': 'md:grid-cols-[100%,0%]'"
 		>
 			<div v-if="lesson.data.no_preview" class="border-r">
@@ -192,7 +192,7 @@
 			<div
 				v-else
 				ref="lessonContainer"
-				class="flex flex-row min-h-0 w-full"
+				class="flex relative flex-row min-h-0 w-full"
 			>
 				<div
 					class="flex flex-col bg-surface-blue-2 h-full w-full overflow-y-auto"
@@ -207,7 +207,7 @@
 							'w-full md:w-3/5 mx-auto border-none !pt-10': zenModeEnabled,
 						}"
 					>
-						<div class="px-5">
+						<div class="pl-5 pr-12">
 							<div v-if="zenModeEnabled" class="top-0 py-5 sticky bg-surface-white z-10">
 								<div
 									class="flex flex-col space-y-3 md:space-y-0 md:flex-row md:items-center justify-between"
@@ -360,8 +360,8 @@
 						
 					</div>
 				</div>
-				<div v-if="!zenModeEnabled" class="h-full border-r bg-surface-blue-2 border-outline-gray-3 item-center justify-center flex flex-col">
-					<div class="h-12 border-l border-y rounded-l-lg bg-surface-white border-outline-gray-3 hover:bg-surface-gray-2 cursor-pointer flex items-center px-3"
+				<!-- <div v-if="!zenModeEnabled" class="h-full abso border-r bg-surface-blue-2 border-outline-gray-3 item-center justify-center flex flex-col"> -->
+					<div class="h-12 absolute right-0 top-1/2 inset-y-0 border-l z-10 insert-y-0 border-y rounded-l-lg bg-surface-white border-outline-gray-3 hover:bg-surface-gray-2 cursor-pointer flex items-center px-3"
 						@click="openOutline()"
 					>
 						<CollapseSidebar
@@ -371,10 +371,11 @@
 							}"
 						/>
 					</div>						
-				</div>
+				<!-- </div> -->
 			</div>
-			<div class="sticky max-h-[calc(100dvh-2.5rem)] flex flex-col min-h-0" 
-				:class="ShowOutline && !zenModeEnabled ? '': 'hidden'"
+			<div
+				class="sticky max-h-[calc(100dvh-2.5rem)] flex flex-col min-h-0 transform-gpu transition-transform transition-opacity duration-300 ease-out"
+				:class="ShowOutline && !zenModeEnabled ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0 pointer-events-none'"
 			>
 				<div class="shrink-0">
 					<div class="bg-surface-menu-bar py-5 px-2 border-b border-outline-gray-3">
@@ -395,8 +396,9 @@
 					</div>
 				</div>
 				<div class="flex flex-col flex-1 min-h-0 justify-between">
-					<div class="overflow-y-auto"
-						:class="NotesShow?'h-1/2':'h-5/6'"
+					<div
+						class="overflow-y-auto transition-[height] duration-300 ease-out"
+						:class="NotesShow ? 'h-1/2' : 'h-5/6'"
 					>
 						<CourseOutline
 							:courseName="courseName"
@@ -405,8 +407,14 @@
 							:lessonProgress="lessonProgress"
 						/>
 					</div>
-					<div :class="NotesShow && !hasQuiz?'h-1/2':'h-fit'">
-						<div class="w-full flex items-center justify-center pt-2" :class="hasQuiz?'hidden':''">
+					<div
+						class="flex flex-col min-h-0"
+						:class="NotesShow && !hasQuiz ? 'h-1/2' : 'flex-1'"
+					>
+						<div
+							class="w-full flex items-center justify-center"
+							:class="hasQuiz ? 'hidden' : NotesShow ? 'pt-2' : 'mt-auto'"
+						>
 							<div 
 								class="w-1/5 border-r border-l border-t border-outline-gray-3 hover:bg-surface-gray-2 rounded-t-lg px-3 py-1 flex items-center justify-center cursor-pointer"
 								@click="openNotesMenu()"
@@ -417,9 +425,9 @@
 						<div
 							v-if="lesson.data"
 							ref="discussionsContainer"
-							class="border-t border-outline-gray-3 transition-all duration-300
-								flex flex-col flex-1 min-h-0 overflow-y-auto"
-							:class="NotesShow ? 'flex-1' : 'hidden'"
+							class="border-t border-outline-gray-3 transition-[transform,opacity,max-height] duration-300 ease-out transform-gpu
+								flex flex-col min-h-0 overflow-hidden"
+							:class="NotesShow ? 'flex-1 max-h-full translate-y-0 opacity-100' : 'flex-none max-h-0 translate-y-full opacity-0 pointer-events-none'"
 						>
 							<!-- Focus / Button-Leiste: feste Höhe -->
 							<div class="shrink-0 w-full flex items-center justify-center">
