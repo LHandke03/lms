@@ -226,7 +226,7 @@
 													v-if="(user && lesson.data.membership && (progressPercent >= 100)) || lesson.data.progress"
 													class="flex items-center transition-all duration-200 font-medium"
 												>
-													{{ __('Lesson Completed ') }}
+													{{ __('Lesson Completed') }}
 													<Check class="h-4 w-4 text-green-700 ml-2"/>
 												</p>	
 											</div>
