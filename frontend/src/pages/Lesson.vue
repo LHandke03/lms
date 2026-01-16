@@ -86,9 +86,9 @@
 				<div class="text-3xl flex flex-row font-semibold w-full justify-between text-ink-gray-9">
 					<div class="flex flex-row align-text-bottom">
 						{{ lesson.data.title }} 
-						<p v-if="!lesson.data.next && (TotalLesson > 0)" class="text-sm pt-2.5 ml-2">Dies ist ihre Letzte Lektion</p>
-						<p v-else-if="(TotalLesson-CurrentLesson == 1) && (TotalLesson > 0)" class="text-sm pt-2.5 ml-2">Noch eine Lektion verbleibend</p>
-						<p v-else-if="(TotalLesson > 0)" class="text-sm pt-2.5 ml-2">Noch {{ TotalLesson-CurrentLesson }} Lektionen verbleibend</p>
+						<p v-if="!lesson.data.next && (TotalLesson > 0)" class="text-sm pt-2.5 ml-2">{{ __('This is your last lesson') }}</p>
+						<p v-else-if="(TotalLesson-CurrentLesson == 1) && (TotalLesson > 0)" class="text-sm pt-2.5 ml-2">{{ __('Two lessons remaining') }}</p>
+						<p v-else-if="(TotalLesson > 0)" class="text-sm pt-2.5 ml-2">{{ __('{0} lessons remaining').format((TotalLesson-CurrentLesson)) }}</p>
 					</div>
 					<div class="px-5 text-sm w-1/2 flex flex-col items-end">
 						<p 

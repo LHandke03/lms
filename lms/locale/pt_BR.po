@@ -1,22 +1,18 @@
+
 msgid ""
 msgstr ""
-"Project-Id-Version: frappe\n"
+"Project-Id-Version:  frappe\n"
 "Report-Msgid-Bugs-To: jannat@frappe.io\n"
 "POT-Creation-Date: 2025-11-07 16:04+0000\n"
-"PO-Revision-Date: 2025-11-11 11:49\n"
+"PO-Revision-Date: 2025-11-11 11:49+0000\n"
 "Last-Translator: jannat@frappe.io\n"
-"Language-Team: Portuguese, Brazilian\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Crowdin-Project: frappe\n"
-"X-Crowdin-Project-ID: 639578\n"
-"X-Crowdin-Language: pt-BR\n"
-"X-Crowdin-File: /[frappe.lms] develop/lms/locale/main.pot\n"
-"X-Crowdin-File-ID: 90\n"
 "Language: pt_BR\n"
+"Language-Team: Portuguese, Brazilian\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.13.1\n"
 
 #: lms/templates/emails/assignment_submission.html:5
 msgid " Please evaluate and grade it."
@@ -1317,7 +1313,6 @@ msgstr ""
 #. Submission'
 #. Label of the comments (Small Text) field in DocType 'Exercise Submission'
 #. Label of the comments (Text Editor) field in DocType 'LMS Assignment
-#. Submission'
 #. Label of the comments (Small Text) field in DocType 'LMS Mentor Request'
 #: frontend/src/components/Assignment.vue:170
 #: lms/lms/doctype/exercise_latest_submission/exercise_latest_submission.json
@@ -2530,7 +2525,6 @@ msgstr ""
 #. Label of the evaluator_name (Data) field in DocType 'LMS Certificate'
 #. Label of the evaluator_name (Data) field in DocType 'LMS Certificate
 #. Evaluation'
-#. Label of the evaluator_name (Data) field in DocType 'LMS Certificate
 #. Request'
 #: lms/lms/doctype/lms_certificate/lms_certificate.json
 #: lms/lms/doctype/lms_certificate_evaluation/lms_certificate_evaluation.json
@@ -3771,6 +3765,11 @@ msgstr ""
 msgid "Lesson"
 msgstr ""
 
+#. String in the header from Lesson
+#: lms/frontend/src/page/lesson.vue
+msgid "Lesson Completed"
+msgstr ""
+
 #. Name of a DocType
 #: lms/lms/doctype/lesson_reference/lesson_reference.json
 msgid "Lesson Reference"
@@ -3896,6 +3895,12 @@ msgstr ""
 #. Label of the location_preference (Select) field in DocType 'User'
 #: lms/fixtures/custom_field.json
 msgid "Location Preference"
+msgstr ""
+
+msgid "Log in"
+msgstr ""
+
+msgid "Log out"
 msgstr ""
 
 #: frontend/src/components/NoPermission.vue:28
@@ -4375,6 +4380,9 @@ msgstr ""
 
 #: frontend/src/components/Notes/Notes.vue:3
 msgid "My Notes"
+msgstr ""
+
+msgid "My Profile"
 msgstr ""
 
 #: frontend/src/pages/ProfileEvaluator.vue:4
@@ -5011,6 +5019,9 @@ msgstr "Número de telefone"
 #: lms/lms/doctype/lms_course/lms_course.json
 msgid "Pink"
 msgstr "Rosa"
+
+msgid "Please Complete Quiz to Complete Lesson"
+msgstr ""
 
 #: lms/lms/doctype/lms_settings/lms_settings.py:35
 msgid "Please add <a href='{0}'>{1}</a> for <a href='{2}'>{3}</a> to send calendar invites for evaluations."
@@ -6574,7 +6585,6 @@ msgstr ""
 #. Label of the test_results (Small Text) field in DocType 'Exercise Latest
 #. Submission'
 #. Label of the test_results (Small Text) field in DocType 'Exercise
-#. Submission'
 #: lms/lms/doctype/exercise_latest_submission/exercise_latest_submission.json
 #: lms/lms/doctype/exercise_submission/exercise_submission.json
 msgid "Test Results"
@@ -6716,6 +6726,9 @@ msgstr ""
 msgid "This image will be shown on lists and pages that don't have an image by default"
 msgstr ""
 
+msgid "This is your last lesson"
+msgstr ""
+
 #: frontend/src/pages/Lesson.vue:74
 msgid "This lesson is locked"
 msgstr ""
@@ -6783,6 +6796,9 @@ msgstr ""
 
 #: frontend/src/components/Modals/LiveClassModal.vue:44
 msgid "Time must be in 24 hour format (HH:mm). Example 11:30 or 22:00"
+msgstr ""
+
+msgid "Time per lesson"
 msgstr ""
 
 #. Label of the schedule_tab (Tab Break) field in DocType 'LMS Batch'
@@ -6896,6 +6912,9 @@ msgstr ""
 msgid "To join this batch, please contact the Administrator."
 msgstr ""
 
+msgid "Toggel Theme"
+msgstr ""
+
 #: lms/lms/user.py:41
 msgid "Too many users signed up recently, so the registration is disabled. Please try back in an hour"
 msgstr ""
@@ -6941,6 +6960,9 @@ msgstr ""
 
 #: frontend/src/pages/ProfileAbout.vue:103
 msgid "Twitter"
+msgstr ""
+
+msgid "Two lessons remaining"
 msgstr ""
 
 #. Label of the type (Select) field in DocType 'Job Opportunity'
@@ -7791,6 +7813,9 @@ msgstr ""
 
 #: lms/lms/notification/certificate_request_reminder/certificate_request_reminder.html:5
 msgid "{0} is your evaluator"
+msgstr ""
+
+msgid "{0} lessons remaining"
 msgstr ""
 
 #: lms/lms/utils.py:665

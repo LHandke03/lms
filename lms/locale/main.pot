@@ -7856,3 +7856,19 @@ msgstr ""
 msgid "{} Published"
 msgstr ""
 
+#. String in the header from Lesson
+#: lms/frontend/src/page/lesson.vue
+msgid "Lesson Completed"
+msgstr ""
+
+msgid "Please Complete Quiz to Complete Lesson"
+msgstr ""
+
+msgid "{0} lessons remaining"
+msgstr ""
+
+msgid "Two lessons remaining"
+msgstr ""
+
+msgid "This is your last lesson"
+msgstr ""

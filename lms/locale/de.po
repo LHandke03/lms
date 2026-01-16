@@ -12,7 +12,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.13.1\n"
 
 #: lms/templates/emails/assignment_submission.html:5
 msgid " Please evaluate and grade it."
@@ -2328,7 +2328,7 @@ msgstr "Aktiviert"
 
 #: frontend/src/components/Modals/BulkCertificates.vue:53
 msgid "Enabling this will publish the certificate on the certified participants page."
-msgstr "Wenn sie das Aktiviersn, werden die Zertifikate auf der "Zertifizierte Teilnehmer" seite angezeigt"
+msgstr "Wenn sie das Aktiviersn, werden die Zertifikate auf der \"Zertifizierte Teilnehmer\" seite angezeigt"
 
 #. Label of the end_date (Date) field in DocType 'Cohort'
 #. Label of the end_date (Date) field in DocType 'LMS Batch'
@@ -2431,7 +2431,7 @@ msgstr "Geben sie den Email-Betreff ein"
 
 #: frontend/src/pages/JobApplications.vue:128
 msgid "Enter reply to email"
-msgstr "Geben sie eine "reply to" Emailadresse ein"
+msgstr "Geben sie eine \"reply to\" Emailadresse ein"
 
 #: frontend/src/components/Modals/ZoomAccountModal.vue:169
 msgid "Error creating Zoom Account"
@@ -3765,6 +3765,11 @@ msgstr "Verlassen um"
 msgid "Lesson"
 msgstr "Unterrichtseinheit"
 
+#. String in the header from Lesson
+#: lms/frontend/src/page/lesson.vue
+msgid "Lesson Completed"
+msgstr "Lektion Abgeschlossen"
+
 #. Name of a DocType
 #: lms/lms/doctype/lesson_reference/lesson_reference.json
 msgid "Lesson Reference"
@@ -5015,6 +5020,9 @@ msgstr "Telefonnummer"
 msgid "Pink"
 msgstr "Rosa"
 
+msgid "Please Complete Quiz to Complete Lesson"
+msgstr "Bitte beantworten sie das Quiz um die Lektion abzuschliesen"
+
 #: lms/lms/doctype/lms_settings/lms_settings.py:35
 msgid "Please add <a href='{0}'>{1}</a> for <a href='{2}'>{3}</a> to send calendar invites for evaluations."
 msgstr "Bitte fügen sie <a href'{0}'>{1}</a> für <a href='{2}'>{3}</a> hinzu um Kalendereinladung für Prüfungstermine zu versenden"
@@ -5677,7 +5685,7 @@ msgstr "Ähnliche Kurse"
 #. Option for the 'Work Mode' (Select) field in DocType 'Job Opportunity'
 #: lms/job/doctype/job_opportunity/job_opportunity.json
 msgid "Remote"
-msgstr Remote"
+msgstr "emote"
 
 #: frontend/src/components/Controls/Uploader.vue:34
 #: frontend/src/pages/BatchForm.vue:246 frontend/src/pages/CourseForm.vue:119
@@ -6718,6 +6726,9 @@ msgstr "Diese Beschreibung wird gezeigt, auf Listen und Seiten ohne Meta-Beschre
 msgid "This image will be shown on lists and pages that don't have an image by default"
 msgstr "Dieses Bild wird auf Listen und Seiten gezeigt, welche kein Standardbild haben"
 
+msgid "This is your last lesson"
+msgstr "Das ist die letzte Lektion"
+
 #: frontend/src/pages/Lesson.vue:74
 msgid "This lesson is locked"
 msgstr "Diese Lektion ist Geschlossen"
@@ -6950,6 +6961,9 @@ msgstr "Dienstag"
 #: frontend/src/pages/ProfileAbout.vue:103
 msgid "Twitter"
 msgstr "Twitter"
+
+msgid "Two lessons remaining"
+msgstr "Dies ist die vorletzte Lektion"
 
 #. Label of the type (Select) field in DocType 'Job Opportunity'
 #. Label of a field in the job-opportunity Web Form
@@ -7800,6 +7814,9 @@ msgstr ""
 #: lms/lms/notification/certificate_request_reminder/certificate_request_reminder.html:5
 msgid "{0} is your evaluator"
 msgstr ""
+
+msgid "{0} lessons remaining"
+msgstr "Noch {0} Lektionen verbleibend"
 
 #: lms/lms/utils.py:665
 msgid "{0} mentioned you in a comment"
