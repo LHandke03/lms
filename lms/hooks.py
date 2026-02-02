@@ -107,6 +107,9 @@ doc_events = {
 		"validate": "lms.lms.user.validate_username_duplicates",
 		"after_insert": "lms.lms.user.after_insert",
 	},
+	"LMS Certificate": {
+        "after_insert": "lms.lms.certification_upload.handle_certificate_submit"
+    }
 }
 
 # Scheduled Tasks

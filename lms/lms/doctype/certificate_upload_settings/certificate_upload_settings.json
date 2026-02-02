@@ -1,0 +1,149 @@
+{
+ "actions": [],
+ "creation": "2026-01-16 17:15:53.195133",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "enabled",
+  "section_frappe",
+  "frappe_api_token",
+  "frappe_api_secret",
+  "column1",
+  "default_print_format",
+  "section_target",
+  "target_api_url",
+  "target_api_auth",
+  "target_api_key",
+  "section_behavior",
+  "run_async",
+  "debug_log",
+  "test"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enabled"
+  },
+  {
+   "fieldname": "section_frappe",
+   "fieldtype": "Section Break",
+   "label": "Frappe Auth (optional)"
+  },
+  {
+   "fieldname": "frappe_api_token",
+   "fieldtype": "Data",
+   "label": "Frappe API Token"
+  },
+  {
+   "fieldname": "frappe_api_secret",
+   "fieldtype": "Password",
+   "label": "Frappe API Secret"
+  },
+  {
+   "fieldname": "column1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "default_print_format",
+   "fieldtype": "Link",
+   "label": "Default Print Format (fallback)",
+   "options": "Print Format"
+  },
+  {
+   "fieldname": "section_target",
+   "fieldtype": "Section Break",
+   "label": "Target API"
+  },
+  {
+   "fieldname": "target_api_url",
+   "fieldtype": "Data",
+   "label": "Target API URL"
+  },
+  {
+   "fieldname": "target_api_auth",
+   "fieldtype": "Password",
+   "label": "Target Authorization Header (optional)"
+  },
+  {
+   "fieldname": "target_api_key",
+   "fieldtype": "Data",
+   "label": "Target API Key (optional)"
+  },
+  {
+   "fieldname": "section_behavior",
+   "fieldtype": "Section Break",
+   "label": "Behavior"
+  },
+  {
+   "default": "1",
+   "fieldname": "run_async",
+   "fieldtype": "Check",
+   "label": "Run async (enqueue)"
+  },
+  {
+   "default": "0",
+   "fieldname": "debug_log",
+   "fieldtype": "Check",
+   "label": "Debug log (frappe.log_error)"
+  },
+  {
+   "fieldname": "test",
+   "fieldtype": "Data",
+   "label": "test"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-01-16 17:17:28.199819",
+ "modified_by": "Administrator",
+ "module": "LMS",
+ "name": "Certificate Upload Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Moderator",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "if_owner": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "LMS Student",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
