@@ -560,4 +560,3 @@ const isActiveLesson = (lessonNumber) => {
 	}
 }
 </script>
-

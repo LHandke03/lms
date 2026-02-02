@@ -79,6 +79,8 @@
 							:courseName="course.data.name"
 							:showOutline="true"
 							:getProgress="course.data.membership ? true : false"
+							:key="course.data.name"
+							:lessonProgress="0"
 						/>
 					</div>
 					<!-- <CourseReviews

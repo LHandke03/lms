@@ -342,7 +342,7 @@
 								@mouseup="toggleInlineMenu"
 								class="ProseMirror prose prose-table:table-fixed prose-td:p-2 prose-th:p-2 prose-td:border prose-th:border prose-td:border-outline-gray-2 prose-th:border-outline-gray-2 prose-td:relative prose-th:relative prose-th:bg-surface-gray-2 prose-sm max-w-none !whitespace-normal mt-8"
 							>
-								<div id="editor"></div>
+								<div id="editor" class="border solid border-outline-gray-2 rounded-xl bg-surface-white p-5"></div>
 							</div>
 							<div
 								v-else
