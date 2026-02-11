@@ -34,23 +34,33 @@
 				<div
 					v-for="stat in displayStats"
 					:key="stat.label"
-					class="flex items-center gap-4 rounded-xl border border-outline-gray-2 bg-surface-white px-4 py-3 shadow-sm"
+					class="flex items-center gap-4 rounded-xl border border-outline-gray-2 bg-surface-white px-4 py-3 shadow-sm justify-between"
 				>
-					<div
-						class="flex h-10 w-10 items-center justify-center rounded-lg bg-surface-blue-2 text-ink-blue-2"
-					>
-						<component :is="stat.icon" class="h-5 w-5 stroke-1.5" />
-					</div>
-					<div>
-						<div class="text-sm font-semibold text-ink-gray-8">
-							{{ stat.label }}
+					<div class="flex items-center gap-3">
+						<div
+							class="flex h-10 w-10 items-center justify-center rounded-lg bg-surface-blue-2 text-ink-blue-2"
+						>
+							<component :is="stat.icon" class="h-5 w-5 stroke-1.5" />
 						</div>
-						<div class="text-xl font-bold text-ink-gray-9">
-							{{ stat.value }}
+						<div>
+							<div class="text-sm font-semibold text-ink-gray-8">
+								{{ stat.label }}
+							</div>
+							<div class="text-xl font-bold text-ink-gray-9">
+								{{ stat.value }}
+							</div>
 						</div>
+					</div>					
+					<div v-if="canCreateCourse && stat.label === __('Erstellte Kurse')">
+						<button
+							class="inline-flex h-full w-full items-center gap-4 rounded-xl bg-blue-600 px-3 py-1.5 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700"
+							@click="createCourse"
+						>
+							<UserPlus class="h-4 w-4 stroke-1.5" />
+						</button>
 					</div>
 				</div>
-				<div v-if="canCreateCourse" class="hidden items-center gap-4 rounded-xl border border-outline-gray-2 bg-surface-white shadow-sm sm:flex">
+				<!-- <div v-if="canCreateCourse" class="hidden items-center gap-4 rounded-xl border border-outline-gray-2 bg-surface-white shadow-sm sm:flex">
 					<button
 						class="inline-flex h-full w-full items-center gap-4 rounded-xl bg-blue-600 px-3 py-1.5 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700"
 						@click="createCourse"
@@ -58,15 +68,24 @@
 						<UserPlus class="h-4 w-4 stroke-1.5" />
 						<span>{{ __('Kurs erstellen') }}</span>
 					</button>
-				</div>
+				</div> -->
 			</div>
 		</section>
 
 		<section class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[2fr_1fr]">
 			<div class="rounded-2xl border border-outline-gray-2 bg-surface-white p-5 shadow-sm">
 				<div class="flex flex-wrap items-center justify-between gap-3">
-					<div class="text-lg font-semibold text-ink-gray-9">
+					<div v-if="filterLabel == __('Eingeschriebene Kurse')" class="text-lg font-semibold text-ink-gray-9">
 						{{ __('Meine Kurse') }} ({{ filteredCourses.length }})
+					</div>
+					<div v-else-if="filterLabel == __('Erstellte Kurse')" class="text-lg font-semibold text-ink-gray-9">
+						{{ __('Erstellte Kurse') }} ({{ filteredCourses.length }})
+					</div>
+					<div v-else-if="filterLabel =='Alle'" class="text-lg font-semibold text-ink-gray-9">
+						{{ __('Kurse') }} ({{ filteredCourses.length }})
+					</div>
+					<div v-else class="text-lg font-semibold text-ink-gray-9">
+						{{ __('Veröffentlichte Kurse') }} ({{ filteredCourses.length }})
 					</div>
 					<div class="flex items-center gap-2">
 						<Dropdown :options="courseFilterOptions">
@@ -109,8 +128,18 @@
 						class="rounded-xl border border-outline-gray-2 bg-surface-gray-1 p-3 transition hover:border-outline-gray-3"
 					>
 						<div class="flex items-start justify-between gap-2">
-							<div class="text-sm font-semibold text-ink-gray-9">
-								{{ course.title || course.name }}
+							<div class="flex items-center gap-2 text-sm font-semibold text-ink-gray-9">
+								<span>{{ course.title || course.name }}</span>
+								<Eye
+									v-if="course.published"
+									class="h-4 w-4 stroke-1.5 text-ink-gray-6"
+									:title="__('Veröffentlicht')"
+								/>
+								<EyeOff
+									v-else
+									class="h-4 w-4 stroke-1.5 text-ink-gray-6"
+									:title="__('Nicht veröffentlicht')"
+								/>
 							</div>
 							<div class="flex items-center gap-2">
 								<Dropdown
@@ -254,6 +283,8 @@ import {
 	BookOpen,
 	ChevronDown,
 	Download,
+	Eye,
+	EyeOff,
 	Filter,
 	MoreHorizontal,
 	Search,
@@ -268,7 +299,7 @@ const router = useRouter()
 const user = inject<any>('$user')
 const dayjs = inject<any>('$dayjs')
 const courseSearch = ref('')
-const selectedCourseFilter = ref<'all' | 'created' | 'enrolled'>('all')
+const selectedCourseFilter = ref<'all' | 'created' | 'enrolled' | 'published'>('all')
 
 const enrolledCourses = createResource({
 	url: 'lms.lms.utils.get_courses',
@@ -294,6 +325,17 @@ const createdCourses = createResource({
 	},
 })
 
+const publishedCourses = createResource({
+	url: 'lms.lms.utils.get_courses',
+	auto: true,
+	makeParams() {
+		return {
+			filters: {
+				published: 1,
+			},
+		}
+	},
+})
 
 
 const certificateCount = createResource({
@@ -341,6 +383,13 @@ const courseFilterOptions = computed(() => {
 				selectedCourseFilter.value = 'enrolled'
 			},
 		},
+		{
+			label: __('Veröffentlichte Kurse'),
+			value: 'published',
+			onClick() {
+				selectedCourseFilter.value = 'published'
+			},
+		}
 	]
 	if (canCreateCourse.value) {
 		options.push({
@@ -363,15 +412,16 @@ const showCertificate = (certificate: any) => {
 	)
 }
 const filterLabel = computed(() => {
+	let options = courseFilterOptions.value
 	return (
-		courseFilterOptions.find(
+		options.find(
 			(option) => option.value === selectedCourseFilter.value
 		)?.label || __('Alle')
 	)
 })
 
 const allCourses = computed(() => {
-	const combined = [...(enrolledCourses.data || []), ...(createdCourses.data || [])]
+	const combined = [...(enrolledCourses.data || []), ...(createdCourses.data || []), ...(publishedCourses.data || [])]
 	const map = new Map()
 	combined.forEach((course) => {
 		map.set(course.name, course)
@@ -385,6 +435,9 @@ const baseCourses = computed(() => {
 	}
 	if (selectedCourseFilter.value === 'enrolled') {
 		return enrolledCourses.data || []
+	}
+	if (selectedCourseFilter.value === 'published') {
+		return publishedCourses.data || []
 	}
 	return allCourses.value
 })
