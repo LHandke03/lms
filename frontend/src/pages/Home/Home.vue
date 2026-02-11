@@ -1,23 +1,15 @@
 <template>
-	<header
+	<!-- <header
 		class="sticky top-0 z-10 border-b border-blue-100 bg-blue-400/90 px-3 py-2.5 backdrop-blur sm:px-5"
 	>
 		<div class="flex items-center justify-between">
 			<Breadcrumbs :items="[{ label: __('Dashboard'), route: { name: 'Home' } }]" />
-			<div v-if="canCreateCourse" class="hidden items-center gap-2 text-ink-gray-9 sm:flex">
-				<button
-					class="inline-flex items-center gap-2 rounded-md bg-blue-600 px-3 py-1.5 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700"
-					@click="createCourse"
-				>
-					<UserPlus class="h-4 w-4 stroke-1.5" />
-					<span>{{ __('Kurs erstellen') }}</span>
-				</button>
-			</div>
+			
 		</div>
-	</header>
-	<div class="min-h-screen w-full bg-slate-100 px-5 pt-6 pb-10">
+	</header> -->
+	<div class="min-h-screen w-full bg-surface-gray-1 px-5 pt-6 pb-10">
 		<section
-			class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-300 via-blue-200 to-slate-100 px-6 py-6 shadow-sm"
+			class="relative overflow-hidden rounded-2xl border border-outline-gray-2 bg-surface-blue-2 px-6 py-6 shadow-sm"
 		>
 			<div class="relative z-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 				<div>
@@ -42,10 +34,10 @@
 				<div
 					v-for="stat in displayStats"
 					:key="stat.label"
-					class="flex items-center gap-4 rounded-xl border border-blue-100 bg-white/80 px-4 py-3 shadow-sm"
+					class="flex items-center gap-4 rounded-xl border border-outline-gray-2 bg-surface-white px-4 py-3 shadow-sm"
 				>
 					<div
-						class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100 text-blue-600"
+						class="flex h-10 w-10 items-center justify-center rounded-lg bg-surface-blue-2 text-ink-blue-2"
 					>
 						<component :is="stat.icon" class="h-5 w-5 stroke-1.5" />
 					</div>
@@ -58,11 +50,20 @@
 						</div>
 					</div>
 				</div>
+				<div v-if="canCreateCourse" class="hidden items-center gap-4 rounded-xl border border-outline-gray-2 bg-surface-white shadow-sm sm:flex">
+					<button
+						class="inline-flex h-full w-full items-center gap-4 rounded-xl bg-blue-600 px-3 py-1.5 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700"
+						@click="createCourse"
+					>
+						<UserPlus class="h-4 w-4 stroke-1.5" />
+						<span>{{ __('Kurs erstellen') }}</span>
+					</button>
+				</div>
 			</div>
 		</section>
 
 		<section class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[2fr_1fr]">
-			<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+			<div class="rounded-2xl border border-outline-gray-2 bg-surface-white p-5 shadow-sm">
 				<div class="flex flex-wrap items-center justify-between gap-3">
 					<div class="text-lg font-semibold text-ink-gray-9">
 						{{ __('Meine Kurse') }} ({{ filteredCourses.length }})
@@ -71,23 +72,23 @@
 						<Dropdown :options="courseFilterOptions">
 							<template #default>
 								<button
-									class="flex items-center gap-2 rounded-md border border-slate-200 bg-slate-50 px-2 py-1 text-xs text-ink-gray-6"
+									class="flex items-center gap-2 rounded-md border border-outline-gray-2 bg-surface-gray-1 px-2 py-1 text-xs text-ink-gray-6"
 								>
 									<Filter class="h-3.5 w-3.5 stroke-1.5" />
 									<span>{{ filterLabel }}</span>
 									<ChevronDown class="h-3.5 w-3.5 stroke-1.5" />
 								</button>
 							</template>
-						</Dropdown>
+						</Dropdown><!-- 
 						<button
-							class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-slate-200 text-ink-gray-6 transition hover:bg-slate-50"
+							class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-outline-gray-2 text-ink-gray-6 transition hover:bg-surface-gray-1"
 						>
 							<MoreHorizontal class="h-4 w-4 stroke-1.5" />
-						</button>
+						</button> -->
 					</div>
 				</div>
 				<div
-					class="mt-4 flex items-center gap-2 rounded-md border border-slate-200 bg-slate-50 px-3 py-2"
+					class="mt-4 flex items-center gap-2 rounded-md border border-outline-gray-2 bg-surface-gray-1 px-3 py-2"
 				>
 					<Search class="h-4 w-4 stroke-1.5 text-ink-gray-5" />
 					<input
@@ -105,7 +106,7 @@
 						v-for="course in filteredCourses"
 						:key="course.name"
 						:to="{ name: 'CourseDetail', params: { courseName: course.name } }"
-						class="rounded-xl border border-slate-200 bg-slate-50/70 p-3 transition hover:border-blue-200"
+						class="rounded-xl border border-outline-gray-2 bg-surface-gray-1 p-3 transition hover:border-outline-gray-3"
 					>
 						<div class="flex items-start justify-between gap-2">
 							<div class="text-sm font-semibold text-ink-gray-9">
@@ -118,7 +119,7 @@
 								>
 									<template #default>
 										<button
-											class="inline-flex h-7 w-7 items-center justify-center rounded-md text-ink-gray-6 transition hover:bg-white"
+											class="inline-flex h-7 w-7 items-center justify-center rounded-md text-ink-gray-6 transition hover:bg-surface-white"
 											@click.stop
 										>
 											<MoreHorizontal class="h-4 w-4 stroke-1.5" />
@@ -129,7 +130,7 @@
 						</div>
 						<div class="mt-3 flex items-center gap-3">
 							<div
-								class="flex h-16 w-24 items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-blue-100 via-blue-200 to-slate-100 text-blue-600"
+								class="flex h-16 w-24 items-center justify-center overflow-hidden rounded-lg bg-surface-blue-2 text-ink-blue-2"
 							>
 								<img
 									v-if="course.image"
@@ -156,13 +157,13 @@
 				</div>
 				<div
 					v-else
-					class="mt-6 rounded-lg border border-dashed border-slate-200 p-6 text-sm text-ink-gray-6"
+					class="mt-6 rounded-lg border border-dashed border-outline-gray-2 p-6 text-sm text-ink-gray-6"
 				>
 					{{ __('Noch keine Kurse vorhanden.') }}
 				</div>
 			</div>
 
-			<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+			<div class="rounded-2xl border border-outline-gray-2 bg-surface-white p-5 shadow-sm">
 				<div class="flex items-center justify-between">
 					<div class="text-lg font-semibold text-ink-gray-9">
 						{{ __('Zertifikate & Fortschritt') }}
@@ -177,19 +178,24 @@
 							<div
 								v-for="certificate in certificates.data"
 								:key="certificate.name"
-								class="rounded-lg border border-slate-200 bg-slate-50/70 p-3"
+								class="rounded-lg border border-outline-gray-2 bg-surface-gray-1 p-3 flex flex-row justify-between"
 							>
-								<div class="text-sm font-semibold text-ink-gray-9">
-									{{ certificate.course_title || certificate.batch_title }}
+								<div>
+									<div class="text-sm font-semibold text-ink-gray-9">
+										{{ certificate.course_title || certificate.batch_title }}
+									</div>
+									<div class="mt-1 text-xs text-ink-gray-6">
+										{{ __('Ausgestellt am {0}').format(dayjs(certificate.issue_date).format('DD MMM YYYY')) }}
+									</div>
 								</div>
-								<div class="mt-1 text-xs text-ink-gray-6">
-									{{ __('Ausgestellt am {0}').format(dayjs(certificate.issue_date).format('DD MMM YYYY')) }}
-								</div>
+								<div class="flex items-center justify-center border border-outline-gray-2 cursor-pointer hover:bg-surface-gray-2 rounded-md p-1" @click="showCertificate(certificate)">
+									<Download class="h-4 w-4 stroke-1.5 text-ink-gray-6" />
+								</div>								
 							</div>
 						</div>
 						<div
 							v-else
-							class="mt-3 rounded-lg border border-dashed border-slate-200 p-3 text-xs text-ink-gray-6"
+							class="mt-3 rounded-lg border border-dashed border-outline-gray-2 p-3 text-xs text-ink-gray-6"
 						>
 							{{ __('Noch keine Zertifikate verfügbar.') }}
 						</div>
@@ -199,26 +205,31 @@
 						<div class="text-sm font-semibold text-ink-gray-7">
 							{{ __('Zertifikatskurse in Arbeit') }}
 						</div>
-						<div v-if="incompleteCertificateCourses.length" class="mt-3 space-y-3">
+						<div v-if="incompleteCertificateCourses.length" class="mt-3 space-y-3">							
 							<div
 								v-for="course in incompleteCertificateCourses"
 								:key="course.name"
-								class="rounded-lg border border-slate-200 bg-slate-50/70 p-3"
-							>
-								<div class="text-sm font-semibold text-ink-gray-9">
-									{{ course.title || course.name }}
-								</div>
-								<div class="mt-2">
-									<ProgressBar :progress="course.membership?.progress || 0" />
-								</div>
-								<div class="mt-1 text-xs text-ink-gray-6">
-									{{ Math.ceil(course.membership?.progress || 0) }}% {{ __('abgeschlossen') }}
-								</div>
+								class="rounded-lg border border-outline-gray-2 bg-surface-gray-1 p-3"
+							>	
+								<router-link
+									:key="course.name"
+									:to="{ name: 'CourseDetail', params: { courseName: course.name } }"
+								>
+									<div class="text-sm font-semibold text-ink-gray-9">
+										{{ course.title || course.name }}
+									</div>
+									<div class="mt-2">
+										<ProgressBar :progress="course.membership?.progress || 0" />
+									</div>
+									<div class="mt-1 text-xs text-ink-gray-6">
+										{{ Math.ceil(course.membership?.progress || 0) }}% {{ __('abgeschlossen') }}
+									</div>	
+								</router-link>
 							</div>
 						</div>
 						<div
 							v-else
-							class="mt-3 rounded-lg border border-dashed border-slate-200 p-3 text-xs text-ink-gray-6"
+							class="mt-3 rounded-lg border border-dashed border-outline-gray-2 p-3 text-xs text-ink-gray-6"
 						>
 							{{ __('Keine aktiven Zertifikatskurse gefunden.') }}
 						</div>
@@ -242,6 +253,7 @@ import {
 	Award,
 	BookOpen,
 	ChevronDown,
+	Download,
 	Filter,
 	MoreHorizontal,
 	Search,
@@ -282,6 +294,8 @@ const createdCourses = createResource({
 	},
 })
 
+
+
 const certificateCount = createResource({
 	url: 'frappe.client.get_count',
 	params: {
@@ -303,30 +317,51 @@ const certificates = createListResource({
 	auto: user?.data?.name ? true : false,
 })
 
-const courseFilterOptions = [
-	{
-		label: __('Alle'),
-		value: 'all',
-		onClick() {
-			selectedCourseFilter.value = 'all'
-		},
-	},
-	{
-		label: __('Eigene Kurse'),
-		value: 'created',
-		onClick() {
-			selectedCourseFilter.value = 'created'
-		},
-	},
-	{
-		label: __('Eingeschriebene Kurse'),
-		value: 'enrolled',
-		onClick() {
-			selectedCourseFilter.value = 'enrolled'
-		},
-	},
-]
+const canCreateCourse = computed(() => {
+	return (
+		user?.data?.is_instructor ||
+		user?.data?.is_moderator ||
+		user?.data?.is_system_manager
+	)
+})
 
+const courseFilterOptions = computed(() => {
+	const options = [
+		{
+			label: __('Alle'),
+			value: 'all',
+			onClick() {
+				selectedCourseFilter.value = 'all'
+			},
+		},
+		{
+			label: __('Eingeschriebene Kurse'),
+			value: 'enrolled',
+			onClick() {
+				selectedCourseFilter.value = 'enrolled'
+			},
+		},
+	]
+	if (canCreateCourse.value) {
+		options.push({
+			label: __('Erstellte Kurse'),
+			value: 'created',
+			onClick() {
+				selectedCourseFilter.value = 'created'
+			},
+		})
+	}
+	return options
+})
+
+const showCertificate = (certificate: any) => {
+	window.open(
+		`/api/method/frappe.utils.print_format.download_pdf?doctype=LMS+Certificate&name=${
+			certificate.name
+		}&format=${encodeURIComponent(certificate.template)}`,
+		'_blank'
+	)
+}
 const filterLabel = computed(() => {
 	return (
 		courseFilterOptions.find(
@@ -406,14 +441,6 @@ const getCourseActions = (course: any) => {
 		},
 	]
 }
-
-const canCreateCourse = computed(() => {
-	return (
-		user?.data?.is_instructor ||
-		user?.data?.is_moderator ||
-		user?.data?.is_system_manager
-	)
-})
 
 const createCourse = () => {
 	router.push({ name: 'CourseForm', params: { courseName: 'new' } })

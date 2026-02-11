@@ -1,82 +1,101 @@
 <template>
-	<header
-		class="sticky flex items-center justify-between top-0 z-10 border-b bg-blue-400 px-3 py-2.5 sm:px-5"
+	<!-- <header
+		class="sticky top-0 z-10 flex items-center justify-between border-b border-outline-gray-2 bg-surface-white px-3 py-2.5 sm:px-5"
 	>
 		<Breadcrumbs :items="breadcrumbs" />
-		<router-link
-			v-if="canCreateCourse()"
-			:to="{
-				name: 'CourseForm',
-				params: { courseName: 'new' },
-			}"
+	</header> -->
+	<div class="min-h-screen bg-surface-gray-1 px-5 pt-6 pb-10">
+		<section
+			class="relative overflow-hidden rounded-2xl border border-outline-gray-2 bg-surface-blue-2 px-6 py-6 shadow-sm"
 		>
-			<Button variant="solid">
-				<template #prefix>
-					<Plus class="h-4 w-4 stroke-1.5" />
-				</template>
-				{{ __('Create') }}
-			</Button>
-		</router-link>
-	</header>
-	<div class="p-5 pb-10">
-		<div
-			class="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:items-center justify-between mb-5"
-		>
-			<div class="text-lg text-ink-gray-9 font-semibold">
+			<div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+				<div>
+					<div class="text-2xl font-bold text-ink-gray-9">
+						{{ __('Courses') }}
+					</div>
+					<div class="mt-1 text-sm text-ink-gray-7">
+						{{ __('Finde und verwalte deine Kurse.') }}
+					</div>
+				</div>
+				<router-link
+					v-if="canCreateCourse()"
+					:to="{
+						name: 'CourseForm',
+						params: { courseName: 'new' },
+					}"
+				>
+					<Button variant="solid">
+						<template #prefix>
+							<Plus class="h-4 w-4 stroke-1.5" />
+						</template>
+						{{ __('Create') }}
+					</Button>
+				</router-link>
+			</div>
+			<div
+				class="mt-5 flex flex-col justify-between gap-3 rounded-xl border border-outline-gray-2 bg-surface-white p-4 lg:flex-row lg:items-center"
+			>
+				<div class="text-sm font-semibold text-ink-gray-8">
+					{{ __('Filter') }}
+				</div>
+				<div
+					class="flex flex-col space-y-3 lg:space-y-0 lg:flex-row lg:items-center lg:space-x-4"
+				>
+					<TabButtons :buttons="courseTabs" v-model="currentTab" class="w-fit" />
+
+					<div class="grid grid-cols-2 gap-2">
+						<FormControl
+							v-model="title"
+							:placeholder="__('Search by Title')"
+							type="text"
+							class="w-full lg:min-w-0 lg:w-32 xl:w-40"
+							@input="updateCourses()"
+						/>
+						<div class="w-full lg:min-w-0 lg:w-32 xl:w-40">
+							<Select
+								v-if="categories.length"
+								v-model="currentCategory"
+								:options="categories"
+								:placeholder="__('Category')"
+								@change="updateCourses()"
+							/>
+						</div>
+					</div>
+
+					<FormControl
+						v-model="certification"
+						:label="__('Certification')"
+						type="checkbox"
+						@change="updateCourses()"
+					/>
+				</div>
+			</div>
+		</section>
+		<section class="mt-8 rounded-2xl border border-outline-gray-2 bg-surface-white p-5 shadow-sm">
+			<div class="mb-4 text-lg font-semibold text-ink-gray-9">
 				{{ __('All Courses') }}
 			</div>
 			<div
-				class="flex flex-col space-y-3 lg:space-y-0 lg:flex-row lg:items-center lg:space-x-4"
+				v-if="courses.data?.length"
+				class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4"
 			>
-				<TabButtons :buttons="courseTabs" v-model="currentTab" class="w-fit" />
-
-				<div class="grid grid-cols-2 gap-2">
-					<FormControl
-						v-model="title"
-						:placeholder="__('Search by Title')"
-						type="text"
-						class="w-full lg:min-w-0 lg:w-32 xl:w-40"
-						@input="updateCourses()"
-					/>
-					<div class="w-full lg:min-w-0 lg:w-32 xl:w-40">
-						<Select
-							v-if="categories.length"
-							v-model="currentCategory"
-							:options="categories"
-							:placeholder="__('Category')"
-							@change="updateCourses()"
-						/>
-					</div>
-				</div>
-
-				<FormControl
-					v-model="certification"
-					:label="__('Certification')"
-					type="checkbox"
-					@change="updateCourses()"
-				/>
+				<router-link
+					v-for="course in courses.data"
+					:to="{ name: 'CourseDetail', params: { courseName: course.name } }"
+				>
+					<CourseCard :course="course" />
+				</router-link>
 			</div>
-		</div>
-		<div
-			v-if="courses.data?.length"
-			class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8"
-		>
-			<router-link
-				v-for="course in courses.data"
-				:to="{ name: 'CourseDetail', params: { courseName: course.name } }"
+			<EmptyState v-else-if="!courses.list.loading" type="Courses" />
+			<div
+				v-if="!courses.list.loading && courses.hasNextPage"
+				class="mt-5 flex justify-center"
 			>
-				<CourseCard :course="course" />
-			</router-link>
-		</div>
-		<EmptyState v-else-if="!courses.list.loading" type="Courses" />
-		<div
-			v-if="!courses.list.loading && courses.hasNextPage"
-			class="flex justify-center mt-5"
-		>
-			<Button @click="courses.next()">
-				{{ __('Load More') }}
-			</Button>
-		</div>
+				<Button @click="courses.next()">
+					{{ __('Load More') }}
+				</Button>
+			</div>
+		</section>
 	</div>
 </template>
 <script setup>
