@@ -130,16 +130,16 @@
 						<div class="flex items-start justify-between gap-2">
 							<div class="flex items-center gap-2 text-sm font-semibold text-ink-gray-9">
 								<span>{{ course.title || course.name }}</span>
-								<Eye
-									v-if="course.published"
-									class="h-4 w-4 stroke-1.5 text-ink-gray-6"
-									:title="__('Veröffentlicht')"
-								/>
-								<EyeOff
-									v-else
-									class="h-4 w-4 stroke-1.5 text-ink-gray-6"
-									:title="__('Nicht veröffentlicht')"
-								/>
+								<Tooltip :text="course.published ? __('Veröffentlicht') : __('Nicht Öffentlich')">
+									<Eye
+										v-if="course.published"
+										class="h-4 w-4 stroke-1.5 text-ink-gray-6"
+									/>
+									<EyeOff
+										v-else
+										class="h-4 w-4 stroke-1.5 text-ink-gray-6"
+									/>
+								</Tooltip>
 							</div>
 							<div class="flex items-center gap-2">
 								<Dropdown
@@ -275,6 +275,7 @@ import {
 	createListResource,
 	createResource,
 	Dropdown,
+	Tooltip,
 	usePageMeta,
 } from 'frappe-ui'
 import { sessionStore } from '@/stores/session'
