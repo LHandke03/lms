@@ -9,27 +9,37 @@
 			<section
 				class="relative overflow-hidden rounded-2xl border border-outline-gray-2 bg-surface-blue-2 px-6 py-6 shadow-sm"
 			>
-				<div class="md:w-2/3">
-					<div class="text-3xl font-semibold text-ink-gray-9">
-						{{ batch.data.title }}
-					</div>
-					<div class="mt-2 leading-6 text-ink-gray-7">
-						{{ batch.data.description }}
-					</div>
-					<div class="mt-4 flex w-fit items-center rounded-md border border-outline-gray-2 bg-surface-white px-2 py-1">
-						<div
-							class="mr-1 h-6"
-							:class="{
-								'avatar-group overlap': batch.data.instructors.length > 1,
-							}"
-						>
-							<UserAvatar
-								v-for="instructor in batch.data.instructors"
-								:user="instructor"
-							/>
+				<div class="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+					<div class="md:w-2/3">
+						<div class="text-3xl font-semibold text-ink-gray-9">
+							{{ batch.data.title }}
 						</div>
-						<CourseInstructors :instructors="batch.data.instructors" />
+						<div class="mt-2 leading-6 text-ink-gray-7">
+							{{ batch.data.description }}
+						</div>
+						<div class="mt-4 flex w-fit items-center rounded-md border border-outline-gray-2 bg-surface-white px-2 py-1">
+							<div
+								class="mr-1 h-6"
+								:class="{
+									'avatar-group overlap': batch.data.instructors.length > 1,
+								}"
+							>
+								<UserAvatar
+									v-for="instructor in batch.data.instructors"
+									:user="instructor"
+								/>
+							</div>
+							<CourseInstructors :instructors="batch.data.instructors" />
+						</div>
 					</div>
+					<router-link :to="{ name: 'Home' }" class="self-start">
+						<Button variant="subtle">
+							<template #prefix>
+								<ArrowLeft class="h-4 w-4 stroke-1.5" />
+							</template>
+							{{ __('Home') }}
+						</Button>
+					</router-link>
 				</div>
 			</section>
 			<section class="mt-8 rounded-2xl border border-outline-gray-2 bg-surface-white p-5 shadow-sm">
@@ -83,9 +93,9 @@
 <script setup>
 import { computed, inject } from 'vue'
 import { useRouter } from 'vue-router'
-import { BookOpen, Clock } from 'lucide-vue-next'
+import { ArrowLeft, BookOpen, Clock } from 'lucide-vue-next'
 import { formatTime } from '@/utils'
-import { Breadcrumbs, createResource, usePageMeta } from 'frappe-ui'
+import { Breadcrumbs, Button, createResource, usePageMeta } from 'frappe-ui'
 import { sessionStore } from '@/stores/session'
 import CourseCard from '@/components/CourseCard.vue'
 import BatchOverlay from '@/components/BatchOverlay.vue'

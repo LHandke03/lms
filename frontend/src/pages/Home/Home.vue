@@ -73,8 +73,8 @@
 		</section>
 
 		<section class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[2fr_1fr]">
-			<div class="rounded-2xl border border-outline-gray-2 bg-surface-white p-5 shadow-sm">
-				<div class="flex flex-wrap items-center justify-between gap-3">
+			<div class="relative overflow-x-hidden rounded-2xl border border-outline-gray-2 bg-surface-white p-5 shadow-sm">
+				<div v-if="currentView  === 'Courses'" class="flex flex-wrap items-center justify-between gap-3">
 					<div v-if="filterLabel == __('Eingeschriebene Kurse')" class="text-lg font-semibold text-ink-gray-9">
 						{{ __('Meine Kurse') }} ({{ filteredCourses.length }})
 					</div>
@@ -106,7 +106,7 @@
 						</button> -->
 					</div>
 				</div>
-				<div
+				<div v-if="currentView  === 'Courses'"
 					class="mt-4 flex items-center gap-2 rounded-md border border-outline-gray-2 bg-surface-gray-1 px-3 py-2"
 				>
 					<Search class="h-4 w-4 stroke-1.5 text-ink-gray-5" />
@@ -117,8 +117,8 @@
 						class="w-full border-0 bg-transparent text-sm text-ink-gray-8 placeholder:text-ink-gray-5 focus:outline-none"
 					/>
 				</div>
-				<div
-					v-if="filteredCourses.length"
+				<div 
+					v-if="filteredCourses.length && (currentView  === 'Courses')"
 					class="mt-4 grid gap-4 md:grid-cols-2"
 				>
 					<router-link
@@ -184,11 +184,142 @@
 						</div>
 					</router-link>
 				</div>
-				<div
-					v-else
+				<div 
+					v-else-if="currentView === 'Courses'"
 					class="mt-6 rounded-lg border border-dashed border-outline-gray-2 p-6 text-sm text-ink-gray-6"
 				>
 					{{ __('Noch keine Kurse vorhanden.') }}
+				</div>
+				<div v-if="currentView  === 'Class'" class="flex flex-wrap items-center justify-between gap-3">
+					<div v-if="batchFilterLabel == __('Eingeschriebene Klassen')" class="text-lg font-semibold text-ink-gray-9">
+						{{ __('Meine Klassen') }} ({{ filteredBatches.length }})
+					</div>
+					<div v-else-if="batchFilterLabel == __('Erstellte Klassen')" class="text-lg font-semibold text-ink-gray-9">
+						{{ __('Erstellte Klassen') }} ({{ filteredBatches.length }})
+					</div>
+					<div v-else-if="batchFilterLabel =='Alle'" class="text-lg font-semibold text-ink-gray-9">
+						{{ __('Klassen') }} ({{ filteredBatches.length }})
+					</div>
+					<div v-else class="text-lg font-semibold text-ink-gray-9">
+						{{ __('Veröffentlichte Klassen') }} ({{ filteredBatches.length }})
+					</div>
+					<div class="flex items-center gap-2">
+						<Dropdown :options="batchFilterOptions">
+							<template #default>
+								<button
+									class="flex items-center gap-2 rounded-md border border-outline-gray-2 bg-surface-gray-1 px-2 py-1 text-xs text-ink-gray-6"
+								>
+									<Filter class="h-3.5 w-3.5 stroke-1.5" />
+									<span>{{ batchFilterLabel }}</span>
+									<ChevronDown class="h-3.5 w-3.5 stroke-1.5" />
+								</button>
+							</template>
+						</Dropdown><!-- 
+						<button
+							class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-outline-gray-2 text-ink-gray-6 transition hover:bg-surface-gray-1"
+						>
+							<MoreHorizontal class="h-4 w-4 stroke-1.5" />
+						</button> -->
+					</div>
+				</div>
+				<div v-if="currentView  === 'Class'"
+					class="mt-4 flex items-center gap-2 rounded-md border border-outline-gray-2 bg-surface-gray-1 px-3 py-2"
+				>
+					<Search class="h-4 w-4 stroke-1.5 text-ink-gray-5" />
+					<input
+						type="text"
+						:placeholder="__('Klassen suchen')"
+						v-model="batchSearch"
+						class="w-full border-0 bg-transparent text-sm text-ink-gray-8 placeholder:text-ink-gray-5 focus:outline-none"
+					/>
+				</div>
+				<div 
+					v-if="filteredBatches.length && (currentView  === 'Class')"
+					class="mt-4 grid gap-4 md:grid-cols-2"
+				>
+					<router-link
+						v-for="batch in filteredBatches"
+						:key="batch.name"
+						:to="{ name: 'BatchDetail', params: { batchName: batch.name } }"
+						class="rounded-xl border border-outline-gray-2 bg-surface-gray-1 p-3 transition hover:border-outline-gray-3"
+					>
+						<!-- <BatchCard :batch="batch" /> -->
+						 <div class="flex items-start justify-between gap-2">
+							<div class="flex items-center gap-2 text-sm font-semibold text-ink-gray-9">
+								<span>{{ batch.title || batch.name }}</span>
+								<Tooltip :text="batch.published ? __('Veröffentlicht') : __('Nicht Öffentlich')">
+									<Eye
+										v-if="batch.published"
+										class="h-4 w-4 stroke-1.5 text-ink-gray-6"
+									/>
+									<EyeOff
+										v-else
+										class="h-4 w-4 stroke-1.5 text-ink-gray-6"
+									/>
+								</Tooltip>
+							</div>
+							<!-- <div class="flex items-center gap-2">
+								<Dropdown
+									v-if="isCourseCreator(course)"
+									:options="getCourseActions(course)"
+								>
+									<template #default>
+										<button
+											class="inline-flex h-7 w-7 items-center justify-center rounded-md text-ink-gray-6 transition hover:bg-surface-white"
+											@click.stop
+										>
+											<MoreHorizontal class="h-4 w-4 stroke-1.5" />
+										</button>
+									</template>
+								</Dropdown>
+							</div> -->
+						</div>
+						<div class="mt-3 flex items-center gap-3">
+							<div
+								class="flex h-16 w-24 items-center justify-center overflow-hidden rounded-lg bg-surface-blue-2 text-ink-blue-2"
+							>
+								<img
+									v-if="batch.image"
+									:src="batch.image"
+									:alt="batch.title || batch.name"
+									class="h-full w-full object-cover"
+								/>
+								<BookOpen v-else class="h-6 w-6 stroke-1.5" />
+							</div>
+							<div class="space-y-1">
+								<div class="text-sm font-semibold text-ink-gray-9">
+									{{ batch.subtitle || batch.title || batch.name }}
+								</div>
+								<div class="text-xs text-ink-gray-6">
+									{{ __('Ersteller: {0}').format(getCreatorName(batch)) }}
+								</div>
+								<div class="flex items-center gap-2 text-xs text-ink-gray-6">
+									<BookOpen class="h-3.5 w-3.5 stroke-1.5" />
+									<span>{{ batch.lessons || 0 }} {{ __('Lektionen') }}</span>
+								</div>
+							</div>
+						</div>
+					</router-link>
+				</div>
+				<div 
+					v-else-if="currentView === 'Class'"
+					class="mt-6 rounded-lg border border-dashed border-outline-gray-2 p-6 text-sm text-ink-gray-6"
+				>
+					{{ __('Noch keine Klassen vorhanden.') }}
+				</div>
+				<div 
+					v-if="currentView === 'Courses'" 
+					class="h-12 absolute right-0 top-1/2 inset-y-0 border-l z-10 insert-y-0 border-y rounded-l-lg bg-surface-white border-outline-gray-3 cursor-pointer flex items-center px-3 opacity-50 translate-x-2/3 transition-all duration-200 hover:translate-x-0 hover:opacity-100 hover:bg-surface-gray-2"
+					@click="setView('Class')"
+				>
+					<ChevronRight class="bg-surface-black"/>
+				</div>
+				<div 
+					v-if="currentView === 'Class'" 
+					class="h-12 absolute left-0 top-1/2 inset-y-0 border-r z-10 insert-y-0 border-y rounded-r-lg bg-surface-white border-outline-gray-3 cursor-pointer flex items-center px-3 opacity-50 -translate-x-2/3 transition-all duration-200 hover:translate-x-0 hover:opacity-100 hover:bg-surface-gray-2"
+					@click="setView('Courses')"	
+				>
+					<ChevronLeft/>
 				</div>
 			</div>
 
@@ -283,6 +414,8 @@ import {
 	Award,
 	BookOpen,
 	ChevronDown,
+	ChevronLeft,
+	ChevronRight,
 	Download,
 	Eye,
 	EyeOff,
@@ -293,14 +426,19 @@ import {
 	Users,
 } from 'lucide-vue-next'
 import { useRouter } from 'vue-router'
+import BatchCard from '@/components/BatchCard.vue'
 import ProgressBar from '@/components/ProgressBar.vue'
+import Batch from '../Batch.vue'
 
 const { brand } = sessionStore()
 const router = useRouter()
 const user = inject<any>('$user')
 const dayjs = inject<any>('$dayjs')
 const courseSearch = ref('')
+const batchSearch = ref('')
+const currentView = ref<'Courses'|'Class'>('Courses')
 const selectedCourseFilter = ref<'all' | 'created' | 'enrolled' | 'published'>('all')
+const selectedBatchFilter = ref<'all' | 'created' | 'enrolled' | 'published'>('all')
 
 const enrolledCourses = createResource({
 	url: 'lms.lms.utils.get_courses',
@@ -338,6 +476,37 @@ const publishedCourses = createResource({
 	},
 })
 
+const enrolledBatches = createResource({
+	url: 'lms.lms.utils.get_my_batches',
+	auto: true,
+})
+
+const createdBatches = createListResource({
+	doctype: 'LMS Batch',
+	url: 'lms.lms.utils.get_batches',
+	auto: true,
+	makeParams() {
+		return {
+			filters: {
+				owner: 1,
+			}
+		}
+	}
+})
+
+const publishedBatches = createListResource({
+	doctype: 'LMS Batch',
+	url: 'lms.lms.utils.get_batches',
+	auto: true,
+	makeParams() {
+		return {
+			filters: {
+				published: 1,
+			},
+		}
+	},
+})
+
 
 const certificateCount = createResource({
 	url: 'frappe.client.get_count',
@@ -358,6 +527,10 @@ const certificates = createListResource({
 	fields: ['name', 'course_title', 'batch_title', 'issue_date', 'template'],
 	cache: ['home_certificates', user?.data?.name],
 	auto: user?.data?.name ? true : false,
+})
+
+const setView = ((view) => {
+	currentView.value = view
 })
 
 const canCreateCourse = computed(() => {
@@ -421,11 +594,69 @@ const filterLabel = computed(() => {
 	)
 })
 
+const batchFilterOptions = computed(() => {
+	const options = [
+		{
+			label: __('Alle'),
+			value: 'all',
+			onClick() {
+				selectedBatchFilter.value = 'all'
+			},
+		},
+		{
+			label: __('Eingeschriebene Klassen'),
+			value: 'enrolled',
+			onClick() {
+				selectedBatchFilter.value = 'enrolled'
+			},
+		},
+		{
+			label: __('Veröffentlichte Klassen'),
+			value: 'published',
+			onClick() {
+				selectedBatchFilter.value = 'published'
+			},
+		},
+	]
+	if (canCreateCourse.value) {
+		options.push({
+			label: __('Erstellte Klassen'),
+			value: 'created',
+			onClick() {
+				selectedBatchFilter.value = 'created'
+			},
+		})
+	}
+	return options
+})
+
+const batchFilterLabel = computed(() => {
+	const options = batchFilterOptions.value
+	return (
+		options.find(
+			(option) => option.value === selectedBatchFilter.value
+		)?.label || __('Alle')
+	)
+})
+
 const allCourses = computed(() => {
 	const combined = [...(enrolledCourses.data || []), ...(createdCourses.data || []), ...(publishedCourses.data || [])]
 	const map = new Map()
 	combined.forEach((course) => {
 		map.set(course.name, course)
+	})
+	return Array.from(map.values())
+})
+
+const allBatches = computed(() => {
+	const combined = [
+		...(enrolledBatches.data || []),
+		...(createdBatches.data || []),
+		...(publishedBatches.data || []),
+	]
+	const map = new Map()
+	combined.forEach((batch) => {
+		map.set(batch.name, batch)
 	})
 	return Array.from(map.values())
 })
@@ -443,6 +674,19 @@ const baseCourses = computed(() => {
 	return allCourses.value
 })
 
+const baseBatches = computed(() => {
+	if (selectedBatchFilter.value === 'created') {
+		return createdBatches.data || []
+	}
+	if (selectedBatchFilter.value === 'enrolled') {
+		return enrolledBatches.data || []
+	}
+	if (selectedBatchFilter.value === 'published') {
+		return publishedBatches.data || []
+	}
+	return allBatches.value
+})
+
 const filteredCourses = computed(() => {
 	const query = courseSearch.value.trim().toLowerCase()
 	if (!query) return baseCourses.value
@@ -450,6 +694,16 @@ const filteredCourses = computed(() => {
 		const title = (course.title || '').toLowerCase()
 		const intro = (course.short_introduction || '').toLowerCase()
 		return title.includes(query) || intro.includes(query)
+	})
+})
+
+const filteredBatches = computed(() => {
+	const query = batchSearch.value.trim().toLowerCase()
+	if (!query) return baseBatches.value
+	return baseBatches.value.filter((batch: any) => {
+		const title = (batch.title || '').toLowerCase()
+		const description = (batch.description || '').toLowerCase()
+		return title.includes(query) || description.includes(query)
 	})
 })
 

@@ -17,20 +17,30 @@
 						{{ __('Entdecke laufende und kommende Batch-Programme.') }}
 					</div>
 				</div>
-				<router-link
-					v-if="canCreateBatch()"
-					:to="{
-						name: 'BatchForm',
-						params: { batchName: 'new' },
-					}"
-				>
-					<Button variant="solid">
-						<template #prefix>
-							<Plus class="h-4 w-4 stroke-1.5" />
-						</template>
-						{{ __('Create') }}
-					</Button>
-				</router-link>
+				<div class="flex items-center gap-2">
+					<router-link :to="{ name: 'Home' }">
+						<Button variant="subtle">
+							<template #prefix>
+								<ArrowLeft class="h-4 w-4 stroke-1.5" />
+							</template>
+							{{ __('Home') }}
+						</Button>
+					</router-link>
+					<router-link
+						v-if="canCreateBatch()"
+						:to="{
+							name: 'BatchForm',
+							params: { batchName: 'new' },
+						}"
+					>
+						<Button variant="solid">
+							<template #prefix>
+								<Plus class="h-4 w-4 stroke-1.5" />
+							</template>
+							{{ __('Create') }}
+						</Button>
+					</router-link>
+				</div>
 			</div>
 			<div
 				class="mt-5 flex flex-col justify-between gap-3 rounded-xl border border-outline-gray-2 bg-surface-white p-4 lg:flex-row lg:items-center"
@@ -115,7 +125,7 @@ import {
 	usePageMeta,
 } from 'frappe-ui'
 import { computed, inject, onMounted, ref, watch } from 'vue'
-import { Plus } from 'lucide-vue-next'
+import { ArrowLeft, Plus } from 'lucide-vue-next'
 import { sessionStore } from '@/stores/session'
 import BatchCard from '@/components/BatchCard.vue'
 import EmptyState from '@/components/EmptyState.vue'

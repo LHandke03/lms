@@ -9,59 +9,69 @@
 			<section
 				class="relative overflow-hidden rounded-2xl border border-outline-gray-2 bg-surface-blue-2 px-6 py-6 shadow-sm"
 			>
-				<div class="md:w-2/3">
-					<div class="text-3xl font-semibold text-ink-gray-9">
-						{{ course.data.title }}
-					</div>
-					<div class="mt-2 leading-6 text-ink-gray-7">
-						{{ course.data.short_introduction }}
-					</div>
-					<div class="mt-4 flex flex-wrap items-center gap-3 text-sm">
-						<Tooltip
-							v-if="parseInt(course.data.rating) > 0"
-							:text="__('Average Rating')"
-							class="flex items-center rounded-md border border-outline-gray-2 bg-surface-white px-2 py-1"
-						>
-							<Star class="size-4 text-transparent fill-yellow-500" />
-							<span class="ml-1 text-ink-gray-7">
-								{{ course.data.rating }}
-							</span>
-						</Tooltip>
-						<Tooltip
-							v-if="course.data.enrollment_count"
-							:text="__('Enrolled Students')"
-							class="flex items-center rounded-md border border-outline-gray-2 bg-surface-white px-2 py-1"
-						>
-							<Users class="h-4 w-4 text-ink-gray-7" />
-							<span class="ml-1">
-								{{ course.data.enrollment_count_formatted }}
-							</span>
-						</Tooltip>
-						<div class="flex items-center rounded-md border border-outline-gray-2 bg-surface-white px-2 py-1">
-							<span
-								class="mr-1 h-6"
-								:class="{
-									'avatar-group overlap': course.data.instructors.length > 1,
-								}"
+				<div class="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+					<div class="md:w-2/3">
+						<div class="text-3xl font-semibold text-ink-gray-9">
+							{{ course.data.title }}
+						</div>
+						<div class="mt-2 leading-6 text-ink-gray-7">
+							{{ course.data.short_introduction }}
+						</div>
+						<div class="mt-4 flex flex-wrap items-center gap-3 text-sm">
+							<Tooltip
+								v-if="parseInt(course.data.rating) > 0"
+								:text="__('Average Rating')"
+								class="flex items-center rounded-md border border-outline-gray-2 bg-surface-white px-2 py-1"
 							>
-								<UserAvatar
-									v-for="instructor in course.data.instructors"
-									:user="instructor"
-								/>
-							</span>
-							<CourseInstructors :instructors="course.data.instructors" />
+								<Star class="size-4 text-transparent fill-yellow-500" />
+								<span class="ml-1 text-ink-gray-7">
+									{{ course.data.rating }}
+								</span>
+							</Tooltip>
+							<Tooltip
+								v-if="course.data.enrollment_count"
+								:text="__('Enrolled Students')"
+								class="flex items-center rounded-md border border-outline-gray-2 bg-surface-white px-2 py-1"
+							>
+								<Users class="h-4 w-4 text-ink-gray-7" />
+								<span class="ml-1">
+									{{ course.data.enrollment_count_formatted }}
+								</span>
+							</Tooltip>
+							<div class="flex items-center rounded-md border border-outline-gray-2 bg-surface-white px-2 py-1">
+								<span
+									class="mr-1 h-6"
+									:class="{
+										'avatar-group overlap': course.data.instructors.length > 1,
+									}"
+								>
+									<UserAvatar
+										v-for="instructor in course.data.instructors"
+										:user="instructor"
+									/>
+								</span>
+								<CourseInstructors :instructors="course.data.instructors" />
+							</div>
+						</div>
+						<div v-if="course.data.tags" class="mt-4 flex w-fit flex-wrap gap-2">
+							<Badge
+								theme="gray"
+								size="lg"
+								class="text-ink-gray-9"
+								v-for="tag in course.data.tags.split(', ')"
+							>
+								{{ tag }}
+							</Badge>
 						</div>
 					</div>
-					<div v-if="course.data.tags" class="mt-4 flex w-fit flex-wrap gap-2">
-						<Badge
-							theme="gray"
-							size="lg"
-							class="text-ink-gray-9"
-							v-for="tag in course.data.tags.split(', ')"
-						>
-							{{ tag }}
-						</Badge>
-					</div>
+					<router-link :to="{ name: 'Home' }" class="self-start">
+						<Button variant="subtle">
+							<template #prefix>
+								<ArrowLeft class="h-4 w-4 stroke-1.5" />
+							</template>
+							{{ __('Home') }}
+						</Button>
+					</router-link>
 				</div>
 			</section>
 			<section class="mt-8 rounded-2xl border border-outline-gray-2 bg-surface-white p-5 shadow-sm">
@@ -104,11 +114,12 @@ import {
 	createResource,
 	Breadcrumbs,
 	Badge,
+	Button,
 	Tooltip,
 	usePageMeta,
 } from 'frappe-ui'
 import { computed, inject, watch } from 'vue'
-import { Users, Star } from 'lucide-vue-next'
+import { ArrowLeft, Users, Star } from 'lucide-vue-next'
 import { sessionStore } from '@/stores/session'
 import { useRouter } from 'vue-router'
 import CourseCardOverlay from '@/components/CourseCardOverlay.vue'
